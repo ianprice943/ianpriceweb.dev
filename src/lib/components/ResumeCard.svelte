@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { ResumeCard } from "../types/resumeCard";
+    import type { ResumeCard } from "$lib/types/resumeCard";
     export let cardContent: ResumeCard;
 
     const responsibilities = cardContent.job.responsibilities.slice(1);

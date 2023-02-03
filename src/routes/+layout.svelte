@@ -17,7 +17,7 @@
 </script>
 
 <Header />
-<main>
+<main class="flex-grow px-2 pb-10 md:px-4 lg:px-8 xl:px-16 2xl:px-32">
     <slot />
 </main>
 <Footer />

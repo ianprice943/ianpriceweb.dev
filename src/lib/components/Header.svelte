@@ -8,16 +8,16 @@
     </div>
     <nav class="flex text-lg sm:flex-grow-0">
         <ul class="flex mx-auto flex-row sm:my-auto">
-            <li class="sm:pr-2 hover:underline">
+            <li class="pr-2 hover:underline">
                 <a href="/">Home</a>
             </li>
-            <li class="sm:pr-2 sm:pl-0 hover:underline">
+            <li class="pr-2 hover:underline">
                 <a href="/resume">Resume</a>
             </li>
-            <li class="sm:pr-2 sm:pl-0 hover:underline">
+            <li class="pr-2 hover:underline">
                 <a href="/portfolio">Portfolio</a>
             </li>
-            <li class="sm:pr-2 sm:pl-0 hover:underline">
+            <li class="sm:pr-2 hover:underline">
                 <a href="/blog">Blog</a>
             </li>
         </ul>

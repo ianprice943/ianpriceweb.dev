@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type { cardContent } from "../types/skillcard";
-    import { theme } from "../stores/stores";
+    import type { cardContent } from "$lib/types/skillcard";
+    import { theme } from "$lib/stores/stores";
     export let cardContent: cardContent;
 
     let progressBarColor: string;

@@ -1,5 +1,5 @@
 <script lang='ts'>
-    import type { EducationCard } from "../types/educationCard";
+    import type { EducationCard } from "$lib/types/educationCard";
     export let cardContent: EducationCard;
 </script>
 
