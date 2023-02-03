@@ -34,13 +34,13 @@
 
 <style>
     #moon {
-        background-image: url('/moon.svg');
+        background-image: url('/images/moon.svg');
         background-size: 1.25rem;
         background-position: center;
         background-repeat: no-repeat;
     }
     #sun {
-        background-image: url('/sun.svg');
+        background-image: url('/images/sun.svg');
         background-size: 1.25rem;
         background-position: center;
         background-repeat: no-repeat;
