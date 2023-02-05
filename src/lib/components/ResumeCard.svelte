@@ -14,7 +14,7 @@
         <!-- {cardContent.job.responsibilities.slice(1).map((responsibility, i) => {
             return <li className="" key={i}>{responsibility}</li> 
         })} -->
-        {#each responsibilities as responsibility}
+        {#each responsibilities as responsibility (responsibility)}
             <li>{responsibility}</li>
         {/each}
     </ul>
