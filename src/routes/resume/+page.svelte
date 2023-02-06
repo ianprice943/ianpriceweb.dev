@@ -1,5 +1,10 @@
 <script lang="ts">
-
+    import EducationCard from "$lib/components/EducationCard.svelte";
+	import SkillCard from "$lib/components/SkillCard.svelte";
+    import type { CombinedResumePageData } from "$lib/types/resumeTypes.types";
+    export let data: CombinedResumePageData;
+    const { resumeData, educationData, skillsData } = data;
+    console.log('data', data);
 </script>
 
 <svelte:head>
@@ -19,6 +24,7 @@
     <meta property="twitter:image" content="//www.ianprice943.dev/images/LinkedIn.png" />
 </svelte:head>
 
+<h1 class="text-center text-3xl">Resume</h1>
 <section id="experience" aria-label="experience">
     <h2 class="text-2xl">Experience</h2>
     <div class="p-1 md:grid md:grid-cols-2">
@@ -30,9 +36,9 @@
 <section id="education" aria-label="education">
     <h2 class="text-2xl">Education</h2>
     <div class="p-1 md:grid md:grid-cols-1 lg:grid-cols-2">
-        <!-- {education?.map((school: EducationData, i: number) => {
-            return <EducationCard key={i} school={school} />
-        })} -->
+        {#each educationData as education}
+            <EducationCard cardContent={education} />
+        {/each}
     </div>
 </section>
 <section id="skills" aria-label="skills">
@@ -42,6 +48,9 @@
             <!-- {skills?.map((skill: string, i: number) => {
                 return <SkillCard key={i} index={i} skill={skill} />
             })} -->
+            {#each skillsData as skill (skill.id)}
+                <SkillCard cardContent={skill} />
+            {/each}
         </ul>
     </div>
 </section>

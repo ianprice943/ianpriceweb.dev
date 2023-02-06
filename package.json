@@ -36,6 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@supabase/supabase-js": "^2.7.1"
+		"@supabase/supabase-js": "^2.7.1",
+		"supabase": "^1.36.6"
 	}
 }

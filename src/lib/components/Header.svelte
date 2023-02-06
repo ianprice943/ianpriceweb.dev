@@ -4,7 +4,7 @@
 
 <header class="p-2 flex flex-col-reverse sm:flex-row md:px-4 lg:px-8 xl:px-16 2xl:px-32">
     <div class="sm:flex-grow">
-        <h1 class="text-4xl text-center sm:text-left">Ian Price</h1>
+        <p class="text-4xl text-center sm:text-left">Ian Price</p>
     </div>
     <nav class="flex text-lg sm:flex-grow-0">
         <ul class="flex mx-auto flex-row sm:my-auto">
