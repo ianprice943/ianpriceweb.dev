@@ -4,27 +4,27 @@
 	import { onMount } from "svelte";
     export let cardContent: SkillsData;
 
-    let progressBarColor: string;
-    if($theme === 'light') {
-        progressBarColor = "#555";
-    } else {
-        progressBarColor = "#FFF";
-    }
+    // following line taken from https://stackoverflow.com/a/64887820
+    $: $theme, applyProgressBar();
 
-    // TODO: Update to be more programatic
-    let gradientString = "";
-    if (cardContent.skill_level === SkillLevel.Novice) {
-        gradientString = `linear-gradient(to right, ${progressBarColor} 25%, transparent 25%)`;
-    } else if (cardContent.skill_level === SkillLevel.Intermediate) {
-        gradientString = `linear-gradient(to right, ${progressBarColor} 50%, transparent 50%)`;
-    } else if (cardContent.skill_level === SkillLevel.Advanced) {
-        gradientString = `linear-gradient(to right, ${progressBarColor} 75%, transparent 75%)`;
-    } else if (cardContent.skill_level === SkillLevel.Expert) {
-        gradientString = `linear-gradient(to right, ${progressBarColor} 100%)`;
-    }
-
-    // TODO: see if this can be done more declaratively
     const applyProgressBar = () => {
+        let progressBarColor: string;
+        if($theme === 'light') {
+            progressBarColor = "#555";
+        } else {
+            progressBarColor = "#FFF";
+        }
+
+        let gradientString = "";
+        if (cardContent.skill_level === SkillLevel.Novice) {
+            gradientString = `linear-gradient(to right, ${progressBarColor} 25%, transparent 25%)`;
+        } else if (cardContent.skill_level === SkillLevel.Intermediate) {
+            gradientString = `linear-gradient(to right, ${progressBarColor} 50%, transparent 50%)`;
+        } else if (cardContent.skill_level === SkillLevel.Advanced) {
+            gradientString = `linear-gradient(to right, ${progressBarColor} 75%, transparent 75%)`;
+        } else if (cardContent.skill_level === SkillLevel.Expert) {
+            gradientString = `linear-gradient(to right, ${progressBarColor} 100%)`;
+        }
         const progressBar: HTMLDivElement | null = document.querySelector(`.proficiency-bar${cardContent.id}`);
         if (progressBar !== null) {
             progressBar.style.backgroundImage = gradientString;

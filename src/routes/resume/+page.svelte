@@ -5,7 +5,6 @@
     import type { CombinedResumePageData } from "$lib/types/resumeTypes.types";
     export let data: CombinedResumePageData;
     const { jobData, educationData, skillsData } = data;
-    console.log('data', data);
 </script>
 
 <svelte:head>
