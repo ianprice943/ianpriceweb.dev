@@ -5,21 +5,21 @@ export const load = ( async () => {
 
     const skillsData = await getAllSkillsData();
 
-    return {educationData, skillsData}
+    const jobData = await getAllJobData();
+
+    return {jobData, educationData, skillsData}
 });
 
 const getAllEducationData = async () => {
     const { data, error } = await supabase
         .from('education')
         .select(`
+            id,
             school_name,
             graduate_level,
             degree_earned,
             education_time
         `);
-    
-    // console.log('education data', data);
-    // console.log('error', error);
 
     return data;
 }
@@ -34,27 +34,26 @@ const getAllSkillsData = async () => {
         )
         .order('priority', {ascending: true})
         .order('skill_name', {ascending: true});
-    
-    // console.log('skills data', data);
-    // console.log('error', error);
 
     return data;
 }
 
-const getAllResumeData = async () => {
+const getAllJobData = async () => {
     const { data, error } = await supabase
         .from('jobs')
         .select(`
+            id,
             company_name,
             job_title,
             description,
             job_descriptions (
+                id,
                 description
-            )
-        `);
-    
-    console.log('resume data', data);
-    console.log('error', error);
+            ),
+            start_time,
+            end_time
+        `)
+        .order('id', {ascending: true});
 
-    return {...data};
+    return data;
 }

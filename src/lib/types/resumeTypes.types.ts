@@ -1,22 +1,19 @@
 //TODO: Update this for Sveltekit
 //seems hacky, but getStaticProps is assigning the json from resumeData a key called 'data'
-export interface ResumeData {
-    data: {
-        experience: JobData[],
-        education: EducationData[],
-        skills: string[]
-    }
-}
 
 export interface JobData {
-    companyName: string,
-    companyTitle: string,
-    experienceTime: string,
-    responsibilities: string[]
+    id: number,
+    company_name: string,
+    job_title: string,
+    start_time: string,
+    end_time: string,
+    description: string,
+    job_descriptions: JobDescription[]
 }
 
-export interface ResumeCard {
-    job: JobData
+interface JobDescription {
+    id: number,
+    description: string
 }
 
 export interface SkillsData {
@@ -35,18 +32,15 @@ export enum SkillLevel {
 }
 
 export interface EducationData {
+    id: number,
     school_name: string,
     graduate_level: string,
     degree_earned: string,
     education_time: string
 }
 
-export interface EducationCard {
-    school: EducationData
-}
-
 export interface CombinedResumePageData {
-    resumeData: ResumeData[],
+    jobData: JobData[],
     educationData: EducationData[],
     skillsData: SkillsData[]
 }

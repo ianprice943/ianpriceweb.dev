@@ -1,9 +1,10 @@
 <script lang="ts">
     import EducationCard from "$lib/components/EducationCard.svelte";
+	import JobCard from "$lib/components/JobCard.svelte";
 	import SkillCard from "$lib/components/SkillCard.svelte";
     import type { CombinedResumePageData } from "$lib/types/resumeTypes.types";
     export let data: CombinedResumePageData;
-    const { resumeData, educationData, skillsData } = data;
+    const { jobData, educationData, skillsData } = data;
     console.log('data', data);
 </script>
 
@@ -28,15 +29,15 @@
 <section id="experience" aria-label="experience">
     <h2 class="text-2xl">Experience</h2>
     <div class="p-1 md:grid md:grid-cols-2">
-        <!-- {jobs?.map((job: JobData, i: number) => {
-            return <ResumeCard key={i} job={job} />
-        })} -->
+        {#each jobData as job (job.id)}
+            <JobCard cardContent={job} />
+        {/each}
     </div>
 </section>
 <section id="education" aria-label="education">
     <h2 class="text-2xl">Education</h2>
     <div class="p-1 md:grid md:grid-cols-1 lg:grid-cols-2">
-        {#each educationData as education}
+        {#each educationData as education (education.id)}
             <EducationCard cardContent={education} />
         {/each}
     </div>
@@ -45,9 +46,6 @@
     <h2 class="text-2xl">Skills</h2>
     <div class="p-1">
         <ul class="sm:grid sm:grid-cols-2 lg:grid-cols-3">
-            <!-- {skills?.map((skill: string, i: number) => {
-                return <SkillCard key={i} index={i} skill={skill} />
-            })} -->
             {#each skillsData as skill (skill.id)}
                 <SkillCard cardContent={skill} />
             {/each}

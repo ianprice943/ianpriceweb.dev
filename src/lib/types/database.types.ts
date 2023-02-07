@@ -105,24 +105,30 @@ export interface Database {
           company_name: string | null
           created_at: string | null
           description: string | null
+          end_time: string | null
           id: number
           job_title: string | null
+          start_time: string | null
           sub_description_id: number | null
         }
         Insert: {
           company_name?: string | null
           created_at?: string | null
           description?: string | null
+          end_time?: string | null
           id?: number
           job_title?: string | null
+          start_time?: string | null
           sub_description_id?: number | null
         }
         Update: {
           company_name?: string | null
           created_at?: string | null
           description?: string | null
+          end_time?: string | null
           id?: number
           job_title?: string | null
+          start_time?: string | null
           sub_description_id?: number | null
         }
       }
