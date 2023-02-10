@@ -2,7 +2,7 @@
     import PCard from "$lib/components/PCard.svelte";
     // import profilePicture from '/images/LinkedIn.png';
 
-    const cardContent1 = "Greetings! I'm a 25 year old web developer based in Columbus, Ohio. In 2019 I graduated Miami University with a Bachelor of Science in Computer Science.";
+    const cardContent1 = "Greetings! I'm a web developer based in Columbus, Ohio. In 2019 I graduated Miami University with a Bachelor of Science in Computer Science.";
 
     const cardContent2 = "My focus is on front-end web development. I've obtained over two years of E-Commerce experience working for Ascena and Opcapita brands such as Justice, Dressbarn, and maurices.";
 
@@ -27,9 +27,11 @@
     <meta property="twitter:description" content="The homepage of Ian Price's Portfolio" />
     <meta property="twitter:image" content="//www.ianprice943.dev/images/LinkedIn.png" />
 </svelte:head>
+
+<h1 class="text-center md:text-left text-3xl mb-2">Home</h1>
 <section class="flex flex-col md:flex-row">
     <div class="block w-2/3 mx-auto md:ml-0 md:mr-auto md:w-5/12 md:my-2.5 xl:w-1/3">
-        <img src={'/images/LinkedIn.png'} alt="An image of Ian" class="rounded-xl" />
+        <img src="/images/LinkedIn.webp" alt="An image of Ian" class="rounded-xl shadow-lg" />
     </div>
     <div class="text-xl m-2.5 mr-0 md:w-6/12 md:ml-auto">
         <PCard cardContent={cardContent1} />

@@ -2,6 +2,6 @@
     export let cardContent: string;
 </script>
 
-<p class="shadow-lg mb-2 rounded-xl p-2 border-gray-50 border-2 dark:bg-gray-600 dark:border-gray-600">
+<p class="shadow-lg mb-2 rounded-xl p-2 bg-gray-100 dark:bg-gray-600">
     {cardContent}
 </p>

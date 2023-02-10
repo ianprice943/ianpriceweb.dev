@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { browser } from "$app/environment";
     import { SkillLevel, type SkillsData } from "../types/resumeTypes.types";
     import { theme } from "$lib/stores/stores";
 	import { onMount } from "svelte";
@@ -25,22 +26,26 @@
         } else if (cardContent.skill_level === SkillLevel.Expert) {
             gradientString = `linear-gradient(to right, ${progressBarColor} 100%)`;
         }
-        const progressBar: HTMLDivElement | null = document.querySelector(`.proficiency-bar${cardContent.id}`);
-        if (progressBar !== null) {
-            progressBar.style.backgroundImage = gradientString;
-            let percentFull = "0";
-            if (gradientString.includes('25%')) {
-                percentFull = "25";
-            } else if (gradientString.includes('50%')) {
-                percentFull = "50";
-            } else if (gradientString.includes('75%')) {
-                percentFull = "75";
-            } else if (gradientString.includes('100%')) {
-                percentFull = "100";
+
+        // added to get SSR to allow this
+        if(browser) {
+            const progressBar: HTMLDivElement | null = document.querySelector(`.proficiency-bar${cardContent.id}`);
+            if (progressBar !== null) {
+                progressBar.style.backgroundImage = gradientString;
+                let percentFull = "0";
+                if (gradientString.includes('25%')) {
+                    percentFull = "25";
+                } else if (gradientString.includes('50%')) {
+                    percentFull = "50";
+                } else if (gradientString.includes('75%')) {
+                    percentFull = "75";
+                } else if (gradientString.includes('100%')) {
+                    percentFull = "100";
+                }
+                progressBar.setAttribute("aria-valuenow", percentFull);
+                progressBar.setAttribute("aria-valuemin", "0");
+                progressBar.setAttribute("aria-valuemax", "100");
             }
-            progressBar.setAttribute("aria-valuenow", percentFull);
-            progressBar.setAttribute("aria-valuemin", "0");
-            progressBar.setAttribute("aria-valuemax", "100");
         }
     }
 

@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    font-family: Arial;
+    font-size: 16px;
+}
+
+.expand {
+    height: min-content !important;
+}
