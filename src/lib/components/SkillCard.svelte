@@ -3,7 +3,9 @@
     import { SkillLevel, type SkillsData } from "../types/resumeTypes.types";
     import { theme } from "$lib/stores/stores";
 	import { onMount } from "svelte";
+    import { debounce } from "$lib/utils/utils";
     export let cardContent: SkillsData;
+    let screenWidth = 0;
 
     // following line taken from https://stackoverflow.com/a/64887820
     $: $theme, applyProgressBar();
@@ -49,45 +51,48 @@
         }
     }
 
+    const calcScreenWidth = () => {
+        screenWidth = window.screen.width;
+    }
+
+    const debouncedCalcScreenWidth = debounce(calcScreenWidth, 300);
+
     if(browser) {
         let listItem: HTMLElement | null = document.querySelector(`.skill-${cardContent.id}`);
         if(listItem !== null) {
             const observer = new IntersectionObserver(entries => {
-                console.log(cardContent.skill_name, entries[0].boundingClientRect.top, entries[0].boundingClientRect.bottom);
-                // if(entries[0].boundingClientRect.top <= window.screen.height ||
-                //          (entries[0].boundingClientRect.top <= 0 && entries[0].boundingClientRect.bottom >= 0)) {
-                //     console.log(cardContent.skill_name, 'flying in')
-                //     listItem?.classList.add('fly');
-                // } else if(entries[0].boundingClientRect.top <= 0 || entries[0].boundingClientRect.bottom <= 0) {
-                //     console.log(cardContent.skill_name, 'going off screen')
-                //     listItem?.classList.remove('fly');
-                // }
-                if(entries[0].boundingClientRect.top <= 0) {
-                    if(entries[0].boundingClientRect.bottom <= 0) {
-                        console.log(cardContent.skill_name, 'going off screen')
-                        listItem?.classList.remove('fly');
-                    } else if(entries[0].boundingClientRect.bottom >= 0) {
-                        console.log(cardContent.skill_name, 'flying in')
-                        listItem?.classList.add('fly');
-                    }
-                } else if(entries[0].boundingClientRect.top <= window.screen.height) {
-                    if(entries[0].boundingClientRect.bottom >= 0) {
-                        console.log(cardContent.skill_name, 'flying in')
-                        listItem?.classList.add('fly');
-                    }
-                } else if(entries[0].boundingClientRect.top >= window.screen.height) {
-                    if(entries[0].boundingClientRect.bottom >= window.screen.height) {
-                        console.log(cardContent.skill_name, 'going off screen')
-                        listItem?.classList.remove('fly');
+                console.log('sW', screenWidth);
+                if(screenWidth <= 1024) {
+                    console.log(cardContent.skill_name, entries[0].boundingClientRect.top, entries[0].boundingClientRect.bottom);
+                    if(entries[0].boundingClientRect.top <= 0) {
+                        if(entries[0].boundingClientRect.bottom < 0) {
+                            console.log(cardContent.skill_name, 'going off screen 1')
+                            listItem?.classList.remove('fly');
+                        } else if(entries[0].boundingClientRect.bottom >= 0) {
+                            console.log(cardContent.skill_name, 'flying in 1')
+                            listItem?.classList.add('fly');
+                        }
+                    } else if(entries[0].boundingClientRect.top <= window.screen.height) {
+                        if(entries[0].boundingClientRect.bottom >= 0) {
+                            console.log(cardContent.skill_name, 'flying in 2')
+                            listItem?.classList.add('fly');
+                        }
+                    } else if(entries[0].boundingClientRect.top >= window.screen.height) {
+                        if(entries[0].boundingClientRect.bottom >= window.screen.height) {
+                            console.log(cardContent.skill_name, 'going off screen 2')
+                            listItem?.classList.remove('fly');
+                        }
                     }
                 }
-            });
+            }, {threshold: [0, .2, 1]});
             observer.observe(listItem);
         }
     }
 
     onMount(() => {
         applyProgressBar();
+        window.addEventListener('resize', debouncedCalcScreenWidth);
+        calcScreenWidth();
     })
 </script>
 <li class={`skill skill-${cardContent.id} text-center shadow-lg mb-2 sm:mr-4 rounded-xl p-4 border-gray-50 border-2  dark:bg-gray-600 dark:border-0 dark:border-gray-600`} tabIndex={0}>
@@ -105,10 +110,12 @@
 </li>
 
 <style>
-.skill {
-    transform: translateX(-300px);
-    transition: all ease-in .3s;
-    /* animation: flyRight 0.5s ease-in; */
+@media (max-width: 1024px) {
+    .skill {
+        transform: translateX(-300px);
+        transition: all ease-in .3s;
+        /* animation: flyRight 0.5s ease-in; */
+    }
 }
 .fly {
     transform: translateX(0px);
