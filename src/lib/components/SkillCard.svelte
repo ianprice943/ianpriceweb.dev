@@ -61,9 +61,7 @@
         let listItem: HTMLElement | null = document.querySelector(`.skill-${cardContent.id}`);
         if(listItem !== null) {
             const observer = new IntersectionObserver(entries => {
-                console.log('sW', screenWidth);
                 if(screenWidth <= 1024) {
-                    console.log(cardContent.skill_name, entries[0].boundingClientRect.top, entries[0].boundingClientRect.bottom);
                     if(entries[0].boundingClientRect.top <= 0) {
                         if(entries[0].boundingClientRect.bottom < 0) {
                             console.log(cardContent.skill_name, 'going off screen 1')
@@ -114,7 +112,6 @@
     .skill {
         transform: translateX(-300px);
         transition: all ease-in .3s;
-        /* animation: flyRight 0.5s ease-in; */
     }
 }
 .fly {

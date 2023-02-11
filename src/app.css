@@ -9,4 +9,5 @@ body {
 
 .expand {
     height: min-content !important;
+    max-height: 2000px !important;
 }

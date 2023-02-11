@@ -74,7 +74,7 @@
     </ul>
     {#if contentHeight > maxCompressedArticleHeight}
         <div class="absolute bottom-0 right-0 left-0 flex justify-center bg-gray-100 dark:bg-gray-600">
-            <button class="flex flex-wrap justify-center items-center w-40 border-t-2 border-white" on:click={handleExpand}>
+            <button class="flex flex-wrap justify-center items-center w-40 border-black dark:border-white" on:click={handleExpand}>
                 {#if isExpanded}
                     <Caret rotate={true} /> Hide
                 {:else}
@@ -86,22 +86,30 @@
 </article>
 
 <style>
+    button {
+        border-top: 1px solid;
+    }
     article {
         height: 18.5em;
+        max-height: 18.5em;
+        transition: max-height .75s;
     }
     @media(min-width: 640px) {
         article {
             height: 20em;
+            max-height: 20em;
         }
     }
     @media(min-width: 768px) {
         article {
             height: 21em;
+            max-height: 21em;
         }
     }
     @media(min-width: 1024px) {
         article {
             height: 19em;
+            max-height: 19em;
         }
     }
 </style>
