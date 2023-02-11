@@ -49,12 +49,48 @@
         }
     }
 
+    if(browser) {
+        let listItem: HTMLElement | null = document.querySelector(`.skill-${cardContent.id}`);
+        if(listItem !== null) {
+            const observer = new IntersectionObserver(entries => {
+                console.log(cardContent.skill_name, entries[0].boundingClientRect.top, entries[0].boundingClientRect.bottom);
+                // if(entries[0].boundingClientRect.top <= window.screen.height ||
+                //          (entries[0].boundingClientRect.top <= 0 && entries[0].boundingClientRect.bottom >= 0)) {
+                //     console.log(cardContent.skill_name, 'flying in')
+                //     listItem?.classList.add('fly');
+                // } else if(entries[0].boundingClientRect.top <= 0 || entries[0].boundingClientRect.bottom <= 0) {
+                //     console.log(cardContent.skill_name, 'going off screen')
+                //     listItem?.classList.remove('fly');
+                // }
+                if(entries[0].boundingClientRect.top <= 0) {
+                    if(entries[0].boundingClientRect.bottom <= 0) {
+                        console.log(cardContent.skill_name, 'going off screen')
+                        listItem?.classList.remove('fly');
+                    } else if(entries[0].boundingClientRect.bottom >= 0) {
+                        console.log(cardContent.skill_name, 'flying in')
+                        listItem?.classList.add('fly');
+                    }
+                } else if(entries[0].boundingClientRect.top <= window.screen.height) {
+                    if(entries[0].boundingClientRect.bottom >= 0) {
+                        console.log(cardContent.skill_name, 'flying in')
+                        listItem?.classList.add('fly');
+                    }
+                } else if(entries[0].boundingClientRect.top >= window.screen.height) {
+                    if(entries[0].boundingClientRect.bottom >= window.screen.height) {
+                        console.log(cardContent.skill_name, 'going off screen')
+                        listItem?.classList.remove('fly');
+                    }
+                }
+            });
+            observer.observe(listItem);
+        }
+    }
+
     onMount(() => {
         applyProgressBar();
     })
 </script>
-
-<li class="text-center shadow-lg mb-2 sm:mr-4 rounded-xl p-4 border-gray-50 border-2  dark:bg-gray-600 dark:border-0 dark:border-gray-600" tabIndex={0}>
+<li class={`skill skill-${cardContent.id} text-center shadow-lg mb-2 sm:mr-4 rounded-xl p-4 border-gray-50 border-2  dark:bg-gray-600 dark:border-0 dark:border-gray-600`} tabIndex={0}>
     <article>
         <span>{cardContent.skill_name}</span>
         <div class={`proficiency-bar${cardContent.id} py-2 border-2 border-black rounded-xl`} aria-label="skill proficiency progress bar" role="progressbar"></div>
@@ -67,3 +103,14 @@
         </ul>
     </article>
 </li>
+
+<style>
+.skill {
+    transform: translateX(-300px);
+    transition: all ease-in .3s;
+    /* animation: flyRight 0.5s ease-in; */
+}
+.fly {
+    transform: translateX(0px);
+}
+</style>

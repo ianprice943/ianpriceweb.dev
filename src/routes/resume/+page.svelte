@@ -43,7 +43,7 @@
 </section>
 <section id="skills" aria-label="skills">
     <h2 class="text-2xl mb-2">Skills</h2>
-    <div class="">
+    <div>
         <ul class="sm:grid sm:grid-cols-2 lg:grid-cols-3">
             {#each skillsData as skill (skill.id)}
                 <SkillCard cardContent={skill} />
