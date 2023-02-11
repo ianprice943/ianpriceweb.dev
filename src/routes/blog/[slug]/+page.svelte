@@ -18,3 +18,7 @@
     <meta property="twitter:description" content="The blog page of Ian Price's Portfolio" />
     <meta property="twitter:image" content="//www.ianprice943.dev/images/LinkedIn.png" />
 </svelte:head>
+
+<article class="prose">
+    
+</article>
