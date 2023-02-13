@@ -23,5 +23,10 @@ Code block
     let typedVariable: Boolean = true;
 ```
 
-Imported Component Below:
+Another code block with a long piece of code
+```ts
+    let superLongVariableWithALotOfText: string = "abcdefghijklmnopqrstuvwxyz";
+```
+
+Imported Svelte Component Below:
 <Caret rotate={false} />

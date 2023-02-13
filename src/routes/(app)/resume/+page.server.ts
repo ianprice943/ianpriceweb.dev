@@ -20,8 +20,11 @@ const getAllEducationData = async () => {
             degree_earned,
             education_time
         `);
-
-    return data;
+    if(!error) {
+        return data;
+    } else {
+        console.log('error:', error);
+    }
 }
 
 const getAllSkillsData = async () => {
@@ -35,7 +38,11 @@ const getAllSkillsData = async () => {
         .order('priority', {ascending: true})
         .order('skill_name', {ascending: true});
 
-    return data;
+    if(!error) {
+        return data;
+    } else {
+        console.log('error:', error);
+    }
 }
 
 const getAllJobData = async () => {
@@ -55,5 +62,9 @@ const getAllJobData = async () => {
         `)
         .order('id', {ascending: true});
 
-    return data;
+    if(!error) {
+        return data;
+    } else {
+        console.log('error:', error);
+    }
 }

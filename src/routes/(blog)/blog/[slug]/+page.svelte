@@ -1,8 +1,26 @@
 <script lang="ts">
+    import { browser } from "$app/environment";
+	import { onMount } from 'svelte';
     import type { PageData } from './$types';
     export let data: PageData;
 
     const dynaURL = "//www.ianprice943.dev/blog/" + data.urlStub;
+
+    const setTabIndexOnCodeBlocks = () => {
+        if(browser) {
+            let preBlocks: NodeListOf<HTMLPreElement> | null = document.querySelectorAll<"pre">('pre');
+            preBlocks?.forEach((block) => {
+                block.tabIndex = 0;
+            });
+        }
+    }
+
+    onMount(() => {
+        setTabIndexOnCodeBlocks();
+    });
+
+    // rerun if markdown dynamically update
+    $: setTabIndexOnCodeBlocks();
 </script>
 
 <svelte:head>
@@ -22,8 +40,8 @@
     <!-- <meta property="twitter:image" content="//www.ianprice943.dev/images/LinkedIn.png" /> -->
 </svelte:head>
 
-<article class="prose">
+<article class="prose dark:prose-invert">
 <h1>{ data.title }</h1>
-<p>Published: {data.date}</p>
-<svelte:component this={data.content} />
+<p>Published: { data.date }</p>
+<svelte:component this={ data.content } />
 </article>
