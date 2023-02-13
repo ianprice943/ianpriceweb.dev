@@ -1,8 +1,15 @@
+---
+title: Test Post
+date: "2023-2-12"
+description: "A test blog post"
+urlStub: "test"
+---
+
 <script>
     import Caret from '$lib/components/Caret.svelte'
 </script>
 
-# Test Markdown File
+## Test Markdown File
 
 **Bold?**
 
