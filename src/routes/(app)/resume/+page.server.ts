@@ -24,6 +24,7 @@ const getAllEducationData = async () => {
         return data;
     } else {
         console.log('error:', error);
+        return { error: error };
     }
 }
 
@@ -42,6 +43,7 @@ const getAllSkillsData = async () => {
         return data;
     } else {
         console.log('error:', error);
+        return { error: error }
     }
 }
 
@@ -66,5 +68,6 @@ const getAllJobData = async () => {
         return data;
     } else {
         console.log('error:', error);
+        return {error: error};
     }
 }

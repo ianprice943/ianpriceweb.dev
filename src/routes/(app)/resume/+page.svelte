@@ -27,27 +27,39 @@
 <h1 class="text-center md:text-left text-3xl mb-2">Resume</h1>
 <section id="experience" aria-label="experience">
     <h2 class="text-2xl mb-2">Experience</h2>
-    <div class="grid md:grid-cols-2 gap-2">
-        {#each jobData as job (job.id)}
-            <JobCard cardContent={job} />
-        {/each}
-    </div>
+    {#if !Object.keys(jobData).includes("error")}
+        <div class="grid md:grid-cols-2 gap-2">
+            {#each jobData as job (job.id)}
+                <JobCard cardContent={job} />
+            {/each}
+        </div>
+    {:else}
+        <p>Sorry, there was an error getting my job data.</p>
+    {/if}
 </section>
 <section id="education" aria-label="education">
     <h2 class="text-2xl mb-2">Education</h2>
-    <div class="md:grid md:grid-cols-1 lg:grid-cols-2">
-        {#each educationData as education (education.id)}
-            <EducationCard cardContent={education} />
-        {/each}
-    </div>
+    {#if !Object.keys(educationData).includes("error")}
+        <div class="md:grid md:grid-cols-1 lg:grid-cols-2">
+            {#each educationData as education (education.id)}
+                <EducationCard cardContent={education} />
+            {/each}
+        </div>
+    {:else}
+        <p>Sorry, there was an error getting my education data.</p>
+    {/if}
 </section>
 <section id="skills" aria-label="skills">
     <h2 class="text-2xl mb-2">Skills</h2>
-    <div>
-        <ul class="sm:grid sm:grid-cols-2 lg:grid-cols-3">
-            {#each skillsData as skill (skill.id)}
-                <SkillCard cardContent={skill} />
-            {/each}
-        </ul>
-    </div>
+    {#if !Object.keys(skillsData).includes("error")}
+        <div>
+            <ul class="sm:grid sm:grid-cols-2 lg:grid-cols-3">
+                {#each skillsData as skill (skill.id)}
+                    <SkillCard cardContent={skill} />
+                {/each}
+            </ul>
+        </div>
+    {:else}
+        <p>Sorry, there was an error getting my skills data.</p>
+    {/if}
 </section>

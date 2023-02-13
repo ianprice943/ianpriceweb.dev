@@ -1,9 +1,16 @@
 <script lang="ts">
     import { browser } from "$app/environment";
 	import { onMount } from 'svelte';
-    import type { PageData } from './$types';
-    export let data: PageData;
-
+    import { marked } from 'marked';
+    import type { PageServerLoad } from './$types';
+    export let data: PageServerLoad;
+    console.log(data);
+    let editMode = false;
+    // let source = data.content.render().html;
+    let source = `### test md`;
+    // console.log('data content render', data.content.render().html);
+    // $: markdown = marked(source);
+    
     const dynaURL = "//www.ianprice943.dev/blog/" + data.urlStub;
 
     const setTabIndexOnCodeBlocks = () => {
@@ -40,8 +47,16 @@
     <!-- <meta property="twitter:image" content="//www.ianprice943.dev/images/LinkedIn.png" /> -->
 </svelte:head>
 
-<article class="prose dark:prose-invert">
-<h1>{ data.title }</h1>
-<p>Published: { data.date }</p>
-<svelte:component this={ data.content } />
-</article>
+{#if !editMode}
+    <article class="prose dark:prose-invert">
+        <button class="absolute right-0 border-2 border-red-800" on:click={() => editMode = !editMode}>Edit Mode</button>
+        <h1>{ data.title }</h1>
+        <p>Published: { data.date }</p>
+        <svelte:component this={ data.content } />
+    </article>
+{:else}
+    <div class="flex flex-row w-full h-screen">
+        <textarea class="w-1/2 max-w-none pl-2 overflow-x-auto focus:outline-0 border-0 bg-gray-900 text-green-600" bind:value={source}></textarea>
+        <article class="w-1/2 max-w-none pl-2 prose dark:prose-invert">{@html markdown}</article>
+    </div>
+{/if}
