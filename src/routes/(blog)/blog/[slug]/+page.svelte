@@ -7,9 +7,9 @@
     console.log(data);
     let editMode = false;
     // let source = data.content.render().html;
-    let source = `### test md`;
+    let source = data.mdContent;
     // console.log('data content render', data.content.render().html);
-    // $: markdown = marked(source);
+    $: markdown = marked(source);
     
     const dynaURL = "//www.ianprice943.dev/blog/" + data.urlStub;
 
@@ -52,11 +52,12 @@
         <button class="absolute right-0 border-2 border-red-800" on:click={() => editMode = !editMode}>Edit Mode</button>
         <h1>{ data.title }</h1>
         <p>Published: { data.date }</p>
-        <svelte:component this={ data.content } />
+        <!-- <svelte:component this={ data.content } /> -->
+        <div>{@html data.content}</div>
     </article>
 {:else}
-    <div class="flex flex-row w-full h-screen">
+    <div class="flex flex-row w-full h-auto">
         <textarea class="w-1/2 max-w-none pl-2 overflow-x-auto focus:outline-0 border-0 bg-gray-900 text-green-600" bind:value={source}></textarea>
-        <article class="w-1/2 max-w-none pl-2 prose dark:prose-invert">{@html markdown}</article>
+        <article class="w-1/2 max-w-none pl-2 overflow-y-auto prose dark:prose-invert">{@html markdown}</article>
     </div>
 {/if}
