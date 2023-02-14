@@ -23,9 +23,9 @@
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl mb-2">Blog</h1>
-<p>A list of my blog posts.</p>
+<p class="m-2">A list of my blog posts.</p>
 {#if data.length > 0}
-    <ul>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {#each data as post (post.id)}
             <BlogCard 
                 urlStub={post.urlStub}

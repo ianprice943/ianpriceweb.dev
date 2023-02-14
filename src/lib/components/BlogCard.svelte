@@ -5,7 +5,7 @@
 </script>
 
 <li>
-    <article>
+    <article class="bg-gray-100 dark:bg-gray-600 shadow-lg rounded-xl p-4">
         <a href={`/blog/${urlStub}`}>
             <h2>{title}</h2>
             <p>{description}</p>
