@@ -26,16 +26,16 @@ const loadFromDB = async (slug: string) => {
     `)
     .eq('urlStub', slug);
     
-    if(!error) {
+    if(!error && data !== null && data?.length !== 0) {
 
         if(data[0].is_published === false || !data[0].content) {
             throw fourOhFour(404, {
-              message: 'Blog post not found'
+                message: 'Blog post not found'
             })
         }
 
         const dbContent = data[0].content;
-        console.log('content', dbContent);
+        // console.log('content', dbContent);
 
         const content = compileMD(dbContent, 'database');
         const mdContent = data[0].content;
@@ -50,6 +50,10 @@ const loadFromDB = async (slug: string) => {
             content,
             mdContent
         }
+    } else {
+        throw fourOhFour(404, {
+            message: 'Blog post not found'
+        })
     }
 }
 
