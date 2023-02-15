@@ -1,8 +1,8 @@
 <script lang="ts">
     import BlogCard from "$lib/components/BlogCard.svelte";
     export let data: any;
-    data = data.data;
-    console.log(data);
+    let posts = data?.data;
+    console.log(posts);
 </script>
 
 <svelte:head>
@@ -23,10 +23,10 @@
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl mb-2">Blog</h1>
-<p class="m-2">A list of my blog posts.</p>
-{#if data.length > 0}
+{#if posts?.length > 0}
+    <p class="my-2">Here's a list of my most recent blog posts.</p>
     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-        {#each data as post (post.id)}
+        {#each posts as post (post.id)}
             <BlogCard 
                 urlStub={post.urlStub}
                 title={post.title}
@@ -34,4 +34,6 @@
             />
         {/each}
     </ul>
+{:else}
+    <h2 class="text-1xl">Sorry, there was a problem loading my blog posts. Please come back later.</h2>
 {/if}
