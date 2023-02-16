@@ -1,3 +1,5 @@
+// TODO Look into form actions and maybe move this logic over to [slug]/+page.server.ts
+
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from "./$types";
 import { supabase } from '$lib/utils/supabaseClient';

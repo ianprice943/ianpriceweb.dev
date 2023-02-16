@@ -77,7 +77,7 @@
     </article>
 {:else}
     <div class="flex flex-row w-full h-auto">
-        <form class="w-1/2 max-w-none pl-2 flex flex-col">
+        <form method="PUT" class="w-1/2 max-w-none pl-2 flex flex-col">
             <label for="postTitle">Title:</label>
             <input 
                 type="text"
