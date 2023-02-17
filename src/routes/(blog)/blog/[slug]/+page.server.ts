@@ -1,6 +1,7 @@
 import { supabase } from '$lib/utils/supabaseClient';
 import { error as fourOhFour } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad, Actions } from './$types';
+import type { BlogPost } from '$lib/types/blogTypes.types';
 import { createRequire } from "module";
 import { compile as mdsvexCompile } from 'mdsvex';
 import { compile as svelteCompile } from 'svelte/compiler';
@@ -28,6 +29,7 @@ const loadFromDB = async (slug: string) => {
     
     if(!error && data !== null && data?.length !== 0) {
 
+        // TODO: add logged in check to allow admin user to edit unpublished blog posts
         if(data[0].is_published === false || !data[0].content) {
             throw fourOhFour(404, {
                 message: 'Blog post not found'
@@ -40,9 +42,12 @@ const loadFromDB = async (slug: string) => {
         const content = compileMD(dbContent, 'database');
         const mdContent = data[0].content;
         const date = data[0].published_at;
-        const { title, description, urlStub } = data[0];
+        const { title, description, urlStub, is_published } = data[0];
+
+        console.log('published?', is_published)
 
         return {
+            is_published,
             title,
             description,
             date,
@@ -140,3 +145,41 @@ const compileMD = async (data: string, source: string) => {
         }
     }
 }
+
+/** @type {import('./$types').Actions} */
+export const actions = {
+    updatePost: async ({ request }) => {
+        const formData = await request.formData();
+        console.log('form data', formData);
+
+        const dateObj = new Date();
+        const month = dateObj.getUTCMonth() + 1;
+        const day = dateObj.getUTCDate();
+        const year = dateObj.getUTCFullYear();
+        const today = `${year}/${month}/${day}`;
+
+        const urlStub = formData.get("urlStub")?.toString();
+
+        const updateObject: BlogPost = {
+            is_published: formData.get("isPublished") === 'on' ? true : false,
+            published_at: today,
+            title: formData.get("postTitle")?.toString(),
+            description: formData.get("postDescription")?.toString(),
+            content: formData.get("markdown")?.toString(),
+            urlStub: urlStub
+        };
+            
+        const { data, error } = await supabase
+        .from('blog_posts')
+        .update(updateObject)
+        .eq('urlStub', urlStub);
+
+        if(!error) {
+            console.log("update post data", data);
+            // return json("ok");
+        } else {
+            console.log("update post error: ", error);
+            // return json("update failed");
+        }
+    }
+} satisfies Actions;

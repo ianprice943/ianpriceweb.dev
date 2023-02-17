@@ -64,20 +64,20 @@
                 if(screenWidth <= 1024) {
                     if(entries[0].boundingClientRect.top <= 0) {
                         if(entries[0].boundingClientRect.bottom < 0) {
-                            console.log(cardContent.skill_name, 'going off screen 1')
+                            // console.log(cardContent.skill_name, 'going off screen 1')
                             listItem?.classList.remove('fly');
                         } else if(entries[0].boundingClientRect.bottom >= 0) {
-                            console.log(cardContent.skill_name, 'flying in 1')
+                            // console.log(cardContent.skill_name, 'flying in 1')
                             listItem?.classList.add('fly');
                         }
                     } else if(entries[0].boundingClientRect.top <= window.screen.height) {
                         if(entries[0].boundingClientRect.bottom >= 0) {
-                            console.log(cardContent.skill_name, 'flying in 2')
+                            // console.log(cardContent.skill_name, 'flying in 2')
                             listItem?.classList.add('fly');
                         }
                     } else if(entries[0].boundingClientRect.top >= window.screen.height) {
                         if(entries[0].boundingClientRect.bottom >= window.screen.height) {
-                            console.log(cardContent.skill_name, 'going off screen 2')
+                            // console.log(cardContent.skill_name, 'going off screen 2')
                             listItem?.classList.remove('fly');
                         }
                     }

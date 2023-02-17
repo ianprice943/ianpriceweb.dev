@@ -1,7 +1,8 @@
 export interface BlogPost {
-    title: string,
-    urlStub: string,
-    is_published: boolean,
-    description: string,
-    content: string
+    title?: string | null,
+    urlStub?: string | null,
+    is_published?: boolean | null,
+    description?: string | null,
+    content?: string | null,
+    published_at?: string | null
 }

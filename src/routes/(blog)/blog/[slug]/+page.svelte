@@ -4,13 +4,15 @@
     import { marked } from 'marked';
     import type { PageServerLoad } from './$types';
     export let data: PageServerLoad;
-    console.log(data);
+    // console.log(data);
     let editMode = false;
     let content = data?.content;
     let description = data?.description;
     let markdown = data?.mdContent;
     let title = data?.title;
     let date = data.date;
+    let isPublished = data.is_published;
+    let urlStub = data.urlStub;
     $: html = marked(markdown);
     
     const dynaURL = "//www.ianprice943.dev/blog/" + data.urlStub;
@@ -66,7 +68,7 @@
 {#if !editMode}
     {#if true}
     <!-- update to only show this button if logged in -->
-        <button class="absolute right-0 border-2 border-red-800" on:click={handleEditMode}>
+        <button class="px-2 py-1 mb-2 rounded-md border-2 bg-red-800 border-red-800" on:click={handleEditMode}>
             Edit
         </button>
     {/if}
@@ -77,20 +79,64 @@
     </article>
 {:else}
     <div class="flex flex-row w-full h-auto">
-        <form method="PUT" class="w-1/2 max-w-none pl-2 flex flex-col">
-            <label for="postTitle">Title:</label>
-            <input 
-                type="text"
-                id="postTitle"
-                name="postTitle"
-                bind:value={title}
-                class="focus:outline-0 border-0"
+        <form method="POST" action="?/updatePost" class="w-1/2 max-w-none pl-2 flex flex-col">
+            <div class="flex flex-col mb-2">
+                <div class="flex gap-2">
+                    <div class="flex flex-col w-3/4">
+                        <label for="postTitle">Title:</label>
+                        <input 
+                            type="text"
+                            id="postTitle"
+                            name="postTitle"
+                            bind:value={title}
+                            class="pl-1 focus:outline-0 border-0 text-black"
+                        >
+                    </div>
+                    <div class="flex flex-col w-1/4">
+                        <label for="urlStub">URL Stub</label>
+                        <input 
+                            type="text"
+                            id="urlStub"
+                            name="urlStub"
+                            bind:value={urlStub}
+                            class="pl-1 focus:outline-0 border-0 text-black"
+                        >
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <label for="postDescription">Description:</label>
+                    <input
+                        type="text"
+                        id="postDescription"
+                        name="postDescription"
+                        bind:value={description}
+                        class="pl-1 focus:outline-0 border-0 text-black"
+                    >
+                </div>
+            </div>
+            <textarea
+                name="markdown" class="pl-2 overflow-x-auto h-full focus:outline-0 border-0 bg-gray-900 text-green-600" bind:value={markdown}></textarea>
+            <div class="flex my-2">
+                <label for="isPublished">Publish Upon Saving?</label>
+                <input
+                    name="isPublished"
+                    type="checkbox"
+                    id="isPublished"
+                    bind:checked={isPublished}
+                    class="ml-2"
+                >
+            </div>
+            <button 
+                type="submit"
+                on:submit|preventDefault
+                class="w-24 px-2 py-1 rounded-md border-2 bg-green-800 border-green-800"
             >
-            <textarea class="overflow-x-auto h-full focus:outline-0 border-0 bg-gray-900 text-green-600" bind:value={markdown}></textarea>
+                Save
+            </button>
         </form>
         <article class="w-1/2 max-w-none pl-2 mt-6 overflow-y-auto prose dark:prose-invert">
             <h1>{ title }</h1>
-            <p>Published: { date }</p>
+            <p>{ description }</p>
             <div>{@html html}</div>
         </article>
     </div>
