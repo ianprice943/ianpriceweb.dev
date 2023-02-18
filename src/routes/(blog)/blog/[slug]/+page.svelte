@@ -128,7 +128,7 @@
             </div>
             <button 
                 type="submit"
-                on:submit|preventDefault
+                on:submit
                 class="w-24 px-2 py-1 rounded-md border-2 bg-green-800 border-green-800"
             >
                 Save
