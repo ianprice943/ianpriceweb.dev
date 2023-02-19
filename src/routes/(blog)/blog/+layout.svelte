@@ -16,6 +16,7 @@
     }
 </script>
 
+<!--TODO figure out if this layout file is necessary anymore-->
 <div id="shell">
     <Header />
     <main class="flex-grow px-4 pb-10 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
