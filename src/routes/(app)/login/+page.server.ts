@@ -8,9 +8,13 @@ export const actions = {
         const email = formData.get('email')?.toString() || "";
         const pw = formData.get('password')?.toString() || "";
 
-        const { data, error } = supabase.auth.signInWithPassword({
-            email: email,
-            password: pw
+        // const { data, error } = supabase.auth.signInWithPassword({
+        //     email: email,
+        //     password: pw
+        // });
+
+        const { data, error } = supabase.auth.signInWithOtp({
+            email: email
         });
 
         if(!error) {

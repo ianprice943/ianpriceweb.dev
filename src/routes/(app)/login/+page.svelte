@@ -5,9 +5,9 @@
 
 <form method="POST" action="?/login">
     <label for="email">Email:</label>
-    <input type="text" id="email" name="emal" bind:value={email}>
-    <label for="password">Password:</label>
-    <input type="text" id="password" name="password" bind:value={pw}>
+    <input type="text" id="email" name="emal" bind:value={email} class="text-black pl-1 focus:outline-0 border-0">
+    <!-- <label for="password">Password:</label>
+    <input type="text" id="password" name="password" bind:value={pw}> -->
     <button
         type="submit"
         on:submit
