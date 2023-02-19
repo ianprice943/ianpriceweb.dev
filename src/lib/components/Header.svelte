@@ -2,7 +2,7 @@
     import ThemeSwitcher from "./ThemeSwitcher.svelte";
 </script>
 
-<header class="px-4 py-2 flex flex-col-reverse sm:flex-row md:px-8 lg:px-16 xl:px-32 2xl:px-64">
+<header class="px-4 py-2 flex flex-col-reverse flex-grow-0 flex-shrink-0 sm:flex-row md:px-8 lg:px-16 xl:px-32 2xl:px-64">
     <div class="sm:flex-grow">
         <p class="text-4xl text-center sm:text-left">Ian Price</p>
     </div>
