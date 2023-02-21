@@ -4,6 +4,7 @@
     import { marked } from 'marked';
     import type { PageServerLoad } from './$types';
     export let data: PageServerLoad;
+    import { page } from "$app/stores";
     // console.log(data);
     let editMode = false;
     let content = data?.content;
@@ -66,7 +67,7 @@
 
 
 {#if !editMode}
-    {#if true}
+    {#if $page.data.session}
     <!-- update to only show this button if logged in -->
         <button class="px-2 py-1 mb-2 rounded-md border-2 bg-red-800 border-red-800" on:click={handleEditMode}>
             Edit

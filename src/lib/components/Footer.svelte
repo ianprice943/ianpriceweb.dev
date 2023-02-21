@@ -7,7 +7,7 @@
     {#if !$page.data.session}
         <a href="/login" alt="admin log in" class="underline absolute right-2 top-2">Admin Login</a>
     {:else}
-        <form method="POST" action="/login/?/logout">
+        <form method="POST" action="/login?/logout">
             <button on:submit|preventDefault type="submit" alt="admin log out" class="underline absolute right-2 top-2">Admin Logout</button>
         </form>
     {/if}

@@ -24,10 +24,6 @@
     <meta property="twitter:image" content="//www.ianprice943.dev/images/LinkedIn.png" />
 </svelte:head>
 
-{#if $page.data.session}
-    <p>Logged In As: {$page.data.session.user.email}</p>
-{/if}
-
 <h1 class="text-center md:text-left text-3xl mb-2">Blog</h1>
 {#if posts?.length > 0}
     <p class="my-2">Here's a list of my most recent blog posts.</p>

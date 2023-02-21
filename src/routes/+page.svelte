@@ -1,6 +1,5 @@
 <script>
     import PCard from "$lib/components/PCard.svelte";
-    // import profilePicture from '/images/LinkedIn.png';
 
     const cardContent1 = "Greetings! I'm a web developer based in Columbus, Ohio. In 2019 I graduated Miami University with a Bachelor of Science in Computer Science.";
 
