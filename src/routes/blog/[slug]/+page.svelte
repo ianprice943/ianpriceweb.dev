@@ -5,18 +5,19 @@
     import type { PageServerLoad } from './$types';
     export let data: PageServerLoad;
     import { page } from "$app/stores";
+    import { domain } from "$lib/stores/stores";
     // console.log(data);
     let editMode = false;
-    let content = data?.content;
-    let description = data?.description;
-    let markdown = data?.mdContent;
-    let title = data?.title;
-    let date = data.date;
-    let isPublished = data.is_published;
-    let urlStub = data.urlStub;
+    let content = data?.content as string;
+    let description = data?.description as string;
+    let markdown = data?.mdContent as string;
+    let title = data?.title as string;
+    let date = data.date as string;
+    let isPublished = data.is_published as boolean;
+    let urlStub = data.urlStub  as string;
     $: html = marked(markdown);
     
-    const dynaURL = "//www.ianprice943.dev/blog/" + data.urlStub;
+    const dynaURL = `//${$domain}/blog/${urlStub}`;
 
     const setTabIndexOnCodeBlocks = () => {
         if(browser) {
@@ -28,16 +29,7 @@
     }
 
     const handleEditMode = () => {
-        if(editMode) {
-            saveMarkDown(markdown);
-        } else {
-
-            editMode = !editMode;
-        }
-    }
-
-    const saveMarkDown = (markdown: string) => {
-
+        editMode = !editMode;
     }
 
     onMount(() => {
@@ -52,7 +44,7 @@
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="icon" href="//ianprice943.dev/images/favicon.ico" />
+    <link rel="icon" href={`//${$domain}/images/favicon.ico`} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={dynaURL} />
     <meta property="og:title" content={title} />
@@ -68,12 +60,11 @@
 
 {#if !editMode}
     {#if $page.data.session}
-    <!-- update to only show this button if logged in -->
         <button class="px-2 py-1 mb-2 rounded-md border-2 bg-red-800 border-red-800" on:click={handleEditMode}>
             Edit
         </button>
     {/if}
-    <article class="prose dark:prose-invert">
+    <article class="prose dark:prose-invert mx-auto">
         <h1>{ title }</h1>
         <p>Published: { date }</p>
         <div>{@html content}</div>

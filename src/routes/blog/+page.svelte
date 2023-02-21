@@ -1,9 +1,9 @@
 <script lang="ts">
     import BlogCard from "$lib/components/BlogCard.svelte";
     import { page } from '$app/stores';
-    console.log('page', page);
     export let data: any;
-    let posts = data?.data;
+    // 
+    let posts = data?.data ?? data?.filtered;
     console.log(posts);
 </script>
 
@@ -25,6 +25,7 @@
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl mb-2">Blog</h1>
+<!-- TODO: Add button to create a new post. Might need to make the form in the slug page a component -->
 {#if posts?.length > 0}
     <p class="my-2">Here's a list of my most recent blog posts.</p>
     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">

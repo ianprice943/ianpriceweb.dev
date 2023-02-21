@@ -5,16 +5,16 @@ import type { BlogPost } from '$lib/types/blogTypes.types';
 import { createRequire } from "module";
 import { compile as mdsvexCompile } from 'mdsvex';
 import { compile as svelteCompile } from 'svelte/compiler';
+import { getServerSession } from '@supabase/auth-helpers-sveltekit';
 
-export const load = ( async ({ params }) => {
-    
-    return loadFromDB(params.slug);
-
-    // return loadFromStorage(params.slug);
+export const load = ( async (event) => {
+    // console.log('event', event);
+    return loadFromDB(event);
 
 }) satisfies PageServerLoad;
 
-const loadFromDB = async (slug: string) => {
+const loadFromDB = async (event: any) => {
+    const slug = event.params.slug;
     const { data, error } = await supabase
     .from('blog_posts')
     .select(`
@@ -29,8 +29,10 @@ const loadFromDB = async (slug: string) => {
     
     if(!error && data !== null && data?.length !== 0) {
 
-        // TODO: add logged in check to allow admin user to edit unpublished blog posts
-        if(data[0].is_published === false || !data[0].content) {
+        const session = await getServerSession(event);
+
+        // if the blog is unpublished or there's no content, and the user is not authenticated
+        if((data[0].is_published === false || !data[0].content) && !session?.user?.aud) {
             throw fourOhFour(404, {
                 message: 'Blog post not found'
             })

@@ -1,5 +1,6 @@
 import { writable, type Writable } from 'svelte/store';
+import { readable } from 'svelte/store';
 
 export const theme = writable("light");
 
-export const isLoggedIn = writable(false);
+export const domain = readable(window.location.hostname);
