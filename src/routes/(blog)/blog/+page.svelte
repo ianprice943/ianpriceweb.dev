@@ -1,5 +1,7 @@
 <script lang="ts">
     import BlogCard from "$lib/components/BlogCard.svelte";
+    import { page } from '$app/stores';
+    console.log('page', page);
     export let data: any;
     let posts = data?.data;
     console.log(posts);
@@ -21,6 +23,10 @@
     <meta property="twitter:description" content="The blog page of Ian Price's Portfolio" />
     <meta property="twitter:image" content="//www.ianprice943.dev/images/LinkedIn.png" />
 </svelte:head>
+
+{#if $page.data.session}
+    <p>Logged In As: {$page.data.session.user.email}</p>
+{/if}
 
 <h1 class="text-center md:text-left text-3xl mb-2">Blog</h1>
 {#if posts?.length > 0}

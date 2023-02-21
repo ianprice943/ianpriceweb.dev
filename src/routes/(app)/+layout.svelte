@@ -4,6 +4,21 @@
     import "../../app.css";
     import Header from "$lib/components/Header.svelte";
     import Footer from "$lib/components/Footer.svelte";
+    import { supabase } from "$lib/utils/supabaseClient";
+    import { invalidate } from "$app/navigation";
+    import { onMount } from 'svelte'
+
+    onMount(() => {
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange(() => {
+            invalidate('supabase:auth')
+        });
+
+        return () => {
+            subscription.unsubscribe()
+        }
+    })
 
     if(browser) {
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('prefers-color-scheme: dark').matches)) {
