@@ -3,4 +3,4 @@ import { readable } from 'svelte/store';
 
 export const theme = writable("light");
 
-export const domain = readable(window.location.hostname);
+export const domain = readable("idpdevelopment.net");
