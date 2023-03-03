@@ -1,10 +1,19 @@
 <script lang="ts">
     import BlogCard from "$lib/components/BlogCard.svelte";
     import { page } from '$app/stores';
+    import { marked } from "marked";
     export let data: any;
-    // 
+    let newBlogMode = false;
     let posts = data?.data ?? data?.filtered;
     console.log(posts);
+    let markdown = "";
+    let title = "";
+    let description = "";
+    $: html = marked(markdown);
+
+    const handleNewBlogMode = () => {
+        newBlogMode = !newBlogMode;
+    }
 </script>
 
 <svelte:head>
@@ -26,17 +35,78 @@
 
 <h1 class="text-center md:text-left text-3xl mb-2">Blog</h1>
 <!-- TODO: Add button to create a new post. Might need to make the form in the slug page a component -->
-{#if posts?.length > 0}
-    <p class="my-2">Here's a list of my most recent blog posts.</p>
-    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-        {#each posts as post (post.id)}
-            <BlogCard 
-                urlStub={post.urlStub}
-                title={post.title}
-                description={post.description}
-            />
-        {/each}
-    </ul>
+{#if !newBlogMode}
+    {#if $page.data.session}
+    <button class="px-2 py-1 mb-2 rounded-md border-2 bg-red-800 border-red-800" on:click={handleNewBlogMode}>
+        Create New Blog
+    </button>
+    {/if}
+    {#if posts?.length > 0}
+        <p class="my-2">Here's a list of my most recent blog posts.</p>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {#each posts as post (post.id)}
+                <BlogCard 
+                    urlStub={post.urlStub}
+                    title={post.title}
+                    description={post.description}
+                />
+            {/each}
+        </ul>
+    {:else}
+        <h2 class="text-1xl">Sorry, there was a problem loading my blog posts. Please come back later.</h2>
+    {/if}
 {:else}
-    <h2 class="text-1xl">Sorry, there was a problem loading my blog posts. Please come back later.</h2>
+    <div class="flex flex-col md:flex-row w-full h-auto">
+        <form method="POST" action="?/updatePost" class="w-full md:w-1/2 max-w-none pl-2 flex flex-col">
+            <div class="flex flex-col mb-2">
+                <div class="flex gap-2">
+                    <div class="flex flex-col w-3/4">
+                        <label for="postTitle">Title:</label>
+                        <input 
+                            type="text"
+                            id="postTitle"
+                            name="postTitle"
+                            bind:value={title}
+                            class="pl-1 focus:outline-0 border-0 text-black"
+                        >
+                    </div>
+                    <div class="flex flex-col w-1/4">
+                        <label for="urlStub">URL Stub</label>
+                        <input 
+                            type="text"
+                            id="urlStub"
+                            name="urlStub"
+                            class="pl-1 focus:outline-0 border-0 text-black"
+                        >
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <label for="postDescription">Description:</label>
+                    <input
+                        type="text"
+                        id="postDescription"
+                        name="postDescription"
+                        bind:value={description}
+                        class="pl-1 focus:outline-0 border-0 text-black"
+                    >
+                </div>
+            </div>
+            <textarea
+                name="markdown"
+                class="pl-2 overflow-x-auto h-full min-h-[150px] md:min-h-[600px] focus:outline-0 border-0 bg-gray-900 text-green-600"
+                bind:value={markdown}></textarea>
+            <button 
+                type="submit"
+                on:submit
+                class="w-24 px-2 py-1 mt-2 rounded-md border-2 text-white bg-green-800 border-green-800"
+            >
+                Save
+            </button>
+        </form>
+        <article class="w-full md:w-1/2 max-w-none pl-2 mt-6 overflow-y-auto prose dark:prose-invert">
+            <h1>{ title }</h1>
+            <p>{ description }</p>
+            <div>{ @html html }</div>
+        </article>
+    </div>
 {/if}

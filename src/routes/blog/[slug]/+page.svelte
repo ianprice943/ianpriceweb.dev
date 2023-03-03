@@ -70,8 +70,8 @@
         <div>{@html content}</div>
     </article>
 {:else}
-    <div class="flex flex-row w-full h-auto">
-        <form method="POST" action="?/updatePost" class="w-1/2 max-w-none pl-2 flex flex-col">
+    <div class="flex flex-col md:flex-row w-full h-auto">
+        <form method="POST" action="?/updatePost" class="w-full md:w-1/2 max-w-none pl-2 flex flex-col">
             <div class="flex flex-col mb-2">
                 <div class="flex gap-2">
                     <div class="flex flex-col w-3/4">
@@ -107,7 +107,9 @@
                 </div>
             </div>
             <textarea
-                name="markdown" class="pl-2 overflow-x-auto h-full focus:outline-0 border-0 bg-gray-900 text-green-600" bind:value={markdown}></textarea>
+                name="markdown"
+                class="pl-2 overflow-x-auto h-full min-h-[150px] md:min-h-[600px] focus:outline-0 border-0 bg-gray-900 text-green-600"
+                bind:value={markdown}></textarea>
             <div class="flex my-2">
                 <label for="isPublished">Publish Upon Saving?</label>
                 <input
@@ -121,15 +123,15 @@
             <button 
                 type="submit"
                 on:submit
-                class="w-24 px-2 py-1 rounded-md border-2 bg-green-800 border-green-800"
+                class="w-24 px-2 py-1 rounded-md border-2 text-white bg-green-800 border-green-800"
             >
                 Save
             </button>
         </form>
-        <article class="w-1/2 max-w-none pl-2 mt-6 overflow-y-auto prose dark:prose-invert">
+        <article class="w-full md:w-1/2 max-w-none pl-2 mt-6 overflow-y-auto prose dark:prose-invert">
             <h1>{ title }</h1>
             <p>{ description }</p>
-            <div>{@html html}</div>
+            <div>{ @html html }</div>
         </article>
     </div>
 {/if}

@@ -30,7 +30,7 @@
             maxCompressedArticleHeight = 296;
         }
 
-        contentHeight = article.scrollHeight;
+        contentHeight = article?.scrollHeight;
     }
 
     const debouncedSetDimensions = debounce(setDimensions, 300);
@@ -61,7 +61,7 @@
 </script>
 
 <!-- h-72 sm:h-56 md:h-80 lg:h-80 -->
-<article class=" overflow-y-hidden p-6 shadow-lg rounded-xl bg-gray-100 dark:bg-gray-600 relative" bind:this={article}>
+<article class="overflow-y-hidden p-6 shadow-lg rounded-xl bg-gray-100 dark:bg-gray-600 relative" bind:this={article}>
     <!-- <p class="absolute right-0 top-0">{contentHeight}</p> -->
     <h3 class="text-xl md:text-2xl text-center">{cardContent.company_name}</h3>
     <p class="md:text-xl">{cardContent.job_title}</p>
