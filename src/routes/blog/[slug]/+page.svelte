@@ -2,6 +2,7 @@
     import { browser } from "$app/environment";
 	import { onMount } from 'svelte';
     import { marked } from 'marked';
+    import hljs from 'highlight.js'
     import type { PageServerLoad } from './$types';
     export let data: PageServerLoad;
     import { page } from "$app/stores";
@@ -15,6 +16,14 @@
     let date = data.date as string;
     let isPublished = data.is_published as boolean;
     let urlStub = data.urlStub  as string;
+
+    marked.setOptions({
+        highlight: (code, lang) => {
+            const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+            return hljs.highlight(code, { language }).value;
+        },
+        langPrefix: 'hljs language-'
+    })
     $: html = marked(markdown);
     
     const dynaURL = `//${$domain}/blog/${urlStub}`;

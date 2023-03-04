@@ -86,7 +86,7 @@ const compileMD = async (data: string, source: string) => {
     // unfortunately I lose the use of svelte components in markdown when using things this way
 
     const mdsvexConfig = {
-      extensions: [".svelte.md"],
+        extensions: [".svelte.md"],
     }
     
     const preprocessed = await mdsvexCompile(data, mdsvexConfig);
@@ -135,12 +135,12 @@ const compileMD = async (data: string, source: string) => {
             const mdContent = data;
             
             return {
-              title,
-              description,
-              date,
-              urlStub,
-              content,
-              mdContent
+                title,
+                description,
+                date,
+                urlStub,
+                content,
+                mdContent
             }
         } else if(source === "database") {
             return renderedHTML;
