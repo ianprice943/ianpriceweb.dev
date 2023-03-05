@@ -17,7 +17,9 @@
     let title = data?.title as string;
     let date = data.date as string;
     let isPublished = data.is_published as boolean;
-    let urlStub = data.urlStub  as string;
+    let urlStub = data.urlStub as string;
+    let thumbnailUrl = data.thumbnailUrl as string;
+    let thumbnailAltText = data.thumbnailAltText as string;
 
     marked.setOptions({
         highlight: (code) => {
@@ -77,6 +79,12 @@
     <article class="prose dark:prose-invert mx-auto">
         <h1>{ title }</h1>
         <p>Published: { date }</p>
+        {#if thumbnailUrl && thumbnailAltText}
+            <img 
+                src={thumbnailUrl}
+                alt={thumbnailAltText}
+            />
+        {/if}
         <div>{@html content}</div>
     </article>
 {:else}

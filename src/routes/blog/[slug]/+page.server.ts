@@ -25,7 +25,9 @@ const loadFromDB = async (event: any) => {
         urlStub,
         title,
         description,
-        content
+        content,
+        thumbnailUrl,
+        thumbnailAltText
     `)
     .eq('urlStub', slug);
     
@@ -47,7 +49,7 @@ const loadFromDB = async (event: any) => {
         const content = compileWithMarked(dbContent);
         const mdContent = data[0].content;
         const date = data[0].published_at;
-        const { title, description, urlStub, is_published } = data[0];
+        const { title, description, urlStub, is_published, thumbnailUrl, thumbnailAltText } = data[0];
 
         console.log('published?', is_published)
 
@@ -58,7 +60,9 @@ const loadFromDB = async (event: any) => {
             date,
             urlStub,
             content,
-            mdContent
+            mdContent,
+            thumbnailUrl,
+            thumbnailAltText
         }
     } else {
         throw fourOhFour(404, {
