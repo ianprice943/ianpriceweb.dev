@@ -59,6 +59,8 @@
                     urlStub={post.urlStub}
                     title={post.title}
                     description={post.description}
+                    thumbnailUrl={post.thumbnailUrl}
+                    thumbnailAltText={post.thumbnailAltText}
                 />
             {/each}
         </ul>

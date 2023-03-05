@@ -13,7 +13,9 @@ export const load = ( async (event: any) => {
         is_published,
         urlStub,
         title,
-        description
+        description,
+        thumbnail,
+        thumbnail_alt_text
     `);
 
     if(!error) {
