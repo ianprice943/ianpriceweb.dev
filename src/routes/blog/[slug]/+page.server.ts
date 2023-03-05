@@ -1,5 +1,5 @@
 import { supabase } from '$lib/utils/supabaseClient';
-import { error as fourOhFour, redirect } from '@sveltejs/kit';
+import { error as fourOhFour, fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import type { BlogPost } from '$lib/types/blogTypes.types';
 // import { createRequire } from "module";
@@ -196,7 +196,12 @@ export const actions = {
             }
         } else {
             console.log("update post error: ", error);
-            // return json("update failed");
+            throw fail(500, {
+                error: 'Something went wrong while updating your blog post.',
+                values: {
+                    error
+                }
+            });
         }
     }
 } satisfies Actions;

@@ -67,7 +67,7 @@
     {/if}
 {:else}
     <div class="flex flex-col md:flex-row w-full h-auto">
-        <form method="POST" action="?/updatePost" class="w-full md:w-1/2 max-w-none pl-2 flex flex-col">
+        <form method="POST" action="?/createPost" class="w-full md:w-1/2 max-w-none pl-2 flex flex-col">
             <div class="flex flex-col mb-2">
                 <div class="flex gap-2">
                     <div class="flex flex-col w-3/4">
@@ -119,4 +119,8 @@
             <div>{ @html html }</div>
         </article>
     </div>
+{/if}
+
+{#if $page.status === 500}
+    <p class="text-red-600">{$page.form.error}</p>
 {/if}

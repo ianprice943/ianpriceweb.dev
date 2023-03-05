@@ -1,6 +1,8 @@
 import { supabase } from "$lib/utils/supabaseClient";
 import { getServerSession } from '@supabase/auth-helpers-sveltekit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from "./$types";
+import type { BlogPost } from "$lib/types/blogTypes.types";
 
 export const load = ( async (event: any) => {
     const { data, error } = await supabase
@@ -39,6 +41,35 @@ export const actions = {
         const formData = await request.formData();
         console.log('new post form data', formData);
 
-        const url
+        const urlStub = formData.get("urlStub")?.toString();
+
+        const createObject: BlogPost = {
+            is_published: formData.get("isPublished") === 'on' ? true : false,
+            title: formData.get("postTitle")?.toString(),
+            description: formData.get("postDescription")?.toString(),
+            content: formData.get("markdown")?.toString(),
+            urlStub: urlStub
+        };
+
+        const { data, error } = await supabase
+        .from('blog_posts')
+        .insert(createObject)
+        .eq('urlStub', urlStub);
+
+        if(!error) {
+            if(urlStub) {
+                throw redirect(303, `/blog/${urlStub}`);
+            } else {
+                throw redirect(303, '/blog');
+            }
+        } else {
+            console.log("update post error: ", error);
+            throw fail(500, {
+                error: 'Something went wrong while updating your blog post.',
+                values: {
+                    error
+                }
+            });
+        }
     }
 } satisfies Actions;

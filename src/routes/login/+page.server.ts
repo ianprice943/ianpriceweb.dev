@@ -26,8 +26,8 @@ export const actions = {
                 })
             }
             return fail(500, {
-                    error: 'Server error. Try again later.',
-                    values: {
+                error: 'Server error. Try again later.',
+                values: {
                     email,
                 },
             })

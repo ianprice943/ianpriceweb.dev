@@ -145,3 +145,7 @@
         </article>
     </div>
 {/if}
+
+{#if $page.status === 500}
+    <p class="text-red-600">{$page.form.error}</p>
+{/if}
