@@ -1,11 +1,13 @@
 import { supabase } from '$lib/utils/supabaseClient';
-import { error as fourOhFour } from '@sveltejs/kit';
+import { error as fourOhFour, redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import type { BlogPost } from '$lib/types/blogTypes.types';
-import { createRequire } from "module";
-import { compile as mdsvexCompile } from 'mdsvex';
-import { compile as svelteCompile } from 'svelte/compiler';
+// import { createRequire } from "module";
+// import { compile as mdsvexCompile } from 'mdsvex';
+// import { compile as svelteCompile } from 'svelte/compiler';
 import { getServerSession } from '@supabase/auth-helpers-sveltekit';
+import { marked } from 'marked';
+import { getTodayString, highlightSettings } from '$lib/utils/utils';
 
 export const load = ( async (event) => {
     // console.log('event', event);
@@ -41,7 +43,8 @@ const loadFromDB = async (event: any) => {
         const dbContent = data[0].content;
         // console.log('content', dbContent);
 
-        const content = compileMD(dbContent, 'database');
+        // const content = compileMD(dbContent, 'database');
+        const content = compileWithMarked(dbContent);
         const mdContent = data[0].content;
         const date = data[0].published_at;
         const { title, description, urlStub, is_published } = data[0];
@@ -64,88 +67,99 @@ const loadFromDB = async (event: any) => {
     }
 }
 
-const loadFromStorage = async (slug: string) => {
-    const { data, error } = await supabase
-    .storage
-    .from('blog-posts')
-    .download(`${slug}/${slug}.md`);
+// const loadFromStorage = async (slug: string) => {
+//     const { data, error } = await supabase
+//     .storage
+//     .from('blog-posts')
+//     .download(`${slug}/${slug}.md`);
 
-    console.log('attempting to download', `${slug}/${slug}.md`)
+//     console.log('attempting to download', `${slug}/${slug}.md`)
 
-    if(!error) {
-        console.log(data);
-        const bufferedData = await data.arrayBuffer().then((arrayBuffer) => Buffer.from(arrayBuffer, 'binary').toString());
-        console.log('buff', bufferedData);
+//     if(!error) {
+//         console.log(data);
+//         const bufferedData = await data.arrayBuffer().then((arrayBuffer) => Buffer.from(arrayBuffer, 'binary').toString());
+//         console.log('buff', bufferedData);
 
-        return compileMD(bufferedData, 'bucket');
-    }
-}
+//         return compileMD(bufferedData, 'bucket');
+//     }
+// }
 
-const compileMD = async (data: string, source: string) => {
-    // following code adapted from https://gist.github.com/babichjacob/c6907dd261fb3776044f618372d59470
-    // unfortunately I lose the use of svelte components in markdown when using things this way
+// const compileMD = async (data: string, source: string) => {
+//     // following code adapted from https://gist.github.com/babichjacob/c6907dd261fb3776044f618372d59470
+//     // unfortunately I lose the use of svelte components in markdown when using things this way
 
-    const mdsvexConfig = {
-        extensions: [".svelte.md"],
-    }
+//     const mdsvexConfig = {
+//         extensions: [".svelte.md"],
+//     }
     
-    const preprocessed = await mdsvexCompile(data, mdsvexConfig);
-    // console.log('preprocessed', preprocessed);
+//     const preprocessed = await mdsvexCompile(data, mdsvexConfig);
+//     // console.log('preprocessed', preprocessed);
     
-    if(preprocessed) {
-        const compiled = svelteCompile(
-        preprocessed.code,
-            {
-              generate: 'ssr',
-              format: "cjs",
-              hydratable: false,
-            }
-        );
-        // console.log('compiled', compiled);
+//     if(preprocessed) {
+//         const compiled = svelteCompile(
+//         preprocessed.code,
+//             {
+//               generate: 'ssr',
+//               format: "cjs",
+//               hydratable: false,
+//             }
+//         );
+//         // console.log('compiled', compiled);
         
-        const require = createRequire(import.meta.url);
-        // getting TS to pipe down
-        const module = { 
-            exports: { 
-                default: {
-                    render: function(){} 
-                },
-                metadata: {
-                    title: "",
-                    description: "",
-                    date: "",
-                    urlStub: ""
-                }
-            } 
-        };
-        const exports = module.exports;
+//         const require = createRequire(import.meta.url);
+//         // getting TS to pipe down
+//         const module = { 
+//             exports: { 
+//                 default: {
+//                     render: function(){} 
+//                 },
+//                 metadata: {
+//                     title: "",
+//                     description: "",
+//                     date: "",
+//                     urlStub: ""
+//                 }
+//             } 
+//         };
+//         const exports = module.exports;
         
-        eval(compiled.js.code);
+//         eval(compiled.js.code);
         
-        const rendered = module.exports.default.render();
-        // still works even though TS is complaining
-        const renderedHTML = rendered.html;
+//         const rendered = module.exports.default.render();
+//         // still works even though TS is complaining
+//         const renderedHTML = rendered.html;
 
-        if(source === "bucket") {
-            const meta = module.exports.metadata;
+//         if(source === "bucket") {
+//             const meta = module.exports.metadata;
             
-            const { title, description, date, urlStub } = meta;
-            // console.log('title', title, 'desc', description, 'date', date, 'stub', urlStub)
-            const content = renderedHTML;
-            const mdContent = data;
+//             const { title, description, date, urlStub } = meta;
+//             // console.log('title', title, 'desc', description, 'date', date, 'stub', urlStub)
+//             const content = renderedHTML;
+//             const mdContent = data;
             
-            return {
-                title,
-                description,
-                date,
-                urlStub,
-                content,
-                mdContent
-            }
-        } else if(source === "database") {
-            return renderedHTML;
-        }
-    }
+//             return {
+//                 title,
+//                 description,
+//                 date,
+//                 urlStub,
+//                 content,
+//                 mdContent
+//             }
+//         } else if(source === "database") {
+//             return renderedHTML;
+//         }
+//     }
+// }
+
+const compileWithMarked = async(data: string) => {
+    marked.setOptions({
+        highlight: (code) => {
+            return highlightSettings(code);
+        },
+        langPrefix: 'hljs language-'
+    })
+
+    return marked(data);
 }
 
 /** @type {import('./$types').Actions} */
@@ -153,23 +167,21 @@ export const actions = {
     updatePost: async ({ request }) => {
         const formData = await request.formData();
         console.log('form data', formData);
-
-        const dateObj = new Date();
-        const month = dateObj.getUTCMonth() + 1;
-        const day = dateObj.getUTCDate();
-        const year = dateObj.getUTCFullYear();
-        const today = `${year}/${month}/${day}`;
-
+        
         const urlStub = formData.get("urlStub")?.toString();
-
+        
         const updateObject: BlogPost = {
             is_published: formData.get("isPublished") === 'on' ? true : false,
-            published_at: today,
             title: formData.get("postTitle")?.toString(),
             description: formData.get("postDescription")?.toString(),
             content: formData.get("markdown")?.toString(),
             urlStub: urlStub
         };
+        
+        if(formData.get("isPublished") === 'on') {
+            const today = getTodayString();
+            updateObject["published_at"] = today;
+        }
             
         const { data, error } = await supabase
         .from('blog_posts')
@@ -177,8 +189,11 @@ export const actions = {
         .eq('urlStub', urlStub);
 
         if(!error) {
-            console.log("update post data", data);
-            // return json("ok");
+            if(urlStub) {
+                throw redirect(303, `/blog/${urlStub}`);
+            } else {
+                throw redirect(303, '/blog');
+            }
         } else {
             console.log("update post error: ", error);
             // return json("update failed");

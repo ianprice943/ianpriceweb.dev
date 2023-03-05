@@ -11,3 +11,10 @@ body {
     height: min-content !important;
     max-height: 2000px !important;
 }
+
+.prose pre {
+    padding: 0;
+}
+.dark:prose-invert pre {
+    padding: 0;
+}

@@ -1,5 +1,6 @@
 import { supabase } from "$lib/utils/supabaseClient";
 import { getServerSession } from '@supabase/auth-helpers-sveltekit';
+import type { Actions } from "./$types";
 
 export const load = ( async (event: any) => {
     const { data, error } = await supabase
@@ -31,3 +32,13 @@ export const load = ( async (event: any) => {
         return {error: error}
     }
 });
+
+/** @type {import('./$types').Actions} */
+export const actions = {
+    createPost: async ({ request }) => {
+        const formData = await request.formData();
+        console.log('new post form data', formData);
+
+        const url
+    }
+} satisfies Actions;

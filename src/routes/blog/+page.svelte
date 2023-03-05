@@ -2,6 +2,9 @@
     import BlogCard from "$lib/components/BlogCard.svelte";
     import { page } from '$app/stores';
     import { marked } from "marked";
+    import { highlightSettings } from "$lib/utils/utils";
+    import "./github.css";
+    import "./github-dark.css";
     export let data: any;
     let newBlogMode = false;
     let posts = data?.data ?? data?.filtered;
@@ -9,6 +12,13 @@
     let markdown = "";
     let title = "";
     let description = "";
+
+    marked.setOptions({
+        highlight: (code) => {
+            return highlightSettings(code);
+        },
+        langPrefix: 'hljs language-'
+    })
     $: html = marked(markdown);
 
     const handleNewBlogMode = () => {

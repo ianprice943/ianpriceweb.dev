@@ -2,7 +2,9 @@
     import { browser } from "$app/environment";
 	import { onMount } from 'svelte';
     import { marked } from 'marked';
-    import hljs from 'highlight.js'
+	import { highlightSettings } from "$lib/utils/utils";
+    import "../github.css";
+    import "../github-dark.css";
     import type { PageServerLoad } from './$types';
     export let data: PageServerLoad;
     import { page } from "$app/stores";
@@ -18,9 +20,8 @@
     let urlStub = data.urlStub  as string;
 
     marked.setOptions({
-        highlight: (code, lang) => {
-            const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-            return hljs.highlight(code, { language }).value;
+        highlight: (code) => {
+            return highlightSettings(code);
         },
         langPrefix: 'hljs language-'
     })
