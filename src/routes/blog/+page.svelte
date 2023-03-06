@@ -12,6 +12,8 @@
     let markdown = "";
     let title = "";
     let description = "";
+    let thumbnailUrl = "";
+    let thumbnailAltText = "";
 
     marked.setOptions({
         highlight: (code) => {
@@ -59,8 +61,8 @@
                     urlStub={post.urlStub}
                     title={post.title}
                     description={post.description}
-                    thumbnailUrl={post.thumbnailUrl}
-                    thumbnailAltText={post.thumbnailAltText}
+                    thumbnailUrl={post.thumbnail}
+                    thumbnailAltText={post.thumbnail_alt_text}
                 />
             {/each}
         </ul>
@@ -102,6 +104,28 @@
                         class="pl-1 focus:outline-0 border-0 text-black"
                     >
                 </div>
+                <div class="flex flex-col">
+                    <div class="flex flex-col">
+                        <label for="thumbnailUrl">Thumbnail Url</label>
+                        <input
+                            type="text"
+                            id="thumbnailUrl"
+                            name="thumbnailUrl"
+                            bind:value={thumbnailUrl}
+                            class="pl-1 focus:outline-0 border-0 text-black"
+                        >
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="thumbnailAltText">Thumbnail Alt Text</label>
+                        <input
+                            type="text"
+                            id="thumbnailAltText"
+                            name="thumbnailAltText"
+                            bind:value={thumbnailAltText}
+                            class="pl-1 focus:outline-0 border-0 text-black"
+                        >
+                    </div>
+                </div>
             </div>
             <textarea
                 name="markdown"
@@ -118,6 +142,10 @@
         <article class="w-full md:w-1/2 max-w-none pl-2 mt-6 overflow-y-auto prose dark:prose-invert">
             <h1>{ title }</h1>
             <p>{ description }</p>
+            <img 
+                src={thumbnailUrl}
+                alt={thumbnailAltText}
+            />
             <div>{ @html html }</div>
         </article>
     </div>

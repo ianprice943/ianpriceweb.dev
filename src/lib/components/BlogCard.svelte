@@ -4,6 +4,9 @@
     export let description: string;
     export let thumbnailUrl: string;
     export let thumbnailAltText: string;
+
+    console.log('tUrl', thumbnailUrl);
+    console.log('tAT', thumbnailAltText);
 </script>
 
 <li>

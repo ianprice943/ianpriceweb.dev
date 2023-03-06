@@ -21,3 +21,11 @@ export const getTodayString = () => {
     const year = dateObj.getUTCFullYear();
     return `${year}/${month}/${day}`;
 }
+
+export const convertDateString = (date: string) => {
+    const dateObj = new Date(date);
+    const month = dateObj.getUTCMonth() + 1;
+    const day = dateObj.getUTCDate();
+    const year = dateObj.getUTCFullYear();
+    return `${year}/${month}/${day}`;
+}

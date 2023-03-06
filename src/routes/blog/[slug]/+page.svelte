@@ -3,22 +3,23 @@
 	import { onMount } from 'svelte';
     import { marked } from 'marked';
 	import { highlightSettings } from "$lib/utils/utils";
+    import { convertDateString } from "$lib/utils/utils";
     import "../github.css";
     import "../github-dark.css";
     import type { PageServerLoad } from './$types';
     export let data: PageServerLoad;
     import { page } from "$app/stores";
     import { domain } from "$lib/stores/stores";
-    // console.log(data);
+    console.log(data);
     let editMode = false;
     let content = data?.content as string;
     let description = data?.description as string;
     let markdown = data?.mdContent as string;
     let title = data?.title as string;
-    let date = data.date as string;
+    let date = convertDateString(data.date as string);
     let isPublished = data.is_published as boolean;
     let urlStub = data.urlStub as string;
-    let thumbnailUrl = data.thumbnail_url as string;
+    let thumbnailUrl = data.thumbnail as string;
     let thumbnailAltText = data.thumbnail_alt_text as string;
 
     marked.setOptions({
@@ -40,8 +41,19 @@
         }
     }
 
-    const handleEditMode = () => {
-        editMode = !editMode;
+    const openEditMode = () => {
+        editMode = true;
+    }
+
+    const cancelEditMode = () => {
+        description = data?.description as string;
+        markdown = data?.mdContent as string;
+        title = data?.title as string;
+        isPublished = data.is_published as boolean;
+        urlStub = data.urlStub as string;
+        thumbnailUrl = data.thumbnail as string;
+        thumbnailAltText = data.thumbnail_alt_text as string;
+        editMode = false;
     }
 
     onMount(() => {
@@ -72,7 +84,7 @@
 
 {#if !editMode}
     {#if $page.data.session}
-        <button class="px-2 py-1 mb-2 rounded-md border-2 bg-red-800 border-red-800" on:click={handleEditMode}>
+        <button class="px-2 py-1 mb-2 rounded-md border-2 bg-red-800 border-red-800" on:click={openEditMode}>
             Edit
         </button>
     {/if}
@@ -123,6 +135,28 @@
                         class="pl-1 focus:outline-0 border-0 text-black"
                     >
                 </div>
+                <div class="flex flex-col">
+                    <div class="flex flex-col">
+                        <label for="thumbnailUrl">Thumbnail Url</label>
+                        <input
+                            type="text"
+                            id="thumbnailUrl"
+                            name="thumbnailUrl"
+                            bind:value={thumbnailUrl}
+                            class="pl-1 focus:outline-0 border-0 text-black"
+                        >
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="thumbnailAltText">Thumbnail Alt Text</label>
+                        <input
+                            type="text"
+                            id="thumbnailAltText"
+                            name="thumbnailAltText"
+                            bind:value={thumbnailAltText}
+                            class="pl-1 focus:outline-0 border-0 text-black"
+                        >
+                    </div>
+                </div>
             </div>
             <textarea
                 name="markdown"
@@ -138,17 +172,29 @@
                     class="ml-2"
                 >
             </div>
-            <button 
-                type="submit"
-                on:submit
-                class="w-24 px-2 py-1 rounded-md border-2 text-white bg-green-800 border-green-800"
-            >
-                Save
-            </button>
+            <div class="flex gap-2">
+                <button 
+                    type="submit"
+                    on:submit
+                    class="w-24 px-2 py-1 rounded-md border-2 text-white bg-green-800 border-green-800"
+                >
+                    Save
+                </button>
+                <button 
+                    class="w-24 px-2 py-1 rounded-md border-2 text-white bg-red-800 border-red-800"
+                    on:click={cancelEditMode}
+                >
+                    Cancel
+                </button>
+            </div>
         </form>
         <article class="w-full md:w-1/2 max-w-none pl-2 mt-6 overflow-y-auto prose dark:prose-invert">
             <h1>{ title }</h1>
             <p>{ description }</p>
+            <img 
+                src={thumbnailUrl}
+                alt={thumbnailAltText}
+            />
             <div>{ @html html }</div>
         </article>
     </div>
