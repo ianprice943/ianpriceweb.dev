@@ -95,6 +95,7 @@
             <img 
                 src={thumbnailUrl}
                 alt={thumbnailAltText}
+                class="bg-gray-700"
             />
         {/if}
         <div>{@html content}</div>
@@ -194,6 +195,7 @@
             <img 
                 src={thumbnailUrl}
                 alt={thumbnailAltText}
+                class="bg-gray-700"
             />
             <div>{ @html html }</div>
         </article>
