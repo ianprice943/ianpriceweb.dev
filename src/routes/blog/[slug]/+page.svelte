@@ -18,8 +18,8 @@
     let date = data.date as string;
     let isPublished = data.is_published as boolean;
     let urlStub = data.urlStub as string;
-    let thumbnailUrl = data.thumbnailUrl as string;
-    let thumbnailAltText = data.thumbnailAltText as string;
+    let thumbnailUrl = data.thumbnail_url as string;
+    let thumbnailAltText = data.thumbnail_alt_text as string;
 
     marked.setOptions({
         highlight: (code) => {

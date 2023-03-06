@@ -42,6 +42,8 @@ export interface Database {
           id: number
           is_published: boolean | null
           published_at: string | null
+          thumbnail: string | null
+          thumbnail_alt_text: string | null
           title: string | null
           urlStub: string | null
         }
@@ -52,6 +54,8 @@ export interface Database {
           id?: number
           is_published?: boolean | null
           published_at?: string | null
+          thumbnail?: string | null
+          thumbnail_alt_text?: string | null
           title?: string | null
           urlStub?: string | null
         }
@@ -62,6 +66,8 @@ export interface Database {
           id?: number
           is_published?: boolean | null
           published_at?: string | null
+          thumbnail?: string | null
+          thumbnail_alt_text?: string | null
           title?: string | null
           urlStub?: string | null
         }

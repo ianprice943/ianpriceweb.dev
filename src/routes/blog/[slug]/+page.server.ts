@@ -26,8 +26,8 @@ const loadFromDB = async (event: any) => {
         title,
         description,
         content,
-        thumbnailUrl,
-        thumbnailAltText
+        thumbnail,
+        thumbnail_alt_text
     `)
     .eq('urlStub', slug);
     
@@ -49,7 +49,7 @@ const loadFromDB = async (event: any) => {
         const content = compileWithMarked(dbContent);
         const mdContent = data[0].content;
         const date = data[0].published_at;
-        const { title, description, urlStub, is_published, thumbnailUrl, thumbnailAltText } = data[0];
+        const { title, description, urlStub, is_published, thumbnail, thumbnail_alt_text } = data[0];
 
         console.log('published?', is_published)
 
@@ -61,8 +61,8 @@ const loadFromDB = async (event: any) => {
             urlStub,
             content,
             mdContent,
-            thumbnailUrl,
-            thumbnailAltText
+            thumbnail,
+            thumbnail_alt_text
         }
     } else {
         throw fourOhFour(404, {
@@ -70,90 +70,6 @@ const loadFromDB = async (event: any) => {
         })
     }
 }
-
-// const loadFromStorage = async (slug: string) => {
-//     const { data, error } = await supabase
-//     .storage
-//     .from('blog-posts')
-//     .download(`${slug}/${slug}.md`);
-
-//     console.log('attempting to download', `${slug}/${slug}.md`)
-
-//     if(!error) {
-//         console.log(data);
-//         const bufferedData = await data.arrayBuffer().then((arrayBuffer) => Buffer.from(arrayBuffer, 'binary').toString());
-//         console.log('buff', bufferedData);
-
-//         return compileMD(bufferedData, 'bucket');
-//     }
-// }
-
-// const compileMD = async (data: string, source: string) => {
-//     // following code adapted from https://gist.github.com/babichjacob/c6907dd261fb3776044f618372d59470
-//     // unfortunately I lose the use of svelte components in markdown when using things this way
-
-//     const mdsvexConfig = {
-//         extensions: [".svelte.md"],
-//     }
-    
-//     const preprocessed = await mdsvexCompile(data, mdsvexConfig);
-//     // console.log('preprocessed', preprocessed);
-    
-//     if(preprocessed) {
-//         const compiled = svelteCompile(
-//         preprocessed.code,
-//             {
-//               generate: 'ssr',
-//               format: "cjs",
-//               hydratable: false,
-//             }
-//         );
-//         // console.log('compiled', compiled);
-        
-//         const require = createRequire(import.meta.url);
-//         // getting TS to pipe down
-//         const module = { 
-//             exports: { 
-//                 default: {
-//                     render: function(){} 
-//                 },
-//                 metadata: {
-//                     title: "",
-//                     description: "",
-//                     date: "",
-//                     urlStub: ""
-//                 }
-//             } 
-//         };
-//         const exports = module.exports;
-        
-//         eval(compiled.js.code);
-        
-//         const rendered = module.exports.default.render();
-//         // still works even though TS is complaining
-//         const renderedHTML = rendered.html;
-
-//         if(source === "bucket") {
-//             const meta = module.exports.metadata;
-            
-//             const { title, description, date, urlStub } = meta;
-//             // console.log('title', title, 'desc', description, 'date', date, 'stub', urlStub)
-//             const content = renderedHTML;
-//             const mdContent = data;
-            
-//             return {
-//                 title,
-//                 description,
-//                 date,
-//                 urlStub,
-//                 content,
-//                 mdContent
-//             }
-//         } else if(source === "database") {
-//             return renderedHTML;
-//         }
-//     }
-// }
 
 const compileWithMarked = async(data: string) => {
     marked.setOptions({
