@@ -10,7 +10,7 @@
     export let data: PageServerLoad;
     import { page } from "$app/stores";
     import { domain } from "$lib/stores/stores";
-    console.log(data);
+    // console.log(data);
     let editMode = false;
     let content = data?.content as string;
     let description = data?.description as string;
@@ -18,6 +18,7 @@
     let title = data?.title as string;
     let date = convertDateString(data.date as string);
     let isPublished = data.is_published as boolean;
+    const startingUrlStub = data.urlStub as string;
     let urlStub = data.urlStub as string;
     let thumbnailUrl = data.thumbnail as string;
     let thumbnailAltText = data.thumbnail_alt_text as string;
@@ -123,6 +124,17 @@
                             name="urlStub"
                             bind:value={urlStub}
                             class="pl-1 focus:outline-0 border-0 text-black"
+                        >
+                    </div>
+                    <!-- Hidden section of form to pass the original url stub to the form logic on backend -->
+                    <div class="hidden">
+                        <label for="startingUrlStub">Starting URL Stub</label>
+                        <input
+                            type="text"
+                            id="startingUrlStub"
+                            name="startingUrlStub"
+                            readonly
+                            value={startingUrlStub}
                         >
                     </div>
                 </div>

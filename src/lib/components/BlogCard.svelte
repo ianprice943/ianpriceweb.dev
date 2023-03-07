@@ -14,7 +14,8 @@
                     src={thumbnailUrl}
                     alt={thumbnailAltText}
                     loading="lazy"
-                    class="object-contain min-h-[200px]"
+                    class="object-contain flex mx-auto max-h-[250px]"
+                    height="250px"
                 />
             {/if}
             <h2 class="text-2xl">{title}</h2>
@@ -22,3 +23,9 @@
         </a>
     </article>
 </li>
+
+<style>
+    img {
+        height: unset;
+    }
+</style>

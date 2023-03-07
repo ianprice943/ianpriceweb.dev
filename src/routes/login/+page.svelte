@@ -13,7 +13,7 @@
     <button
         type="submit"
         on:submit
-        class="w-24 px-2 py-1 mt-2 rounded-md border-2 bg-green-800 border-green-800"
+        class="w-24 px-2 py-1 mt-2 rounded-md border-2 text-white bg-green-800 border-green-800"
     >
         Sign In
     </button>

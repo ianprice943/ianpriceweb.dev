@@ -86,9 +86,10 @@ const compileWithMarked = async(data: string) => {
 export const actions = {
     updatePost: async ({ request }) => {
         const formData = await request.formData();
-        console.log('form data', formData);
+        // console.log('form data', formData);
         
         const urlStub = formData.get("urlStub")?.toString();
+        const startingUrlStub = formData.get("startingUrlStub")?.toString();
         
         const updateObject: BlogPost = {
             is_published: formData.get("isPublished") === 'on' ? true : false,
@@ -106,9 +107,10 @@ export const actions = {
         const { data, error } = await supabase
         .from('blog_posts')
         .update(updateObject)
-        .eq('urlStub', urlStub);
+        .eq('urlStub', startingUrlStub);
 
         if(!error) {
+            console.log('error?', error)
             if(urlStub) {
                 throw redirect(303, `/blog/${urlStub}`);
             } else {
