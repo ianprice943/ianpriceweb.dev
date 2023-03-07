@@ -34,7 +34,7 @@
 
     const setTabIndexOnCodeBlocks = () => {
         if(browser) {
-            let preBlocks: NodeListOf<HTMLPreElement> | null = document.querySelectorAll<"pre">('pre');
+            let preBlocks: NodeListOf<HTMLElement> | null = document.querySelectorAll<"code">('code');
             preBlocks?.forEach((block) => {
                 block.tabIndex = 0;
             });
@@ -84,7 +84,7 @@
 
 {#if !editMode}
     {#if $page.data.session}
-        <button class="px-2 py-1 mb-2 rounded-md border-2 bg-red-800 border-red-800" on:click={openEditMode}>
+        <button class="px-2 py-1 mb-2 rounded-md border-2 text-white bg-red-800 border-red-800" on:click={openEditMode}>
             Edit
         </button>
     {/if}
@@ -95,7 +95,7 @@
             <img 
                 src={thumbnailUrl}
                 alt={thumbnailAltText}
-                class="bg-gray-700"
+                class="bg-gray-700 min-h-[200px]"
             />
         {/if}
         <div>{@html content}</div>

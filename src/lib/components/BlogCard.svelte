@@ -4,9 +4,6 @@
     export let description: string;
     export let thumbnailUrl: string;
     export let thumbnailAltText: string;
-
-    console.log('tUrl', thumbnailUrl);
-    console.log('tAT', thumbnailAltText);
 </script>
 
 <li>
@@ -16,6 +13,8 @@
                 <img 
                     src={thumbnailUrl}
                     alt={thumbnailAltText}
+                    loading="lazy"
+                    class="object-contain min-h-[200px]"
                 />
             {/if}
             <h2 class="text-2xl">{title}</h2>

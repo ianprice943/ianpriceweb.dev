@@ -1,6 +1,7 @@
 <script lang="ts">
     import BlogCard from "$lib/components/BlogCard.svelte";
     import { page } from '$app/stores';
+    import { domain } from "$lib/stores/stores";
     import { marked } from "marked";
     import { highlightSettings } from "$lib/utils/utils";
     import "./github.css";
@@ -41,7 +42,7 @@
     <title>Ian Price - Blog</title>
     <meta name="description" content="The blog page of Ian Price's Portfolio" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="icon" href="//ianprice943.dev/images/favicon.ico" />
+    <link rel="icon" href={`//${$domain}/images/favicon.ico`} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="//www.ianprice943.dev/blog" />
     <meta property="og:title" content="Ian Price - Blog" />
