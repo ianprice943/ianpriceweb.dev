@@ -4,9 +4,10 @@
     import { domain } from "$lib/stores/stores";
     import { marked } from "marked";
     import { highlightSettings } from "$lib/utils/utils";
+    import type { PageData } from "./$types";
     import "./github.css";
     import "./github-dark.css";
-    export let data: any;
+    export let data: PageData;
     let newBlogMode = false;
     let posts = data?.data ?? data?.filtered;
     console.log(posts);
@@ -63,7 +64,7 @@
         Create New Blog
     </button>
     {/if}
-    {#if posts?.length > 0}
+    {#if posts?.length && posts?.length > 0}
         <p class="my-2">Here's a list of my most recent blog posts.</p>
         <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {#each posts as post (post.id)}

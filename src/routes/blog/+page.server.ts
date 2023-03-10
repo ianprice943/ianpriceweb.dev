@@ -1,10 +1,10 @@
 import { supabase } from "$lib/utils/supabaseClient";
 import { getServerSession } from '@supabase/auth-helpers-sveltekit';
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from "./$types";
+import type { PageServerLoadEvent, Actions } from "./$types";
 import type { BlogPost } from "$lib/types/blogTypes.types";
 
-export const load = ( async (event: any) => {
+export const load = ( async (event: PageServerLoadEvent) => {
     const { data, error } = await supabase
     .from('blog_posts')
     .select(`
