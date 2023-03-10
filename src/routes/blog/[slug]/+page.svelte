@@ -6,8 +6,8 @@
     import { convertDateString } from "$lib/utils/utils";
     import "../github.css";
     import "../github-dark.css";
-    import type { PageServerLoad } from './$types';
-    export let data: PageServerLoad;
+    import type { PageData } from './$types';
+    export let data: PageData;
     import { page } from "$app/stores";
     import { domain } from "$lib/stores/stores";
     // console.log(data);
@@ -96,7 +96,7 @@
             <img 
                 src={thumbnailUrl}
                 alt={thumbnailAltText}
-                class="bg-gray-700 min-h-[200px]"
+                class="bg-gray-700 sm:min-h-[200px]"
             />
         {/if}
         <div>{@html content}</div>

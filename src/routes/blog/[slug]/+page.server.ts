@@ -1,6 +1,6 @@
 import { supabase } from '$lib/utils/supabaseClient';
 import { error as fourOhFour, fail, redirect } from '@sveltejs/kit';
-import type { PageServerLoad, Actions } from './$types';
+import type { PageServerLoadEvent, Actions } from './$types';
 import type { BlogPost } from '$lib/types/blogTypes.types';
 // import { createRequire } from "module";
 // import { compile as mdsvexCompile } from 'mdsvex';
@@ -9,13 +9,13 @@ import { getServerSession } from '@supabase/auth-helpers-sveltekit';
 import { marked } from 'marked';
 import { getTodayString, highlightSettings } from '$lib/utils/utils';
 
-export const load = ( async (event) => {
+export const load = ( async (event: PageServerLoadEvent) => {
     // console.log('event', event);
     return loadFromDB(event);
 
-}) satisfies PageServerLoad;
+});
 
-const loadFromDB = async (event: any) => {
+const loadFromDB = async (event: PageServerLoadEvent) => {
     const slug = event.params.slug;
     const { data, error } = await supabase
     .from('blog_posts')
