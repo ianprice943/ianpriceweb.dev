@@ -7,15 +7,17 @@
 </script>
 
 <li>
-    <article class="bg-gray-100 dark:bg-gray-600 shadow-lg rounded-xl p-4">
-        <a href={`/blog/${urlStub}`}>
+    <article class="bg-gray-100 dark:bg-gray-600 shadow-lg rounded-xl p-4 h-full">
+        <a 
+            class="flex flex-col justify-between h-full"
+            href={`/blog/${urlStub}`}
+        >
             {#if thumbnailUrl && thumbnailAltText}
                 <img 
                     src={thumbnailUrl}
                     alt={thumbnailAltText}
                     loading="lazy"
-                    class="object-contain flex mx-auto max-h-[250px]"
-                    height="250px"
+                    class="object-contain flex mx-auto mb-2 rounded-md"
                 />
             {/if}
             <h2 class="text-2xl">{title}</h2>

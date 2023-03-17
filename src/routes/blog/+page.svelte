@@ -6,7 +6,7 @@
     import "$lib/styles/github-dark.css";
     export let data: PageData;
     let posts = data?.data ?? data?.filtered;
-    console.log(posts);
+    console.log('posts', posts);
 </script>
 
 <svelte:head>

@@ -66,7 +66,7 @@
         <img 
             src={thumbnailUrl}
             alt={thumbnailAltText}
-            class="bg-gray-700 sm:min-h-[200px]"
+            class="bg-gray-700 sm:min-h-[200px] rounded-md"
         />
     {/if}
     <div>{@html content}</div>
@@ -75,3 +75,11 @@
 {#if $page.status === 500}
     <p class="text-red-600">{$page.form.error}</p>
 {/if}
+
+<style>
+    @media (min-width: 768px) {
+        article {
+            max-width: 75ch;
+        }
+    }
+</style>

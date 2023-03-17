@@ -1,10 +1,9 @@
 import { supabase } from '$lib/utils/supabaseClient';
-import { error as fourOhFour, fail, redirect } from '@sveltejs/kit';
-import type { PageServerLoadEvent, Actions } from './$types';
-import type { BlogPost } from '$lib/types/blogTypes.types';
+import { error as fourOhFour } from '@sveltejs/kit';
+import type { PageServerLoadEvent } from './$types';
 import { getServerSession } from '@supabase/auth-helpers-sveltekit';
 import { marked } from 'marked';
-import { getTodayString, highlightSettings } from '$lib/utils/utils';
+import {  highlightSettings } from '$lib/utils/utils';
 
 export const load = ( async (event: PageServerLoadEvent) => {
     // console.log('event', event);
@@ -77,49 +76,3 @@ const compileWithMarked = async(data: string) => {
 
     return marked(data);
 }
-
-/** @type {import('./$types').Actions} */
-export const actions = {
-    updatePost: async ({ request }) => {
-        const formData = await request.formData();
-        // console.log('form data', formData);
-        
-        const urlStub = formData.get("urlStub")?.toString();
-        const startingUrlStub = formData.get("startingUrlStub")?.toString();
-        
-        const updateObject: BlogPost = {
-            is_published: formData.get("isPublished") === 'on' ? true : false,
-            title: formData.get("postTitle")?.toString(),
-            description: formData.get("postDescription")?.toString(),
-            content: formData.get("markdown")?.toString(),
-            urlStub: urlStub
-        };
-        
-        if(formData.get("isPublished") === 'on') {
-            const today = getTodayString();
-            updateObject["published_at"] = today;
-        }
-            
-        const { data, error } = await supabase
-        .from('blog_posts')
-        .update(updateObject)
-        .eq('urlStub', startingUrlStub);
-
-        if(!error) {
-            console.log('error?', error)
-            if(urlStub) {
-                throw redirect(303, `/blog/${urlStub}`);
-            } else {
-                throw redirect(303, '/blog');
-            }
-        } else {
-            console.log("update post error: ", error);
-            throw fail(500, {
-                error: 'Something went wrong while updating your blog post.',
-                values: {
-                    error
-                }
-            });
-        }
-    }
-} satisfies Actions;

@@ -93,7 +93,7 @@
             </div>
             <div class="flex flex-col">
                 <div class="flex flex-col">
-                    <label for="thumbnailUrl">Thumbnail Url</label>
+                    <label for="thumbnailUrl">Thumbnail Url (multiple of 600x250 preferable)</label>
                     <input
                         type="text"
                         id="thumbnailUrl"
@@ -140,7 +140,7 @@
             </button>
             <a
                 class="w-24 px-2 py-1 rounded-md border-2 text-center text-white bg-red-800 border-red-800"
-                href="/blog/{$page.params.slug}"
+                href={$page.params.slug === "new" ? "/blog" : `/blog/${$page.params.slug}`}
             >
                 Cancel
             </a>
@@ -152,7 +152,7 @@
         <img 
             src={thumbnailUrl}
             alt={thumbnailAltText}
-            class="bg-gray-700"
+            class="bg-gray-700 rounded-md"
         />
         <div>{ @html html }</div>
     </article>
@@ -161,3 +161,11 @@
 {#if $page.status === 500}
     <p class="text-red-600">{$page.form.error}</p>
 {/if}
+
+<style>
+    @media (min-width: 768px) {
+        article {
+            max-width: 75ch;
+        }
+    }
+</style>

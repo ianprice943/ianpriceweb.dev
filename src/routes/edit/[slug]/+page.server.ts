@@ -104,7 +104,9 @@ export const actions = {
             title: formData.get("postTitle")?.toString(),
             description: formData.get("postDescription")?.toString(),
             content: formData.get("markdown")?.toString(),
-            urlStub: urlStub
+            urlStub: urlStub,
+            thumbnail: formData.get("thumbnailUrl")?.toString(),
+            thumbnail_alt_text: formData.get("thumbnailAltText")?.toString()
         };
         
         if(formData.get("isPublished") === 'on') {
@@ -145,7 +147,9 @@ export const actions = {
             title: formData.get("postTitle")?.toString(),
             description: formData.get("postDescription")?.toString(),
             content: formData.get("markdown")?.toString(),
-            urlStub: urlStub
+            urlStub: urlStub,
+            thumbnail: formData.get("thumbnailUrl")?.toString(),
+            thumbnail_alt_text: formData.get("thumbnailAltText")?.toString()
         };
 
         const { data, error } = await supabase

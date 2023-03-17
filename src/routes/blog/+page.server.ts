@@ -23,7 +23,7 @@ export const load = ( async (event: PageServerLoadEvent) => {
         if(!session?.user?.aud) {
             console.log('data', data);
             const filtered = data?.filter(post => {
-                post.is_published;
+                return post.is_published === true;
             });
             return {filtered}
         }
