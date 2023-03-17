@@ -1,23 +1,22 @@
 <script lang="ts">
-    import { domain } from "$lib/stores/stores";
-    const dynaURL = `//${$domain}/portfolio/`;
+    const dynaURL = `//$ianpriceweb.dev/portfolio/`;
 </script>
 
 <svelte:head>
     <title>Ian Price - Portfolio</title>
     <meta name="description" content="The portfolio page of Ian Price's Portfolio" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="icon" href={`//${$domain}/images/favicon.ico`} />
+    <link rel="icon" href={`//$ianpriceweb.dev/images/favicon.ico`} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={dynaURL} />
+    <meta property="og:url" content=//www.ianpriceweb.dev/ />
     <meta property="og:title" content="Ian Price - Portfolio" />
     <meta property="og:description" content="The portfolio page of Ian Price's Portfolio" />
-    <!-- <meta property="og:image" content="//www.ianprice943.dev/images/LinkedIn.png" /> -->
+    <meta property="og:image" content="//www.ianpriceweb.dev/images/LinkedIn.png" />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={dynaURL} />
+    <meta property="twitter:url" content="//www.ianpriceweb.dev/" />
     <meta property="twitter:title" content="Ian Price - Portfolio" />
     <meta property="twitter:description" content="The portfolio page of Ian Price's Portfolio" />
-    <!-- <meta property="twitter:image" content="//www.ianprice943.dev/images/LinkedIn.png" /> -->
+    <meta property="twitter:image" content="//www.ianpriceweb.dev/images/LinkedIn.png" />
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl mb-2">Portfolio</h1>

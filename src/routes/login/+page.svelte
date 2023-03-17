@@ -1,6 +1,5 @@
 <script>
     import { page } from '$app/stores';
-    console.log('page', $page);
     let email = "";
     let pw = "";
 </script>
