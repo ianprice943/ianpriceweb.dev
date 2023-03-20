@@ -74,7 +74,7 @@
     </ul>
     {#if contentHeight > maxCompressedArticleHeight}
         <div class="absolute bottom-0 right-0 left-0 flex justify-center bg-gray-100 dark:bg-gray-600">
-            <button class="flex flex-wrap justify-center items-center w-40 border-black dark:border-white" on:click={handleExpand}>
+            <button class="flex flex-wrap justify-center items-center w-40 border-black dark:border-white" aria-label={isExpanded ? "Hide additional content" : "Expand to view additional content"} on:click={handleExpand}>
                 {#if isExpanded}
                     <Caret rotate={true} /> Hide
                 {:else}

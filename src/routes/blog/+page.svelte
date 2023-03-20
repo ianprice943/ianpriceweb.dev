@@ -36,7 +36,7 @@
     </a>
 {/if}
 {#if posts?.length && posts?.length > 0}
-    <p class="my-2">Here's a list of my most recent blog posts.</p>
+    <p class="my-2">A list of my most recent blog posts:</p>
     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {#each posts as post (post.id)}
             <BlogCard 

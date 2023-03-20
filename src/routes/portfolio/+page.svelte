@@ -28,19 +28,11 @@
         </a>
     </article>
     <article class="shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
-        <h2 class="text-center text-lg font-semibold">Pokemon Mystery Dungeon Rescue Team DX Starters</h2>
-        <p class="text-center text-sm py-2">A website I developed to learn Vue.js, and later React.js + Typescript (Note, due to Heroku removing their free tier of hosting services, these sites are now offline. Links now take you to their respective GitHub repositories.)</p>
-        <a href="https://github.com/ianprice943/PMDDXStarters-react" aria-label="Website for a game, written in React" class="flex my-auto justify-center">
-            <img src="/images/PMDRTDXLogo.webp" alt="Pokemon Mystery Dungeon Rescue Team DX Logo" />
+        <h2 class="text-center text-lg font-semibold">Three.js Playground</h2>
+        <p class="text-center text-sm py-2">A small playground I developed to learn the basics of Three.js.</p>
+        <a href="https://ip-threejs-playground.netlify.app/" aria-label="A website showing off some basics of Three.js" class="flex y-auto justify-center">
+            <img src="/images/three.webp" alt="Three.js rendered sphere" class='rounded-xl' />
         </a>
-        <ul class="flex justify-around">
-            <li class="hover:underline">
-                <a href="https://github.com/ianprice943/PMDDXStarters" aria-label="Website for a game, written in Vue.js">Vue.js Version</a>
-            </li>
-            <li class="hover:underline">
-                <a href="https://github.com/ianprice943/PMDDXStarters-react" aria-label="Website for a game, written in React">React.js Version</a>
-            </li>
-        </ul>
     </article>
     <article class="flex flex-col shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
         <h2 class="text-center text-lg font-semibold">William Kampf Mediation</h2>
@@ -50,10 +42,18 @@
         </a>
     </article>
     <article class="shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
-        <h2 class="text-center text-lg font-semibold">Three.js Playground</h2>
-        <p class="text-center text-sm py-2">A small playground I developed to learn the basics of Three.js.</p>
-        <a href="https://ip-threejs-playground.netlify.app/" aria-label="A website showing off some basics of Three.js" class="flex y-auto justify-center">
-            <img src="/images/three.webp" alt="Three.js rendered sphere" class='rounded-xl' />
+        <h2 class="text-center text-lg font-semibold">Pokemon Mystery Dungeon Rescue Team DX Starters</h2>
+        <p class="text-center text-sm py-2">A website I developed to learn Vue.js, and later React.js + Typescript (Note, due to Heroku removing their free tier of hosting services, these sites are now offline. Links now take you to their respective GitHub repositories.)</p>
+        <a href="https://github.com/ianprice943/PMDDXStarters-react" aria-label="Link to React.js Version Source Code" class="flex my-auto justify-center">
+            <img src="/images/PMDRTDXLogo.webp" alt="Pokemon Mystery Dungeon Rescue Team DX Logo" />
         </a>
+        <ul class="flex justify-around">
+            <li class="hover:underline">
+                <a href="https://github.com/ianprice943/PMDDXStarters">Vue.js Version Source Code</a>
+            </li>
+            <li class="hover:underline">
+                <a href="https://github.com/ianprice943/PMDDXStarters-react">React.js Version Source Code</a>
+            </li>
+        </ul>
     </article>
 </section>

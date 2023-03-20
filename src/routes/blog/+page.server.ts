@@ -14,7 +14,12 @@ export const load = ( async (event: PageServerLoadEvent) => {
         description,
         thumbnail,
         thumbnail_alt_text
-    `);
+    `).order('published_at', { ascending: false });
+    /*  
+        Order by most recent publishes. When I get enough articles I may 
+        add a sorting function on the front end, but the initial page load
+        will remain with this sorting.
+    */
 
     if(!error) {
         const session = await getServerSession(event);

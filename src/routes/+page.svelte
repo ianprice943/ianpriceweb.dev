@@ -5,14 +5,14 @@
 
     const cardContent2 = "My focus is on front-end web development. I take designs and bring them to life on the web while ensuring responsiveness, cross browser compatibility, and WCAG2 and ADA compliance. A more accessible web is a more inclusive web.";
 
-    const cardContent3 = "I'm currently working as a Software Engineer for g2o, consulting on the Innovate Ohio Project to revamp many core .gov websites for the State of Ohio. I also have over two years of E-Commerce experience working for Ascena and Opcapita brands such as Justice, Dressbarn, and maurices.";
+    const cardContent3 = "I'm currently working as a Senior Software Engineer for g2o, consulting on projects such as the Innovate Ohio Project to revamp many core .gov websites for the State of Ohio.";
 </script>
 
 <svelte:head>
     <title>Ian Price - Home</title>
     <meta name="description" content="The homepage of Ian Price's Portfolio" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="icon" href="//www.ianpriceweb.dev/images/favicon.ico" />
+    <link rel="icon" href="/images/favicon.ico" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="//www.ianpriceweb.dev" />
     <meta property="og:title" content="Ian Price - Home" />
