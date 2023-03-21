@@ -2,12 +2,9 @@ import { supabase } from "$lib/utils/supabaseClient";
 
 export const load = ( async () => {
     const educationData = await getAllEducationData();
-
     const skillsData = await getAllSkillsData();
-
     const jobData = await getAllJobData();
-
-    return {jobData, educationData, skillsData}
+    return { jobData, educationData, skillsData }
 });
 
 const getAllEducationData = async () => {

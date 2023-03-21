@@ -5,10 +5,10 @@
 	import { highlightSettings, setTabIndexOnCodeBlocks } from "$lib/utils/utils";
     import "$lib/styles/github.css";
     import "$lib/styles/github-dark.css";
+    import { page } from "$app/stores";
+
     import type { PageData } from './$types';
     export let data: PageData;
-    import { page } from "$app/stores";
-    // console.log(data);
     let description = data?.description as string;
     let markdown = data?.mdContent as string;
     let title = data?.title as string;
@@ -26,7 +26,7 @@
     })
     $: html = marked(markdown);
     
-    console.log('$page', $page)
+    // console.log('$page', $page)
 
     onMount(() => {
         setTabIndexOnCodeBlocks(browser);
@@ -36,8 +36,8 @@
     $: setTabIndexOnCodeBlocks(browser);
 </script>
 
-<div class="flex flex-col md:flex-row w-full h-auto">
-    <form method="POST" action={$page.params.slug === "new" ? "?/createPost" : "?/updatePost"} class="w-full md:w-1/2 max-w-none pl-2 flex flex-col">
+<div class="flex flex-col md:flex-row w-full h-auto max-h-screens">
+    <form method="POST" action={$page.params.slug === "new" ? "?/createPost" : "?/updatePost"} class="w-full md:w-1/2 max-w-none flex flex-col h-auto">
         <div class="flex flex-col mb-2">
             <div class="flex gap-2">
                 <div class="flex flex-col w-3/4">
@@ -137,7 +137,7 @@
             </a>
         </div>
     </form>
-    <article class="w-full md:w-1/2 max-w-none pl-2 mt-6 overflow-y-auto prose dark:prose-invert">
+    <article class="w-full md:w-1/2 max-w-none pl-2 overflow-y-auto prose dark:prose-invert h-auto">
         <h1>{ title }</h1>
         <p>{ description }</p>
         <img 
