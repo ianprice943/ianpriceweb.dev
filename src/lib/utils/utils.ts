@@ -9,9 +9,13 @@ export const debounce = (func: any, delay = 300) => {
     };
 };
 
-export const highlightSettings = (code: string) => {
+export const highlightSettings = (code: string, lang: string) => {
     const languages = ["html", "javascript", "typescript", "css", "scss", "c++", "dart", "json", "python"];
-    return hljs.highlightAuto(code, languages).value;
+    if(languages.includes(lang)) {
+        return hljs.highlightAuto(code, languages).value;
+    } else {
+        return hljs.highlightAuto(code, []).value;
+    }
 }
 
 export const getTodayString = () => {
@@ -28,4 +32,13 @@ export const convertDateString = (date: string) => {
     const day = dateObj.getUTCDate();
     const year = dateObj.getUTCFullYear();
     return `${year}/${month}/${day}`;
+}
+
+export const setTabIndexOnCodeBlocks = (browser: boolean) => {
+    if(browser) {
+        const codeBlocks: NodeListOf<HTMLElement> | null = document.querySelectorAll<"code">('code');
+        codeBlocks?.forEach((block) => {
+            block.tabIndex = 0;
+        });
+    }
 }

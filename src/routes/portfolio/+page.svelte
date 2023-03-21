@@ -1,7 +1,3 @@
-<script lang="ts">
-    const dynaURL = `//$ianpriceweb.dev/portfolio/`;
-</script>
-
 <svelte:head>
     <title>Ian Price - Portfolio</title>
     <meta name="description" content="The portfolio page of Ian Price's Portfolio" />

@@ -2,7 +2,7 @@
     import { browser } from "$app/environment";
 	import { onMount } from 'svelte';
     import { marked } from 'marked';
-	import { highlightSettings } from "$lib/utils/utils";
+	import { highlightSettings, setTabIndexOnCodeBlocks } from "$lib/utils/utils";
     import "$lib/styles/github.css";
     import "$lib/styles/github-dark.css";
     import type { PageData } from './$types';
@@ -19,30 +19,21 @@
     let thumbnailAltText = data.thumbnail_alt_text as string;
 
     marked.setOptions({
-        highlight: (code) => {
-            return highlightSettings(code);
+        highlight: (code, lang) => {
+            return highlightSettings(code, lang);
         },
         langPrefix: 'hljs language-'
     })
     $: html = marked(markdown);
     
-    const setTabIndexOnCodeBlocks = () => {
-        if(browser) {
-            let preBlocks: NodeListOf<HTMLElement> | null = document.querySelectorAll<"code">('code');
-            preBlocks?.forEach((block) => {
-                block.tabIndex = 0;
-            });
-        }
-    }
-
     console.log('$page', $page)
 
     onMount(() => {
-        setTabIndexOnCodeBlocks();
+        setTabIndexOnCodeBlocks(browser);
     });
 
-    // rerun if markdown dynamically update
-    $: setTabIndexOnCodeBlocks();
+    // rerun when markdown dynamically updates
+    $: setTabIndexOnCodeBlocks(browser);
 </script>
 
 <div class="flex flex-col md:flex-row w-full h-auto">

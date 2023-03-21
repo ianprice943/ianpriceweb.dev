@@ -1,7 +1,7 @@
 <script lang="ts">
     import { browser } from "$app/environment";
 	import { onMount } from 'svelte';
-    import { convertDateString } from "$lib/utils/utils";
+    import { convertDateString, setTabIndexOnCodeBlocks } from "$lib/utils/utils";
     import "$lib/styles/github.css";
     import "$lib/styles/github-dark.css";
     import type { PageData } from './$types';
@@ -13,25 +13,12 @@
     let description = data?.description as string;
     let title = data?.title as string;
     let date = convertDateString(data.date as string);
-    let urlStub = data.urlStub as string;
     let thumbnailUrl = data.thumbnail as string;
     let thumbnailAltText = data.thumbnail_alt_text as string;
 
-    const setTabIndexOnCodeBlocks = () => {
-        if(browser) {
-            let preBlocks: NodeListOf<HTMLElement> | null = document.querySelectorAll<"code">('code');
-            preBlocks?.forEach((block) => {
-                block.tabIndex = 0;
-            });
-        }
-    }
-
     onMount(() => {
-        setTabIndexOnCodeBlocks();
+        setTabIndexOnCodeBlocks(browser);
     });
-
-    // rerun if markdown dynamically update
-    $: setTabIndexOnCodeBlocks();
 </script>
 
 <svelte:head>
