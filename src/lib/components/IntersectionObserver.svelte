@@ -1,11 +1,11 @@
 <script lang="ts">
     import { onMount, onDestroy } from "svelte";
     import { browser } from "$app/environment";
+    import { page } from '$app/stores';
 
     export let slug: string;
 
     const handleView = async () => {
-        console.log('Intersection Observer view event triggered');
         const newView = { 
             viewed: true,
             post: slug
@@ -28,7 +28,8 @@
     let observer: IntersectionObserver;
 
     onMount(() => {
-        if(browser) {
+        // only update view count when user is not logged in
+        if(browser && !$page.data.session) {
             const handleIntersect = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
                 entries.forEach((entry) => {
                     if(entry.isIntersecting) {

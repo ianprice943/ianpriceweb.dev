@@ -81,8 +81,8 @@ const loadFromDB = async (event: PageServerLoadEvent) => {
 
 const compileWithMarked = async(data: string) => {
     marked.setOptions({
-        highlight: (code) => {
-            return highlightSettings(code);
+        highlight: (code, lang) => {
+            return highlightSettings(code, lang);
         },
         langPrefix: 'hljs language-'
     })
