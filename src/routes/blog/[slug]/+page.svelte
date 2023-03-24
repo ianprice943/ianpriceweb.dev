@@ -41,7 +41,7 @@
 
 {#if $page.data.session}
     <a 
-        class="px-2 py-1 mb-2 rounded-md border-2 text-white bg-red-800 border-red-800"
+        class="px-2 py-1 sticky top-16 rounded-md border-2 text-white bg-red-800 border-red-800"
         href="/edit/{$page.params.slug}"
     >
         Edit
