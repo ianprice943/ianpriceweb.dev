@@ -63,10 +63,6 @@
     <div>{@html content}</div>
 </article>
 
-{#if $page.status === 500}
-    <p class="text-red-600">{$page.form.error}</p>
-{/if}
-
 <style>
     @media (min-width: 768px) {
         article {
