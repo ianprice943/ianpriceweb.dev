@@ -18,19 +18,24 @@ describe('BlogCard.svelte', async () => {
         expect(card.querySelector('li > article')).not.toBeNull();
     });
     it('Should render a link with the href of "/blog/test"', async () => {
-        const anchor = card.querySelector('a');
+        const anchor: HTMLLinkElement = screen.getByRole('link');
         expect(anchor).not.toBeNull();
         expect(anchor?.href).toContain('/blog/test');
     });
     it('Should render an image with a src of "https://www.google.com/"', async () => {
-        const image = card.querySelector('img');
+        const image: HTMLImageElement = screen.getByRole('img');
         expect(image).not.toBeNull();
         expect(image?.src).toBe('https://www.google.com/');
         expect(image?.alt).toBe('the picture');
     });
     it('Should have an h2 with the content of "test title"', async () => {
-        const h2 = card.querySelector('h2');
+        const h2 = screen.getByRole('heading')
         expect(h2).not.toBeNull();
-        expect(h2?.innerText).toBe('test title');
+        expect(h2.innerHTML).toBe('test title');
+    });
+    it('Should have a paragraph with the content of "a description"', async () => {
+        const p = screen.getByText('a description');
+        expect(p).not.toBeNull();
+        expect(p.innerHTML).toBe('a description');
     });
 })
