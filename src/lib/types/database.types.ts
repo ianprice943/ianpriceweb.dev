@@ -46,6 +46,7 @@ export interface Database {
           thumbnail_alt_text: string | null
           title: string | null
           urlStub: string | null
+          views: number
         }
         Insert: {
           content?: string | null
@@ -58,6 +59,7 @@ export interface Database {
           thumbnail_alt_text?: string | null
           title?: string | null
           urlStub?: string | null
+          views?: number
         }
         Update: {
           content?: string | null
@@ -70,6 +72,7 @@ export interface Database {
           thumbnail_alt_text?: string | null
           title?: string | null
           urlStub?: string | null
+          views?: number
         }
       }
       education: {
@@ -191,7 +194,10 @@ export interface Database {
     Tables: {
       buckets: {
         Row: {
+          allowed_mime_types: string[] | null
+          avif_autodetection: boolean | null
           created_at: string | null
+          file_size_limit: number | null
           id: string
           name: string
           owner: string | null
@@ -199,7 +205,10 @@ export interface Database {
           updated_at: string | null
         }
         Insert: {
+          allowed_mime_types?: string[] | null
+          avif_autodetection?: boolean | null
           created_at?: string | null
+          file_size_limit?: number | null
           id: string
           name: string
           owner?: string | null
@@ -207,7 +216,10 @@ export interface Database {
           updated_at?: string | null
         }
         Update: {
+          allowed_mime_types?: string[] | null
+          avif_autodetection?: boolean | null
           created_at?: string | null
+          file_size_limit?: number | null
           id?: string
           name?: string
           owner?: string | null
@@ -275,6 +287,15 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
+      can_insert_object: {
+        Args: {
+          bucketid: string
+          name: string
+          owner: string
+          metadata: Json
+        }
+        Returns: undefined
+      }
       extension: {
         Args: {
           name: string

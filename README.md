@@ -1,4 +1,8 @@
+# The Home of the ianpriceweb.dev Source Code
+This repository contains the full source code for the ianpriceweb.dev website. The only thing it's missing is the Supabase environment variables. I am leaving in most of the original SvelteKit README content as the instructions are quite useful.
+
 # DB Type Generation
+A handy script to analyze your Supabase Postgres tables and generate a type file. You must link your Supabase project and log in first. More info on that [here](https://supabase.com/docs/reference/cli/supabase-link):
 ```
 npx supabase gen types typescript --linked > src/lib/types/database.types.ts
 ```

@@ -17,8 +17,18 @@ body {
     border-radius: 0;
     background-color: #E5E7EB;
 }
+.prose ul li::marker {
+    color: #374151;
+}
 .dark .prose pre {
     background-color: #374151;
+}
+.dark .prose ul li::marker {
+    color: #d1d5db;
+}
+.prose table img {
+    margin-top: .5em;
+    margin-bottom: .5em;
 }
 
 pre code.hljs {
