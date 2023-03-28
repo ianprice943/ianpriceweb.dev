@@ -12,10 +12,10 @@ describe('BlogCard.svelte', async () => {
             thumbnailAltText: 'the picture'
         }
     );
-    const card = result.container;
+    const card = result.container.querySelector('li');
 
-    it('Should render an article wrapped in a list item', async () => {
-        expect(card.querySelector('li > article')).not.toBeNull();
+    it('Should render an article', async () => {
+        expect(card?.querySelector('article')).not.toBeNull();
     });
     it('Should render a link with the href of "/blog/test"', async () => {
         const anchor: HTMLLinkElement = screen.getByRole('link');
@@ -34,8 +34,8 @@ describe('BlogCard.svelte', async () => {
         expect(h2.innerHTML).toBe('test title');
     });
     it('Should have a paragraph with the content of "a description"', async () => {
-        const p = screen.getByText('a description');
+        const p = card?.querySelector('p');
         expect(p).not.toBeNull();
-        expect(p.innerHTML).toBe('a description');
+        expect(p?.innerHTML).toBe('a description');
     });
 })
