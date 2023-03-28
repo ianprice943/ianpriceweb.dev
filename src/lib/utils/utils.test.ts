@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-
 import { convertDateString } from './utils';
 
 describe('Date Formatting', () => {

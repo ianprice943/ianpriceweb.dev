@@ -25,6 +25,7 @@ export const actions = {
                     },
                 })
             }
+            console.log('error', error);
             return fail(500, {
                 error: 'Server error. Try again later.',
                 values: {

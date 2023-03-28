@@ -18,6 +18,6 @@
     </button>
 </form>
 
-{#if $page.status === 400}
+{#if $page.status === 400 || $page.status === 500}
     <p class="text-red-600">{$page.form.error}</p>
 {/if}
