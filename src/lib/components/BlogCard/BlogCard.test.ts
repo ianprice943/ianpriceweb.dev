@@ -3,15 +3,14 @@ import { render, screen } from '@testing-library/svelte';
 import BlogCard from './BlogCard.svelte';
 
 describe('BlogCard.svelte', async () => {
-    const result = render(BlogCard, 
-        {
-            urlStub: 'test', 
-            title: 'test title',
-            description: 'a description',
-            thumbnailUrl: 'https://www.google.com',
-            thumbnailAltText: 'the picture'
-        }
-    );
+    const mockData = {
+        urlStub: 'test', 
+        title: 'test title',
+        description: 'a description',
+        thumbnailUrl: 'https://www.google.com/',
+        thumbnailAltText: 'the picture'
+    }
+    const result = render(BlogCard, mockData);
     const card = result.container.querySelector('li');
 
     it('Should render an article', async () => {
@@ -25,17 +24,17 @@ describe('BlogCard.svelte', async () => {
     it('Should render an image with a src of "https://www.google.com/"', async () => {
         const image: HTMLImageElement = screen.getByRole('img');
         expect(image).not.toBeNull();
-        expect(image?.src).toBe('https://www.google.com/');
-        expect(image?.alt).toBe('the picture');
+        expect(image?.src).toBe(mockData.thumbnailUrl);
+        expect(image?.alt).toBe(mockData.thumbnailAltText);
     });
     it('Should have an h2 with the content of "test title"', async () => {
         const h2 = screen.getByRole('heading')
         expect(h2).not.toBeNull();
-        expect(h2.innerHTML).toBe('test title');
+        expect(h2.innerHTML).toBe(mockData.title);
     });
     it('Should have a paragraph with the content of "a description"', async () => {
         const p = card?.querySelector('p');
         expect(p).not.toBeNull();
-        expect(p?.innerHTML).toBe('a description');
+        expect(p?.innerHTML).toBe(mockData.description);
     });
 })
