@@ -1,6 +1,6 @@
 <script lang="ts">
     import { browser } from "$app/environment";
-    import { SkillLevel, type SkillsData } from "../types/resumeTypes.types";
+    import { SkillLevel, type SkillsData } from "../../types/resumeTypes.types";
     import { theme } from "$lib/stores/stores";
 	import { onMount } from "svelte";
     import { debounce } from "$lib/utils/utils";

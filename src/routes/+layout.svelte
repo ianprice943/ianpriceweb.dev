@@ -2,8 +2,8 @@
     import { theme } from "$lib/stores/stores";
     import { browser } from "$app/environment";
     import "../app.css";
-    import Header from "$lib/components/Header.svelte";
-    import Footer from "$lib/components/Footer.svelte";
+    import Header from "$lib/components/Header/Header.svelte";
+    import Footer from "$lib/components/Footer/Footer.svelte";
     import { supabase } from "$lib/utils/supabaseClient";
     import { invalidate } from "$app/navigation";
     import { onMount } from 'svelte'

@@ -2,7 +2,7 @@
     import type { JobData } from "$lib/types/resumeTypes.types";
 	import { onMount } from "svelte";
     import { debounce } from "$lib/utils/utils";
-    import Caret from "./Caret.svelte";
+    import Caret from "../Caret/Caret.svelte";
     export let cardContent: JobData;
 
     let contentHeight: number;

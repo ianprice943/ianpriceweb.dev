@@ -1,5 +1,5 @@
 <script>
-    import PCard from "$lib/components/PCard.svelte";
+    import PCard from "$lib/components/PCard/PCard.svelte";
 
     const cardContent1 = "Greetings! I'm a web developer based in Columbus, Ohio. In 2019 I graduated Miami University with a Bachelor of Science in Computer Science.";
 

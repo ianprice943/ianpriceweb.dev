@@ -1,7 +1,7 @@
 <script lang="ts">
-    import EducationCard from "$lib/components/EducationCard.svelte";
-	import JobCard from "$lib/components/JobCard.svelte";
-	import SkillCard from "$lib/components/SkillCard.svelte";
+    import EducationCard from "$lib/components/EducationCard/EducationCard.svelte";
+	import JobCard from "$lib/components/JobCard/JobCard.svelte";
+	import SkillCard from "$lib/components/SkillCard/SkillCard.svelte";
     import type { CombinedResumePageData } from "$lib/types/resumeTypes.types";
     export let data: CombinedResumePageData;
     const { jobData, educationData, skillsData } = data;
@@ -28,7 +28,7 @@
 <section id="experience" aria-label="experience">
     <h2 class="text-2xl mb-2">Experience</h2>
     {#if !Object.keys(jobData).includes("error")}
-        <div class="grid md:grid-cols-2 gap-2">
+        <div class="mb-2 grid md:grid-cols-2 gap-2">
             {#each jobData as job (job.id)}
                 <JobCard cardContent={job} />
             {/each}

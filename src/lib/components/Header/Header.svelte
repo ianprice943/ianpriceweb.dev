@@ -1,5 +1,5 @@
 <script>
-    import ThemeSwitcher from "./ThemeSwitcher.svelte";
+    import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher.svelte";
     import { page } from "$app/stores";
 </script>
 

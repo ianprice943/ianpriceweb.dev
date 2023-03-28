@@ -2,7 +2,7 @@
     import { browser } from "$app/environment";
 	import { onMount } from 'svelte';
     import { convertDateString, setTabIndexOnCodeBlocks } from "$lib/utils/utils";
-    import IntersectionObserver from "$lib/components/IntersectionObserver.svelte";
+    import IntersectionObserver from "$lib/components/IntersectionObserver/IntersectionObserver.svelte";
     import "$lib/styles/github.css";
     import "$lib/styles/github-dark.css";
     import type { PageData } from './$types';

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { theme } from "../stores/stores";
+    import { theme } from "../../stores/stores";
     import { browser } from "$app/environment";
 
     const setTheme = (newTheme: string) => {

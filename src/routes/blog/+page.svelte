@@ -1,5 +1,5 @@
 <script lang="ts">
-    import BlogCard from "$lib/components/BlogCard.svelte";
+    import BlogCard from "$lib/components/BlogCard/BlogCard.svelte";
     import { page } from '$app/stores';
     import type { PageData } from "./$types";
     import "$lib/styles/github.css";
