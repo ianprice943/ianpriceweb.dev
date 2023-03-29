@@ -43,7 +43,7 @@
         <a href="https://github.com/ianprice943/PMDDXStarters-react" aria-label="Link to React.js Version Source Code" class="flex my-auto justify-center">
             <img src="/images/PMDRTDXLogo.webp" alt="Pokemon Mystery Dungeon Rescue Team DX Logo" />
         </a>
-        <ul class="flex justify-around">
+        <ul class="flex justify-around pt-2">
             <li class="text-center hover:underline">
                 <a href="https://github.com/ianprice943/PMDDXStarters">Vue.js Version Source Code</a>
             </li>
