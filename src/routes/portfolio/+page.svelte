@@ -44,10 +44,10 @@
             <img src="/images/PMDRTDXLogo.webp" alt="Pokemon Mystery Dungeon Rescue Team DX Logo" />
         </a>
         <ul class="flex justify-around">
-            <li class="hover:underline">
+            <li class="text-center hover:underline">
                 <a href="https://github.com/ianprice943/PMDDXStarters">Vue.js Version Source Code</a>
             </li>
-            <li class="hover:underline">
+            <li class="text-center hover:underline">
                 <a href="https://github.com/ianprice943/PMDDXStarters-react">React.js Version Source Code</a>
             </li>
         </ul>
