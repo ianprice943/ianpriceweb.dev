@@ -95,7 +95,7 @@
 </script>
 <li class={`skill skill-${cardContent.id} text-center shadow-lg mb-2 sm:mr-4 rounded-xl p-4 border-gray-50 border-2  dark:bg-gray-600 dark:border-0 dark:border-gray-600`}>
     <article>
-        <span>{cardContent.skill_name}</span>
+        <h3>{cardContent.skill_name}</h3>
         <div class={`proficiency-bar${cardContent.id} py-2 border-2 border-black rounded-xl`} aria-label="skill proficiency progress bar" role="progressbar"></div>
         <ul class="pt-2 flex flex-row justify-between text-xs md:text-sm lg:text-xs xl:text-sm">
             <li aria-label={cardContent.skill_level === SkillLevel.None ? "Current Skill Level" : null}>None</li>
