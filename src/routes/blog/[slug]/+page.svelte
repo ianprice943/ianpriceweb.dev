@@ -2,7 +2,7 @@
     import { browser } from "$app/environment";
 	import { onMount } from 'svelte';
     import { convertDateString, setTabIndexOnCodeBlocks } from "$lib/utils/utils";
-    import IntersectionObserver from "$lib/components/IntersectionObserver/IntersectionObserver.svelte";
+    import ViewCountObserver from "$lib/components/ViewCountObserver/ViewCountObserver.svelte";
     import "$lib/styles/github.css";
     import "$lib/styles/github-dark.css";
     import type { PageData } from './$types';
@@ -53,10 +53,10 @@
 {/if}
 
 <article class="prose dark:prose-invert mx-auto">
-    <IntersectionObserver slug={data.urlStub}>
+    <ViewCountObserver slug={data.urlStub}>
         <h1>{ title }</h1>
         <p>Published: { date }</p>
-    </IntersectionObserver>
+    </ViewCountObserver>
     {#if thumbnailUrl && thumbnailAltText}
         <img 
             src={thumbnailUrl}

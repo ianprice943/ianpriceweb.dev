@@ -6,9 +6,7 @@ import { marked } from 'marked';
 import {  highlightSettings } from '$lib/utils/utils';
 
 export const load = ( async (event: PageServerLoadEvent) => {
-    // console.log('event', event);
     return loadFromDB(event);
-
 });
 
 const loadFromDB = async (event: PageServerLoadEvent) => {
@@ -38,15 +36,10 @@ const loadFromDB = async (event: PageServerLoadEvent) => {
             })
         }
 
-        const dbContent = data[0].content;
-        // console.log('content', dbContent);
-
-        const content = compileWithMarked(dbContent);
         const mdContent = data[0].content;
+        const content = compileWithMarked(mdContent);
         const date = data[0].published_at;
         const { title, description, urlStub, is_published, thumbnail, thumbnail_alt_text } = data[0];
-
-        console.log('published?', is_published)
 
         return {
             is_published,

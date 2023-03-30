@@ -26,7 +26,6 @@ export const load = ( async (event: PageServerLoadEvent) => {
         
         // Filter out unpublished posts if not authenticated
         if(!session?.user?.aud) {
-            console.log('data', data);
             const filtered = data?.filter(post => {
                 return post.is_published;
             });
