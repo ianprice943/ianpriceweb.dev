@@ -17,6 +17,8 @@
     let thumbnailUrl = data.thumbnail as string;
     let thumbnailAltText = data.thumbnail_alt_text as string;
 
+    const openGraphURL = thumbnailUrl.replace('webp', 'jpg');
+
     onMount(() => {
         setTabIndexOnCodeBlocks(browser);
     });
@@ -29,11 +31,11 @@
     <meta name="author" content="Ian Price" />
     <meta property="article:published_time" content={date} />
     <link rel="icon" href="//www.ianpriceweb.dev/images/favicon.ico" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="article" />
     <meta property="og:url" content={dynaURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={thumbnailUrl} />
+    <meta name="image" property="og:image" content={openGraphURL} />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={dynaURL} />
     <meta property="twitter:title" content={title} />
