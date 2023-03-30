@@ -26,6 +26,8 @@
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="author" content="Ian Price" />
+    <meta property="article:published_time" content={date} />
     <link rel="icon" href="//www.ianpriceweb.dev/images/favicon.ico" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={dynaURL} />
