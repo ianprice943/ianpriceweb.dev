@@ -3,9 +3,7 @@
     import { SkillLevel, type SkillsData } from "../../types/resumeTypes.types";
     import { theme } from "$lib/stores/stores";
 	import { onMount } from "svelte";
-    import { debounce } from "$lib/utils/utils";
     export let cardContent: SkillsData;
-    let screenWidth = 0;
 
     // following line taken from https://stackoverflow.com/a/64887820
     $: $theme, applyProgressBar();
@@ -51,49 +49,11 @@
         }
     }
 
-    const calcScreenWidth = () => {
-        screenWidth = window.screen.width;
-    }
-
-    const debouncedCalcScreenWidth = debounce(calcScreenWidth, 300);
-
-    if(browser) {
-        let listItem: HTMLElement | null = document.querySelector(`.skill-${cardContent.id}`);
-        if(listItem !== null) {
-            const observer = new IntersectionObserver(entries => {
-                if(screenWidth <= 1024) {
-                    if(entries[0].boundingClientRect.top <= 0) {
-                        if(entries[0].boundingClientRect.bottom < 0) {
-                            // console.log(cardContent.skill_name, 'going off screen 1')
-                            listItem?.classList.remove('fly');
-                        } else if(entries[0].boundingClientRect.bottom >= 0) {
-                            // console.log(cardContent.skill_name, 'flying in 1')
-                            listItem?.classList.add('fly');
-                        }
-                    } else if(entries[0].boundingClientRect.top <= window.screen.height) {
-                        if(entries[0].boundingClientRect.bottom >= 0) {
-                            // console.log(cardContent.skill_name, 'flying in 2')
-                            listItem?.classList.add('fly');
-                        }
-                    } else if(entries[0].boundingClientRect.top >= window.screen.height) {
-                        if(entries[0].boundingClientRect.bottom >= window.screen.height) {
-                            // console.log(cardContent.skill_name, 'going off screen 2')
-                            listItem?.classList.remove('fly');
-                        }
-                    }
-                }
-            }, {threshold: [0, .2, 1]});
-            observer.observe(listItem);
-        }
-    }
-
     onMount(() => {
         applyProgressBar();
-        window.addEventListener('resize', debouncedCalcScreenWidth);
-        calcScreenWidth();
     })
 </script>
-<li class={`skill skill-${cardContent.id} text-center shadow-lg mb-2 sm:mr-4 rounded-xl p-4 border-gray-50 border-2  dark:bg-gray-600 dark:border-0 dark:border-gray-600`}>
+<li class={`skill-${cardContent.id} text-center shadow-lg mb-2 sm:mr-4 rounded-xl p-4 border-gray-50 border-2  dark:bg-gray-600 dark:border-0 dark:border-gray-600`}>
     <article>
         <h3>{cardContent.skill_name}</h3>
         <div class={`proficiency-bar${cardContent.id} py-2 border-2 border-black rounded-xl`} aria-label="skill proficiency progress bar" role="progressbar"></div>
@@ -106,15 +66,3 @@
         </ul>
     </article>
 </li>
-
-<style>
-@media (max-width: 1024px) {
-    .skill {
-        transform: translateX(-300px);
-        transition: all ease-in .3s;
-    }
-}
-.fly {
-    transform: translateX(0px);
-}
-</style>
