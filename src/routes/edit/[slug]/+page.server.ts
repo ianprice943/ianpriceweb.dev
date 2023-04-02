@@ -94,10 +94,10 @@ const compileWithMarked = async(data: string) => {
 export const actions = {
     updatePost: async ({ request }) => {
         const formData = await request.formData();
-        // console.log('form data', formData);
         
         const urlStub = formData.get("urlStub")?.toString();
         const startingUrlStub = formData.get("startingUrlStub")?.toString();
+        const startingPublished = formData.get("startingPublished") === 'on' ? true : false;
         
         const updateObject: BlogPost = {
             is_published: formData.get("isPublished") === 'on' ? true : false,
@@ -109,7 +109,7 @@ export const actions = {
             thumbnail_alt_text: formData.get("thumbnailAltText")?.toString()
         };
         
-        if(formData.get("isPublished") === 'on') {
+        if(formData.get("isPublished") === 'on' && !startingPublished) {
             const today = getTodayString();
             updateObject["published_at"] = today;
         }
@@ -120,7 +120,6 @@ export const actions = {
         .eq('urlStub', startingUrlStub);
 
         if(!error) {
-            console.log('error?', error)
             if(urlStub) {
                 throw redirect(303, `/blog/${urlStub}`);
             } else {
@@ -138,7 +137,6 @@ export const actions = {
     },
     createPost: async ({ request }) => {
         const formData = await request.formData();
-        console.log('new post form data', formData);
 
         const urlStub = formData.get("urlStub")?.toString();
 

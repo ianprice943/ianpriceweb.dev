@@ -14,6 +14,8 @@
     let title = data?.title as string;
     let isPublished = data.is_published as boolean;
     const startingUrlStub = data.urlStub as string;
+    const startingPublished = data.is_published as boolean;
+    console.log('startingPublished?', startingPublished);
     let urlStub = data.urlStub as string;
     let thumbnailUrl = data.thumbnail as string;
     let thumbnailAltText = data.thumbnail_alt_text as string;
@@ -118,6 +120,17 @@
                     id="isPublished"
                     bind:checked={isPublished}
                     class="ml-2"
+                >
+            </div>
+            <!-- Hidden section for whether the post was already published-->
+            <div class="hidden">
+                <label for="startingPublished">Already Published?</label>
+                <input
+                    type="checkbox"
+                    id="startingPublished"
+                    name="startingPublished"
+                    readonly
+                    checked={startingPublished}
                 >
             </div>
         {/if}
