@@ -28,7 +28,7 @@
 <h1 class="text-center md:text-left text-3xl my-4">Home</h1>
 <section class="flex flex-col lg:flex-row">
     <div class="block w-2/3 mx-auto lg:ml-0 lg:mr-auto lg:w-5/12 lg:my-2.5 xl:w-1/3">
-        <img src="/images/LinkedIn.webp" alt="An image of Ian" class="rounded-xl shadow-lg" />
+        <img src="/images/LinkedIn.webp" alt="Ian" class="rounded-xl shadow-lg" />
     </div>
     <div class="text-xl mt-4 lg:w-6/12 lg:ml-auto">
         <PCard cardContent={cardContent1} />
