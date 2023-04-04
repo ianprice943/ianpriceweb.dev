@@ -56,13 +56,14 @@
 <li class={`skill-${cardContent.id} text-center shadow-lg mb-2 sm:mr-4 rounded-xl p-4 border-gray-50 border-2  dark:bg-gray-600 dark:border-0 dark:border-gray-600`}>
     <article>
         <h3>{cardContent.skill_name}</h3>
-        <div class={`proficiency-bar${cardContent.id} py-2 border-2 border-black rounded-xl`} aria-label="skill proficiency progress bar" role="progressbar"></div>
-        <ul class="pt-2 flex flex-row justify-between text-xs md:text-sm lg:text-xs xl:text-sm">
-            <li aria-label={cardContent.skill_level === SkillLevel.None ? "Current Skill Level" : null}>None</li>
-            <li aria-label={cardContent.skill_level === SkillLevel.Novice ? "Current Skill Level" : null}>Novice</li>
-            <li aria-label={cardContent.skill_level === SkillLevel.Intermediate ? "Current Skill Level" : null}>Intermediate</li>
-            <li aria-label={cardContent.skill_level === SkillLevel.Advanced ? "Current Skill Level" : null}>Advanced</li>
-            <li aria-label={cardContent.skill_level === SkillLevel.Expert ? "Current Skill Level" : null}>Expert</li>
+        <span class="sr-only">Current Skill Level: {cardContent.skill_level}</span>
+        <div class={`proficiency-bar${cardContent.id} py-2 border-2 border-black rounded-xl`} aria-hidden="true"></div>
+        <ul aria-hidden="true" class="pt-2 flex flex-row justify-between text-xs md:text-sm lg:text-xs xl:text-sm">
+            <li>None</li>
+            <li>Novice</li>
+            <li>Intermediate</li>
+            <li>Advanced</li>
+            <li>Expert</li>
         </ul>
     </article>
 </li>
