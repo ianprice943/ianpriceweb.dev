@@ -16,7 +16,7 @@
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl mb-2">Portfolio</h1>
-<section class="grid md:grid-cols-2 gap-4">
+<div class="grid md:grid-cols-2 gap-4">
     <article class="flex flex-col shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
         <h2 class="text-center text-lg font-semibold">To see what side projects I&apos;m working on, check out my GitHub</h2>
         <a href="https://github.com/ianprice943" aria-label="Ian's GitHub" class="flex h-full justify-center rounded-xl bg-gray-600 dark:bg-transparent">
@@ -52,4 +52,4 @@
             </li>
         </ul>
     </article>
-</section>
+</div>
