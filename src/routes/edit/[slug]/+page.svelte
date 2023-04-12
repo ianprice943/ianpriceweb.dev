@@ -156,7 +156,7 @@
         <img 
             src={thumbnailUrl}
             alt={thumbnailAltText}
-            class="bg-gray-700 rounded-md"
+            class="bg-gray-700"
         />
         <div>{ @html html }</div>
     </article>

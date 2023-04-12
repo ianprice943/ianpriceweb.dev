@@ -61,7 +61,7 @@
         <img 
             src={thumbnailUrl}
             alt={thumbnailAltText}
-            class="bg-gray-700 sm:min-h-[200px] rounded-md"
+            class="bg-gray-700 sm:min-h-[200px]"
         />
     {/if}
     <div>{@html content}</div>

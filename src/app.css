@@ -26,6 +26,9 @@ body {
 .dark .prose ul li::marker {
     color: #d1d5db;
 }
+.prose img {
+    border-radius: .375rem;
+}
 .prose table img {
     margin-top: .5em;
     margin-bottom: .5em;
