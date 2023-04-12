@@ -26,7 +26,7 @@
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl my-4">Home</h1>
-<section class="flex flex-col lg:flex-row">
+<div class="flex flex-col lg:flex-row">
     <div class="block w-2/3 mx-auto lg:ml-0 lg:mr-auto lg:w-5/12 lg:my-2.5 xl:w-1/3">
         <img src="/images/LinkedIn.webp" alt="Ian" class="rounded-xl shadow-lg" />
     </div>
@@ -35,4 +35,4 @@
         <PCard cardContent={cardContent2} />
         <PCard cardContent={cardContent3} />
     </div>
-</section>
+</div>
