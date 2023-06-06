@@ -12,7 +12,7 @@ test('index page has expected image', async ({ page }) => {
 
 test('index page has expected three paragraphs', async ({ page }) => {
 	await page.goto('/');
-	expect(await page.textContent('section > div > p:first-of-type')).not.toBeNull();
-	expect(await page.textContent('section > div > p:nth-of-type(2)')).not.toBeNull();
-	expect(await page.textContent('section > div > p:last-of-type')).not.toBeNull();
+	expect(await page.textContent('div > p:first-of-type')).not.toBeNull();
+	expect(await page.textContent('div > p:nth-of-type(2)')).not.toBeNull();
+	expect(await page.textContent('div > p:last-of-type')).not.toBeNull();
 });
