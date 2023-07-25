@@ -5,7 +5,7 @@
 
     const cardContent2 = "My focus is on front-end web development. I take designs and bring them to life on the web while ensuring responsiveness, cross browser compatibility, and WCAG2 and ADA compliance. A more accessible web is a more inclusive web.";
 
-    const cardContent3 = "I'm currently working as a Senior Software Engineer for G20, consulting on projects such as the Innovate Ohio Project to revamp many core .gov websites for the State of Ohio.";
+    const cardContent3 = "I'm currently working as a Senior Software Engineer for G2O, consulting on projects such as the Innovate Ohio Project to revamp many core .gov websites for the State of Ohio.";
 </script>
 
 <svelte:head>
