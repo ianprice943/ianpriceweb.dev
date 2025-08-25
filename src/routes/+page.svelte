@@ -1,7 +1,7 @@
 <script>
     import PCard from "$lib/components/PCard/PCard.svelte";
 
-    const cardContent1 = "Greetings! I'm a web developer based in Columbus, Ohio. In 2019 I graduated Miami University with a Bachelor of Science in Computer Science.";
+    const cardContent1 = "Greetings! I'm a full stack web developer based in Memphis Tennessee. In 2019 I graduated Miami University with a Bachelor of Science in Computer Science.";
 
     const cardContent2 = "My focus is on front-end web development. I take designs and bring them to life on the web while ensuring responsiveness, cross browser compatibility, and WCAG2 and ADA compliance. A more accessible web is a more inclusive web.";
 

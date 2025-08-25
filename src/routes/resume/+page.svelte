@@ -25,10 +25,10 @@
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl mb-2">Resume</h1>
-<section id="experience" aria-label="experience">
+<section id="experience" aria-label="experience" class="flex flex-col items-center">
     <h2 class="text-2xl mb-2">Experience</h2>
     {#if !Object.keys(jobData).includes("error")}
-        <div class="mb-2 grid md:grid-cols-2 gap-2">
+        <div class="mb-2 grid gap-2">
             {#each jobData as job (job.id)}
                 <JobCard cardContent={job} />
             {/each}
@@ -37,10 +37,10 @@
         <p>Sorry, there was an error getting my job data.</p>
     {/if}
 </section>
-<section id="education" aria-label="education">
+<section id="education" aria-label="education" class="flex flex-col items-center">
     <h2 class="text-2xl mb-2">Education</h2>
     {#if !Object.keys(educationData).includes("error")}
-        <div class="md:grid md:grid-cols-1 lg:grid-cols-2">
+        <div class="grid">
             {#each educationData as education (education.id)}
                 <EducationCard cardContent={education} />
             {/each}
@@ -49,11 +49,11 @@
         <p>Sorry, there was an error getting my education data.</p>
     {/if}
 </section>
-<section id="skills" aria-label="skills">
+<section id="skills" aria-label="skills" class="flex flex-col items-center">
     <h2 class="text-2xl mb-2">Skills</h2>
     {#if !Object.keys(skillsData).includes("error")}
         <div>
-            <ul class="sm:grid sm:grid-cols-2 lg:grid-cols-3">
+            <ul class="grid sm:grid-cols-2 gap-2">
                 {#each skillsData as skill (skill.id)}
                     <SkillCard cardContent={skill} />
                 {/each}

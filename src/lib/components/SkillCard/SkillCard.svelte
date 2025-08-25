@@ -53,12 +53,12 @@
         applyProgressBar();
     })
 </script>
-<li class={`skill-${cardContent.id} text-center shadow-lg mb-2 sm:mr-4 rounded-xl p-4 border-gray-50 border-2  dark:bg-gray-600 dark:border-0 dark:border-gray-600`}>
-    <article>
+<li class={`skill-${cardContent.id} min-w-min text-center shadow-lg rounded-xl p-4 border-gray-50 border-2  dark:bg-gray-600 dark:border-0 dark:border-gray-600`}>
+    <article >
         <h3>{cardContent.skill_name}</h3>
         <span class="sr-only">Current Skill Level: {cardContent.skill_level}</span>
         <div class={`proficiency-bar${cardContent.id} py-2 border-2 border-black rounded-xl`} aria-hidden="true"></div>
-        <ul aria-hidden="true" class="pt-2 flex flex-row justify-between text-xs md:text-sm lg:text-xs xl:text-sm">
+        <ul aria-hidden="true" class="pt-2 flex flex-row justify-between gap-3 md:gap-4 lg:gap-5 text-xs md:text-sm lg:text-xs xl:text-sm">
             <li>None</li>
             <li>Novice</li>
             <li>Intermediate</li>
