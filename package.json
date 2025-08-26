@@ -48,6 +48,6 @@
     "@types/marked": "^4.0.8",
     "highlight.js": "^11.7.0",
     "marked": "^4.2.12",
-    "supabase": "^1.36.6"
+    "supabase": "^1.226.4"
   }
 }
