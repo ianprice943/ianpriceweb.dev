@@ -40,7 +40,7 @@
 <section id="education" aria-label="education" class="flex flex-col items-center">
     <h2 class="text-2xl mb-2">Education</h2>
     {#if !Object.keys(educationData).includes("error")}
-        <div class="grid">
+        <div class="grid sm:grid-cols-2 gap-2">
             {#each educationData as education (education.id)}
                 <EducationCard cardContent={education} />
             {/each}
