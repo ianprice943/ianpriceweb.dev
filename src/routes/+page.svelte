@@ -6,6 +6,8 @@
     const cardContent2 = "My focus is on front-end web development. I take designs and bring them to life on the web while ensuring responsiveness, cross browser compatibility, and WCAG2 and ADA compliance. A more accessible web is a more inclusive web.";
 
     const cardContent3 = "I'm currently working as a Senior Software Engineer for G2O, consulting on projects such as the Innovate Ohio Project to revamp many core .gov websites for the State of Ohio.";
+
+    const cardContent4 = 'If you or your business needs a website, or updates to your current site, email me at <a style="text-decoration:underline;" href="mailto:ianpricewebdev@gmail.com">ianpricewebdev@gmail.com</a>!'
 </script>
 
 <svelte:head>
@@ -34,5 +36,6 @@
         <PCard cardContent={cardContent1} />
         <PCard cardContent={cardContent2} />
         <PCard cardContent={cardContent3} />
+        <PCard cardContent={cardContent4} />
     </div>
 </div>
