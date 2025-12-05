@@ -25,10 +25,10 @@
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl mb-2">Resume</h1>
-<section id="experience" aria-label="experience" class="flex flex-col items-center">
-    <h2 class="text-2xl mb-2">Experience</h2>
+<section id="experience" class="flex flex-col items-center">
+    <h2 class="text-2xl mb-6">Experience</h2>
     {#if !Object.keys(jobData).includes("error")}
-        <div class="mb-2 grid gap-2">
+        <div class="md:w-[80ch] mb-4 grid gap-4">
             {#each jobData as job (job.id)}
                 <JobCard cardContent={job} />
             {/each}
@@ -37,10 +37,10 @@
         <p>Sorry, there was an error getting my job data.</p>
     {/if}
 </section>
-<section id="education" aria-label="education" class="flex flex-col items-center">
-    <h2 class="text-2xl mb-2">Education</h2>
+<section id="education" class="flex flex-col items-center">
+    <h2 class="text-2xl mt-2 mb-6">Education</h2>
     {#if !Object.keys(educationData).includes("error")}
-        <div class="grid sm:grid-cols-2 gap-2">
+        <div class="md:w-[80ch] grid sm:grid-cols-2 gap-4">
             {#each educationData as education (education.id)}
                 <EducationCard cardContent={education} />
             {/each}
@@ -49,16 +49,14 @@
         <p>Sorry, there was an error getting my education data.</p>
     {/if}
 </section>
-<section id="skills" aria-label="skills" class="flex flex-col items-center">
-    <h2 class="text-2xl mb-2">Skills</h2>
+<section id="skills" class="flex flex-col items-center">
+    <h2 class="text-2xl mt-2 mb-6">Skills</h2>
     {#if !Object.keys(skillsData).includes("error")}
-        <div>
-            <ul class="grid sm:grid-cols-2 gap-2">
-                {#each skillsData as skill (skill.id)}
-                    <SkillCard cardContent={skill} />
-                {/each}
-            </ul>
-        </div>
+        <ul class="md:w-[80ch] grid sm:grid-cols-2 gap-4">
+            {#each skillsData as skill (skill.id)}
+                <SkillCard cardContent={skill} />
+            {/each}
+        </ul>
     {:else}
         <p>Sorry, there was an error getting my skills data.</p>
     {/if}

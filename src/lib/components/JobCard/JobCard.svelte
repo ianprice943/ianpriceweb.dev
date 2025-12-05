@@ -4,13 +4,13 @@
 </script>
 
 <article class="p-6 shadow-lg rounded-xl bg-gray-100 dark:bg-gray-600">
-    <h3 class="text-xl md:text-2xl text-center">{cardContent.company_name}</h3>
-    <p class="md:text-xl">{cardContent.job_title}</p>
-    <p class="md:text-xl">{cardContent.start_time} - {cardContent.end_time}</p>
-    <p class="md:text-xl">{cardContent.description}</p>
+    <h3 class="text-2xl text-center font-extrabold mb-4">{cardContent.company_name}</h3>
+    <p class="text-xl font-semibold">{cardContent.job_title}</p>
+    <p class="text-sm">{cardContent.start_time} - {cardContent.end_time}</p>
+    <p class="mt-4 leading-8">{cardContent.description}</p>
     <ul class="list-disc pl-6">
         {#each cardContent.job_descriptions as responsibility (responsibility.id)}
-            <li class="md:text-lg text-ellipsis">{responsibility.description}</li>
+            <li class="text-ellipsis leading-7 mb-2">{responsibility.description}</li>
         {/each}
     </ul>
 </article>
