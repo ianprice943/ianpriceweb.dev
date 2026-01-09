@@ -45,10 +45,10 @@
         </a>
     </article>
     <article class="shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
-        <h2 class="text-center text-lg font-semibold">Pokemon Mystery Dungeon Rescue Team DX Starters</h2>
+        <h2 class="text-center text-lg font-semibold">Pokémon Mystery Dungeon Rescue Team DX Starters</h2>
         <p class="text-center text-sm py-2">A website I developed to learn Vue.js, and later React.js + Typescript (Note, due to Heroku removing their free tier of hosting services, these sites are now offline. Links now take you to their respective GitHub repositories.)</p>
         <a href="https://github.com/ianprice943/PMDDXStarters-react" target="_blank" aria-label="Link to React.js Version Source Code, this link opens in a new tab" class="flex my-auto justify-center">
-            <img src="/images/PMDRTDXLogo.webp" alt="Pokemon Mystery Dungeon Rescue Team DX Logo" />
+            <img src="/images/PMDRTDXLogo.webp" alt="Pokémon Mystery Dungeon Rescue Team DX Logo" />
         </a>
         <ul class="flex justify-around pt-2">
             <li class="text-center hover:underline">
@@ -58,5 +58,12 @@
                 <a href="https://github.com/ianprice943/PMDDXStarters-react" target="_blank" aria-label="Link to React.js Version Source Code, this link opens in a new tab">React.js Version Source Code</a>
             </li>
         </ul>
+    </article>
+    <article class="flex flex-col shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
+        <h2 class="text-center text-lg font-semibold">Pokémon Weight Based Moves Calculator</h2>
+        <p class="text-center text-sm py-2">A website I developed to calculate the base power of certain Pokémon moves that use the user or target's weight to determine their power.</p>
+        <a href="https://pokemon-weight-move-calculator.netlify.app/" target="_blank" aria-label="Link to the Pokémon Weight Based Moves Calculator, ths link opens in a new tab." class="flex flex-grow items-center">
+            <img src="/images/PWBMC.webp" alt="" />
+        </a>
     </article>
 </div>
