@@ -5,7 +5,8 @@
 
 <header class="px-4 py-2 relative flex flex-col flex-grow-0 flex-shrink-0 sm:flex-row md:px-8 lg:px-16 xl:px-32 2xl:px-64">
     <div class="sm:flex-grow">
-        <p class="text-4xl text-left">Ian Price</p>
+        <p class="text-2xl sm:text-4xl text-left">Ian Price WebDev</p>
+        <p class="text-xl mt-2 sm:mt-0 sm:text-2xl">Building Website with Real People in Mind</p>
     </div>
     <nav class="flex text-lg py-2 sm:py-0 sm:flex-grow-0">
         <ul class="flex mx-auto flex-row sm:my-auto">
