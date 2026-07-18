@@ -1,14 +1,16 @@
-import { supabase } from "$lib/utils/supabaseClient";
+import { createSupabaseClient } from "$lib/utils/supabaseClient";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 export const load = ( async () => {
-    const educationData = await getAllEducationData();
-    const skillsData = await getAllSkillsData();
-    const jobData = await getAllJobData();
+    const supabaseClient = createSupabaseClient(event)
+    const educationData = await getAllEducationData(supabaseClient);
+    const skillsData = await getAllSkillsData(supabaseClient);
+    const jobData = await getAllJobData(supabaseClient);
     return { jobData, educationData, skillsData }
 });
 
-const getAllEducationData = async () => {
-    const { data, error } = await supabase
+const getAllEducationData = async (supabaseClient: SupabaseClient) => {
+    const { data, error } = await supabaseClient
         .from('education')
         .select(`
             id,
@@ -25,8 +27,8 @@ const getAllEducationData = async () => {
     }
 }
 
-const getAllSkillsData = async () => {
-    const { data, error } = await supabase
+const getAllSkillsData = async (supabaseClient: SupabaseClient) => {
+    const { data, error } = await supabaseClient
         .from('skills')
         .select(`
             id,
@@ -44,8 +46,8 @@ const getAllSkillsData = async () => {
     }
 }
 
-const getAllJobData = async () => {
-    const { data, error } = await supabase
+const getAllJobData = async (supabaseClient: SupabaseClient) => {
+    const { data, error } = await supabaseClient
         .from('jobs')
         .select(`
             id,

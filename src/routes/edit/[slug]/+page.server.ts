@@ -1,8 +1,7 @@
-import { supabase } from '$lib/utils/supabaseClient';
+import { createSupabaseClient } from '$lib/utils/supabaseClient';
 import { error as fourOhFour, fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoadEvent, Actions } from './$types';
 import type { BlogPost } from '$lib/types/blogTypes.types';
-import { getServerSession } from '@supabase/auth-helpers-sveltekit';
 import { marked } from 'marked';
 import { getTodayString, highlightSettings } from '$lib/utils/utils';
 
@@ -11,9 +10,9 @@ export const load = ( async (event: PageServerLoadEvent ) => {
 })
 
 const loadFromDB = async (event: PageServerLoadEvent) => {
-    
+    const supabaseClient = createSupabaseClient(event)
+    const { data: { session } } = await supabaseClient.auth.getSession();
     // bail out early if user isn't logged in
-    const session = await getServerSession(event);
     if(!session?.user?.aud) {
         throw fourOhFour(404, {
             message: 'Page not found'
@@ -37,7 +36,7 @@ const loadFromDB = async (event: PageServerLoadEvent) => {
         }
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
     .from('blog_posts')
     .select(`
         is_published,
@@ -93,6 +92,7 @@ const compileWithMarked = async(data: string) => {
 /** @type {import('./$types').Actions} */
 export const actions = {
     updatePost: async ({ request }) => {
+        const supabaseClient = createSupabaseClient(event)
         const formData = await request.formData();
         
         const urlStub = formData.get("urlStub")?.toString();
@@ -114,7 +114,7 @@ export const actions = {
             updateObject["published_at"] = today;
         }
             
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
         .from('blog_posts')
         .update(updateObject)
         .eq('urlStub', startingUrlStub);
@@ -136,6 +136,7 @@ export const actions = {
         }
     },
     createPost: async ({ request }) => {
+        const supabaseClient = createSupabaseClient(event)
         const formData = await request.formData();
 
         const urlStub = formData.get("urlStub")?.toString();
@@ -150,7 +151,7 @@ export const actions = {
             thumbnail_alt_text: formData.get("thumbnailAltText")?.toString()
         };
 
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
         .from('blog_posts')
         .insert(createObject)
         .eq('urlStub', urlStub);

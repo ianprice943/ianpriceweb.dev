@@ -1,12 +1,13 @@
 import type { Actions } from './$types';
 import { fail, redirect } from '@sveltejs/kit';
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { AuthApiError } from '@supabase/supabase-js';
+import { createSupabaseClient } from '$lib/utils/supabaseClient';
 
 export const actions = {
     login: async (event) => {
         const { request, cookies, url } = event;
-        const { session, supabaseClient } = await getSupabase(event);
+        const supabaseClient = createSupabaseClient(event)
+        const { data: { session } } = await supabaseClient.auth.getSession();
         const formData = await request.formData();
         const email = formData.get('email')?.toString() || "";
         const pw = formData.get('password')?.toString() || "";
@@ -37,7 +38,7 @@ export const actions = {
         throw redirect(303, '/');
     },
     logout: async (event: any) => {
-        const { supabaseClient } = await getSupabase(event);
+        const supabaseClient = createSupabaseClient(event)
         await supabaseClient.auth.signOut();
         throw redirect(303, '/');
     }

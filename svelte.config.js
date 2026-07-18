@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-netlify';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import tailwindcss from '@tailwindcss/postcss';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -15,6 +16,7 @@ const config = {
 		'.svelte',
 	],
 	preprocess: [
+		tailwindcss(),
 		vitePreprocess(),
 	],
 };

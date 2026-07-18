@@ -1,8 +1,13 @@
 <script lang="ts">
+    import { JSDOM } from "jsdom";
     export let cardContent: string;
 
     function containsHTML(str: string) {
-        const doc = new DOMParser().parseFromString(str, "text/html");
+        const dom = new JSDOM('<!DOCTYPE html><html></html>');
+        const parser = new dom.window.DOMParser()
+        const doc = parser.parseFromString(str, 'text/html')
+        // console.log('doc nodes: ', doc.body.childNodes.length)
+        // console.log(Array.from(doc.body.childNodes).some(node => node.nodeType === 1))
         return Array.from(doc.body.childNodes).some(node => node.nodeType === 1);
     }
 </script>
