@@ -35,11 +35,11 @@ export const actions = {
             })
         }
 
-        throw redirect(303, '/');
+        redirect(303, '/');
     },
     logout: async (event: any) => {
         const supabaseClient = createSupabaseClient(event)
         await supabaseClient.auth.signOut();
-        throw redirect(303, '/');
+        redirect(303, '/');
     }
 } satisfies Actions;

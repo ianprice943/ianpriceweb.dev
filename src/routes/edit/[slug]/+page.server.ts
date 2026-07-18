@@ -121,9 +121,9 @@ export const actions = {
 
         if(!error) {
             if(urlStub) {
-                throw redirect(303, `/blog/${urlStub}`);
+                redirect(303, `/blog/${urlStub}`);
             } else {
-                throw redirect(303, '/blog');
+                redirect(303, '/blog');
             }
         } else {
             console.log("update post error: ", error);
@@ -158,9 +158,9 @@ export const actions = {
 
         if(!error) {
             if(urlStub) {
-                throw redirect(303, `/blog/${urlStub}`);
+                redirect(303, `/blog/${urlStub}`);
             } else {
-                throw redirect(303, '/blog');
+                redirect(303, '/blog');
             }
         } else {
             console.log("update post error: ", error);
