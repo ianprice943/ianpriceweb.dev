@@ -24,7 +24,7 @@
 
 <div class="min-h-screen flex flex-col">
     <Header />
-    <main class="flex-grow px-4 pb-10 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
+    <main class="grow px-4 pb-10 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
         <slot />
     </main>
     <Footer />

@@ -1,8 +1,10 @@
 <script lang="ts">
     import { JSDOM } from "jsdom";
+    import { browser } from "$app/env";
     export let cardContent: string;
 
     function containsHTML(str: string) {
+        if(browser) return
         const dom = new JSDOM('<!DOCTYPE html><html></html>');
         const parser = new dom.window.DOMParser()
         const doc = parser.parseFromString(str, 'text/html')

@@ -4,8 +4,8 @@
     import { theme } from "$lib/stores/stores";
 </script>
 
-<header class="px-4 py-2 relative flex flex-col flex-grow-0 flex-shrink-0 lg:flex-row md:px-8 lg:px-16 xl:px-32 2xl:px-64">
-    <div class="flex flex-col items-center sm:items-baseline sm:flex-row lg:flex-grow lg:max-h-44 xl:max-h-56 2xl:max-h-[unset]">
+<header class="px-4 py-2 relative flex flex-col grow-0 shrink-0 lg:flex-row md:px-8 lg:px-16 xl:px-32 2xl:px-64">
+    <div class="flex flex-col items-center sm:items-baseline sm:flex-row lg:grow lg:max-h-44 xl:max-h-56 2xl:max-h-[unset]">
         <a 
             href="/" 
             aria-label="Ian Price Web Development logo, click to return to the home page."
@@ -39,7 +39,7 @@
              {/if}
         </div>
     </div>
-    <nav class="flex text-lg py-2 sm:py-0 sm:flex-grow-0">
+    <nav class="flex text-lg py-2 sm:py-0 sm:grow-0">
         <ul class="flex mx-auto flex-row sm:my-auto">
             <li class="px-1 hover:underline {$page?.route?.id === "/" ? "underline" : ""}">
                 <a href="/">Home</a>

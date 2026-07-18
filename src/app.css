@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    @plugin "@tailwindcss/typography";
+
+    --tw-prose-code: transparent;
+    --tw-prose-pre-code: transparent;
+    --tw-prose-b-quote: transparent;
+    --tw-prose-b-quote-decor: transparent; 
+    --tw-prose-links: #1d4ed8; /* blue-700 */
+    --tw-prose-links-hover: #1d4ed8; /* blue-700 */
+    --tw-prose-invert-links: #60a5fa; /* blue-300 */
+    
+}
+
 body {
     font-family: Arial;
     font-size: 16px;
