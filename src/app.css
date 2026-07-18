@@ -62,3 +62,9 @@ code {
     padding: 0 2px;
     color: #d1d5db;
 }
+
+.what-I-offer-list {
+    list-style-type: disc;
+    margin-left: 16px;
+    margin-bottom: 8px;
+}

@@ -5,7 +5,7 @@
 </script>
 
 <footer class="text-center p-2 flex-grow-0 flex-shrink-0 relative">
-    <div class="justify-self-center">Copyright © { year } - Ian Price</div>
+    <div class="justify-self-center">Copyright © { year } - Ian Price WebDev</div>
     {#if !$page.data.session}
         <a href="/login" class="underline sm:absolute sm:right-6 sm:top-2">Admin Login</a>
     {:else}

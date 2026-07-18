@@ -7,12 +7,12 @@
     <meta property="og:url" content=//www.ianpriceweb.dev/ />
     <meta property="og:title" content="Ian Price - Portfolio" />
     <meta property="og:description" content="The portfolio page of Ian Price's Portfolio" />
-    <meta property="og:image" content="//www.ianpriceweb.dev/images/LinkedIn.png" />
+    <meta property="og:image" content="//www.ianpriceweb.dev/images/ian.png" />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="//www.ianpriceweb.dev/" />
     <meta property="twitter:title" content="Ian Price - Portfolio" />
     <meta property="twitter:description" content="The portfolio page of Ian Price's Portfolio" />
-    <meta property="twitter:image" content="//www.ianpriceweb.dev/images/LinkedIn.png" />
+    <meta property="twitter:image" content="//www.ianpriceweb.dev/images/ian.png" />
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl mb-2">Portfolio</h1>
@@ -24,17 +24,17 @@
         </a>
     </article>
     <article class="flex flex-col shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
+        <h2 class="text-center text-lg font-semibold">Dawn Taylor Law</h2>
+        <p class="text-center text-sm py-2">Dawn Taylor Law is a law office focused on Mediations, Family Law and Criminal Law.</p>
+        <a href="https://www.dawntaylorlaw.com" target="_blank" aria-label="The website for Dawn Taylor's law practice, this link opens in a new tab" class="flex h-full justify-center rounded-xl">
+            <img src="/images/dawn-and-scales.webp" alt="Dawn with legal scales" class="my-auto" />
+        </a>
+    </article>
+    <article class="flex flex-col shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
         <h2 class="text-center text-lg font-semibold">Operation Valor Arts</h2>
         <p class="text-center text-sm py-2">Operation Valor Arts is a 501(c)(3) dedicated to providing Veterans with training and resources to design interpretive public art.</p>
         <a href="https://www.ovarts.org" target="_blank" aria-label="The website for Operation Valor Arts, this link opens in a new tab" class="flex h-full justify-center rounded-xl">
-            <img src="/images/OVArts-Logo.webp" alt="GitHub Logo" class="my-auto" />
-        </a>
-    </article>
-    <article class="shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
-        <h2 class="text-center text-lg font-semibold">Three.js Playground</h2>
-        <p class="text-center text-sm py-2">A small playground I developed to learn the basics of Three.js.</p>
-        <a href="https://ip-threejs-playground.netlify.app/" target="_blank" aria-label="A website showing off some basics of Three.js, this link opens in a new tab" class="flex my-auto justify-center">
-            <img src="/images/three.webp" alt="Three.js rendered sphere" class='rounded-xl' />
+            <img src="/images/OVArts-Logo.webp" alt="Operation Valor Arts logo" class="my-auto" />
         </a>
     </article>
     <article class="flex flex-col shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
@@ -42,28 +42,6 @@
         <p class="text-center text-sm py-2">An introductory site and blog for a client&apos;s Mediation business.</p>
         <a href="https://wkmediation.com/" target="_blank" aria-label="Website for a mediator in Los Angeles, this link opens in a new tab" class="flex h-full justify-center">
             <img src="/images/wk_mediation_logo_horiz_graygold.webp" alt="WK Mediation Logo" class="my-auto" />
-        </a>
-    </article>
-    <article class="shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
-        <h2 class="text-center text-lg font-semibold">Pokémon Mystery Dungeon Rescue Team DX Starters</h2>
-        <p class="text-center text-sm py-2">A website I developed to learn Vue.js, and later React.js + Typescript (Note, due to Heroku removing their free tier of hosting services, these sites are now offline. Links now take you to their respective GitHub repositories.)</p>
-        <a href="https://github.com/ianprice943/PMDDXStarters-react" target="_blank" aria-label="Link to React.js Version Source Code, this link opens in a new tab" class="flex my-auto justify-center">
-            <img src="/images/PMDRTDXLogo.webp" alt="Pokémon Mystery Dungeon Rescue Team DX Logo" />
-        </a>
-        <ul class="flex justify-around pt-2">
-            <li class="text-center hover:underline">
-                <a href="https://github.com/ianprice943/PMDDXStarters" target="_blank" aria-label="Link to Vue.js Version Source Code, this link opens in a new tab">Vue.js Version Source Code</a>
-            </li>
-            <li class="text-center hover:underline">
-                <a href="https://github.com/ianprice943/PMDDXStarters-react" target="_blank" aria-label="Link to React.js Version Source Code, this link opens in a new tab">React.js Version Source Code</a>
-            </li>
-        </ul>
-    </article>
-    <article class="flex flex-col shadow-lg rounded-xl p-4 lg:p-2 xl:p-4 border-gray-50 border-4 dark:bg-gray-600 dark:border-gray-600">
-        <h2 class="text-center text-lg font-semibold">Pokémon Weight Based Moves Calculator</h2>
-        <p class="text-center text-sm py-2">A website I developed to calculate the base power of certain Pokémon moves that use the user or target's weight to determine their power.</p>
-        <a href="https://pokemon-weight-move-calculator.netlify.app/" target="_blank" aria-label="Link to the Pokémon Weight Based Moves Calculator, ths link opens in a new tab." class="flex flex-grow items-center">
-            <img src="/images/PWBMC.webp" alt="" />
         </a>
     </article>
 </div>

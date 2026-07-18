@@ -16,12 +16,12 @@
     <meta property="og:url" content=//www.ianpriceweb.dev/ />
     <meta property="og:title" content="Ian Price - Resume" />
     <meta property="og:description" content="The resume page of Ian Price's Portfolio" />
-    <meta property="og:image" content="//www.ianpriceweb.dev/images/LinkedIn.png" />
+    <meta property="og:image" content="//www.ianpriceweb.dev/images/ian.png" />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="//www.ianpriceweb.dev/" />
     <meta property="twitter:title" content="Ian Price - Resume" />
     <meta property="twitter:description" content="The resume page of Ian Price's Portfolio" />
-    <meta property="twitter:image" content="//www.ianpriceweb.dev/images/LinkedIn.png" />
+    <meta property="twitter:image" content="//www.ianpriceweb.dev/images/ian.png" />
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl mb-2">Resume</h1>
@@ -34,7 +34,7 @@
             {/each}
         </div>
     {:else}
-        <p>Sorry, there was an error getting my job data.</p>
+        <p>Sorry, there was an error retrieving my experiences.</p>
     {/if}
 </section>
 <section id="education" class="flex flex-col items-center">
@@ -46,7 +46,7 @@
             {/each}
         </div>
     {:else}
-        <p>Sorry, there was an error getting my education data.</p>
+        <p>Sorry, there was an error retrieving my education.</p>
     {/if}
 </section>
 <section id="skills" class="flex flex-col items-center">
@@ -58,6 +58,6 @@
             {/each}
         </ul>
     {:else}
-        <p>Sorry, there was an error getting my skills data.</p>
+        <p>Sorry, there was an error retrieving my skills.</p>
     {/if}
 </section>

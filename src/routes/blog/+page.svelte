@@ -17,12 +17,12 @@
     <meta property="og:url" content="//www.ianpriceweb.dev/blog" />
     <meta property="og:title" content="Ian Price - Blog" />
     <meta property="og:description" content="The blog page of Ian Price's Portfolio" />
-    <meta property="og:image" content="//www.ianpriceweb.dev/images/LinkedIn.png" />
+    <meta property="og:image" content="//www.ianpriceweb.dev/images/ian.png" />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="//www.ianpriceweb.dev/blog" />
     <meta property="twitter:title" content="Ian Price - Blog" />
     <meta property="twitter:description" content="The blog page of Ian Price's Portfolio" />
-    <meta property="twitter:image" content="//www.ianpriceweb.dev/images/LinkedIn.png" />
+    <meta property="twitter:image" content="//www.ianpriceweb.dev/images/ian.png" />
 </svelte:head>
 
 <h1 class="text-center md:text-left text-3xl mb-2">Blog</h1>
