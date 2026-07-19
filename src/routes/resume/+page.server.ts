@@ -1,7 +1,7 @@
 import { createSupabaseClient } from "$lib/utils/supabaseClient";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-export const load = ( async () => {
+export const load = ( async (event) => {
     const supabaseClient = createSupabaseClient(event)
     const educationData = await getAllEducationData(supabaseClient);
     const skillsData = await getAllSkillsData(supabaseClient);

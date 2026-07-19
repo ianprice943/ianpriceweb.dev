@@ -1,17 +1,28 @@
-import { supabase } from '$lib/utils/supabaseClient';
+import { createSupabaseClient } from '$lib/utils/supabaseClient';
 import { error as fourOhFour } from '@sveltejs/kit';
-import type { PageServerLoadEvent } from './$types';
-import { getServerSession } from '@supabase/auth-helpers-sveltekit';
+import type { PageServerLoad, PageServerLoadEvent } from './$types';
 import { marked } from 'marked';
 import {  highlightSettings } from '$lib/utils/utils';
 
-export const load = ( async (event: PageServerLoadEvent) => {
-    return loadFromDB(event);
-});
+export interface BlogPost {
+    is_published: boolean;
+    date: string;
+    urlStub: string;
+    title: string;
+    description: string;
+    content: string;
+    mdContent: string;
+    thumbnail: string;
+    thumbnail_alt_text: string;
+}
 
-const loadFromDB = async (event: PageServerLoadEvent) => {
+// @ts-ignore typescript and svelte aren't playing nice right now
+export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
+    const supabaseClient = createSupabaseClient(event);
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    
     const slug = event.params.slug;
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
     .from('blog_posts')
     .select(`
         is_published,
@@ -23,34 +34,35 @@ const loadFromDB = async (event: PageServerLoadEvent) => {
         thumbnail,
         thumbnail_alt_text
     `)
+    // .eq('urlStub', slug);
     .eq('urlStub', slug);
     
     if(!error && data !== null && data?.length !== 0) {
-
-        const session = await getServerSession(event);
-
+    
         // if the blog is unpublished or there's no content, and the user is not authenticated
         if((data[0].is_published === false || !data[0].content) && !session?.user?.aud) {
             throw fourOhFour(404, {
                 message: 'Blog post not found'
             })
         }
-
+    
         const mdContent = data[0].content;
-        const content = compileWithMarked(mdContent);
+        const content = await compileWithMarked(mdContent);
         const date = data[0].published_at;
         const { title, description, urlStub, is_published, thumbnail, thumbnail_alt_text } = data[0];
-
+    
         return {
-            is_published,
-            title,
-            description,
-            date,
-            urlStub,
-            content,
-            mdContent,
-            thumbnail,
-            thumbnail_alt_text
+            post: {
+                is_published,
+                title,
+                description,
+                date,
+                urlStub,
+                content,
+                mdContent,
+                thumbnail,
+                thumbnail_alt_text
+            } as BlogPost
         }
     } else {
         throw fourOhFour(404, {
@@ -58,6 +70,7 @@ const loadFromDB = async (event: PageServerLoadEvent) => {
         })
     }
 }
+
 
 const compileWithMarked = async(data: string) => {
     marked.setOptions({
