@@ -1,17 +1,20 @@
 import type { RequestHandler } from '@sveltejs/kit'
 import { json } from '@sveltejs/kit';
-import { supabase } from '$lib/utils/supabaseClient';
+import { createSupabaseClient } from '$lib/utils/supabaseClient';
+import type { RequestEvent } from './$types';
+import type { SupabaseClient } from '@supabase/supabase-js';
 
-export const POST = ( async ({ request }) => {
+export const POST = ( async (event) => {
     // console.log('req', request);
-    const { viewed, post } = await request.json();
+    const { viewed, post } = await event.request.json();
+    const supabaseClient = createSupabaseClient(event)
 
     try {
         if(viewed) {
-            const viewCount = await getViewCount(post);
+            const viewCount = await getViewCount(post, supabaseClient);
             if(viewCount !== -1) {
     
-                const success = await updateViewCount(post, viewCount);
+                const success = await updateViewCount(post, viewCount, supabaseClient);
     
                 if(success) {
                     return json({status: 200});
@@ -26,8 +29,8 @@ export const POST = ( async ({ request }) => {
     return json({status: 400, error: 'a problem occured updating the view count'});
 }) satisfies RequestHandler;
 
-const getViewCount = async (urlStub: string): Promise<number> => {
-    const { data, error } = await supabase
+const getViewCount = async (urlStub: string, supabaseClient: SupabaseClient): Promise<number> => {
+    const { data, error } = await supabaseClient
         .from('blog_posts')
         .select(`
             views
@@ -41,12 +44,12 @@ const getViewCount = async (urlStub: string): Promise<number> => {
     }
 }
 
-const updateViewCount = async (urlStub: string, viewCount: number): Promise<boolean> => {
+const updateViewCount = async (urlStub: string, viewCount: number, supabaseClient: SupabaseClient): Promise<boolean> => {
     const updateObject = {
         views: viewCount + 1
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
         .from('blog_posts')
         .update(updateObject)
         .eq('urlStub', urlStub);
