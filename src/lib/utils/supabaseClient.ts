@@ -1,4 +1,16 @@
-import { createClient } from '@supabase/auth-helpers-sveltekit';
+import { createServerClient } from '@supabase/auth-helpers-sveltekit';
 import { env } from '$env/dynamic/public'
 
-export const supabase = createClient(env.PUBLIC_SUPABASE_URL, env.PUBLIC_SUPABASE_KEY);
+export const createSupabaseClient = (event: any) => {
+  return createServerClient(
+    env.PUBLIC_SUPABASE_URL,
+    env.PUBLIC_SUPABASE_KEY,
+    {
+      cookies: {
+        get(name) {
+          return event.cookies.get(name);
+        }
+      }
+    }
+  );
+}

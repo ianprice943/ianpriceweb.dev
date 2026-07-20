@@ -4,20 +4,11 @@
     import "../app.css";
     import Header from "$lib/components/Header/Header.svelte";
     import Footer from "$lib/components/Footer/Footer.svelte";
-    import { supabase } from "$lib/utils/supabaseClient";
     import { invalidate } from "$app/navigation";
     import { onMount } from 'svelte'
 
     onMount(() => {
-        const {
-            data: { subscription },
-        } = supabase.auth.onAuthStateChange(() => {
-            invalidate('supabase:auth')
-        });
-
-        return () => {
-            subscription.unsubscribe()
-        }
+        invalidate('supabase:auth');
     })
 
     if(browser) {
@@ -33,7 +24,7 @@
 
 <div class="min-h-screen flex flex-col">
     <Header />
-    <main class="flex-grow px-4 pb-10 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
+    <main class="grow px-4 pb-10 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
         <slot />
     </main>
     <Footer />

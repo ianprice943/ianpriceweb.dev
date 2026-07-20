@@ -5,17 +5,22 @@
     import ViewCountObserver from "$lib/components/ViewCountObserver/ViewCountObserver.svelte";
     import "$lib/styles/github.css";
     import "$lib/styles/github-dark.css";
-    import type { PageData } from './$types';
-    export let data: PageData;
-    import { page } from "$app/stores";
-    const dynaURL = `//www.ianpriceweb.dev/blog/${$page.params.slug}`;
-    // console.log(data);
-    let content = data?.content as string;
-    let description = data?.description as string;
-    let title = data?.title as string;
-    let date = convertDateString(data.date as string);
-    let thumbnailUrl = data.thumbnail as string;
-    let thumbnailAltText = data.thumbnail_alt_text as string;
+    import { page } from "$app/state";
+	import type { BlogPost } from "./+page.server";
+
+    const dynaURL = `//www.ianpriceweb.dev/blog/${page.params.slug}`;
+    // @ts-ignore typescript and svelte aren't playing nice right now
+    let { data }: any = $props()
+    // console.log(data)
+    
+    const post = data.post as BlogPost
+    let content = post.content as string;
+    let description = post.description as string;
+    let title = post.title as string;
+    let date = convertDateString(post.date as string);
+    let thumbnailUrl = post.thumbnail as string;
+    let thumbnailAltText = post.thumbnail_alt_text as string;
+    let urlStub = post.urlStub
 
     const openGraphURL = thumbnailUrl.replace('webp', 'jpg');
 
@@ -43,17 +48,17 @@
     <meta property="twitter:image" content={thumbnailUrl} />
 </svelte:head>
 
-{#if $page.data.session}
+{#if page.data.session}
     <a 
         class="px-2 py-1 sticky top-16 rounded-md border-2 text-white bg-red-800 border-red-800"
-        href="/edit/{$page.params.slug}"
+        href="/edit/{page.params.slug}"
     >
         Edit
     </a>
 {/if}
 
 <article class="prose dark:prose-invert mx-auto">
-    <ViewCountObserver slug={data.urlStub}>
+    <ViewCountObserver slug={urlStub}>
         <h1>{ title }</h1>
         <p>Published: { date }</p>
     </ViewCountObserver>

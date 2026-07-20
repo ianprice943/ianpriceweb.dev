@@ -1,9 +1,11 @@
 <script lang="ts">
     export let cardContent: string;
+    // @ts-ignore
+    import parse from '@js-bits/dom-parser';
 
     function containsHTML(str: string) {
-        const doc = new DOMParser().parseFromString(str, "text/html");
-        return Array.from(doc.body.childNodes).some(node => node.nodeType === 1);
+        const doc = parse(str, 'text/html') as Document
+        return Array.from(doc.childNodes).some(node => node.nodeType === 1);
     }
 </script>
 

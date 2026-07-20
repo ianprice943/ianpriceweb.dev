@@ -1,9 +1,10 @@
-import { supabase } from "$lib/utils/supabaseClient";
-import { getServerSession } from '@supabase/auth-helpers-sveltekit';
+import { createSupabaseClient } from "$lib/utils/supabaseClient";
 import type { PageServerLoadEvent } from "./$types";
 
 export const load = ( async (event: PageServerLoadEvent) => {
-    const { data, error } = await supabase
+    const supabaseClient = createSupabaseClient(event)
+    
+    const { data, error } = await supabaseClient
     .from('blog_posts')
     .select(`
         id,
@@ -22,7 +23,7 @@ export const load = ( async (event: PageServerLoadEvent) => {
     */
 
     if(!error) {
-        const session = await getServerSession(event);
+        const { data: { session } } = await supabaseClient.auth.getSession();
         
         // Filter out unpublished posts if not authenticated
         if(!session?.user?.aud) {

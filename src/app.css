@@ -1,10 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
 
 body {
     font-family: Arial;
     font-size: 16px;
+
+    /* Tailwind Typography Overrides */
+    --tw-prose-code: transparent;
+    --tw-prose-pre-code: transparent;
+    --tw-prose-b-quote: transparent;
+    --tw-prose-b-quote-decor: transparent; 
+    --tw-prose-links: #1d4ed8; /* blue-700 */
+    --tw-prose-links-hover: #1d4ed8; /* blue-700 */
+    --tw-prose-invert-links: #60a5fa; /* blue-300 */
 }
 
 .expand {
