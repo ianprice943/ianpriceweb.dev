@@ -1,16 +1,11 @@
 <script lang="ts">
-    import { JSDOM } from "jsdom";
-    import { browser } from "$app/env";
     export let cardContent: string;
+    // @ts-ignore
+    import parse from '@js-bits/dom-parser';
 
     function containsHTML(str: string) {
-        if(browser) return
-        const dom = new JSDOM('<!DOCTYPE html><html></html>');
-        const parser = new dom.window.DOMParser()
-        const doc = parser.parseFromString(str, 'text/html')
-        // console.log('doc nodes: ', doc.body.childNodes.length)
-        // console.log(Array.from(doc.body.childNodes).some(node => node.nodeType === 1))
-        return Array.from(doc.body.childNodes).some(node => node.nodeType === 1);
+        const doc = parse(str, 'text/html') as Document
+        return Array.from(doc.childNodes).some(node => node.nodeType === 1);
     }
 </script>
 

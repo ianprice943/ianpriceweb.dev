@@ -55,6 +55,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@js-bits/dom-parser": "^1.0.3",
     "@supabase/auth-helpers-sveltekit": "^0.15.0",
     "@supabase/supabase-js": "^2.110.7",
     "@tailwindcss/vite": "^4.3.3",

@@ -14,13 +14,13 @@
             {#if $theme === 'light'}
                 <img 
                     src="/images/ipwd-logo-960-transparent-cropped.webp"
-                    alt="ADA Compliance, accessibility focused, website analytics, and SEO optimization. Building websites with real people in mind." 
+                    alt="Ian Price website development, for small businesses and professionals." 
                     class="w-full"
                 />
             {:else}
                 <img 
                     src="/images/ipwd-logo-960-transparent-cropped-dark-mode.webp"
-                    alt="ADA Compliance, accessibility focused, website analytics, and SEO optimization. Building websites with real people in mind." 
+                    alt="Ian Price website development, for small businesses and professionals." 
                     class="w-full"
                 />
             {/if}
