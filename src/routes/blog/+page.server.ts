@@ -1,12 +1,13 @@
-import { createSupabaseClient } from "$lib/utils/supabaseClient";
-import type { PageServerLoadEvent } from "./$types";
+import { createSupabaseClient } from '#lib/utils/supabaseClient.ts';
+import type { PageServerLoadEvent } from './$types';
 
-export const load = ( async (event: PageServerLoadEvent) => {
-    const supabaseClient = createSupabaseClient(event)
-    
-    const { data, error } = await supabaseClient
-    .from('blog_posts')
-    .select(`
+export const load = async (event: PageServerLoadEvent) => {
+	const supabaseClient = createSupabaseClient(event);
+
+	const { data, error } = await supabaseClient
+		.from('blog_posts')
+		.select(
+			`
         id,
         published_at,
         is_published,
@@ -15,27 +16,31 @@ export const load = ( async (event: PageServerLoadEvent) => {
         description,
         thumbnail,
         thumbnail_alt_text
-    `).order('published_at', { ascending: false });
-    /*  
+    `
+		)
+		.order('published_at', { ascending: false });
+	/*  
         Order by most recent publishes. When I get enough articles I may 
         add a sorting function on the front end, but the initial page load
         will remain with this sorting.
     */
 
-    if(!error) {
-        const { data: { session } } = await supabaseClient.auth.getSession();
-        
-        // Filter out unpublished posts if not authenticated
-        if(!session?.user?.aud) {
-            const filtered = data?.filter(post => {
-                return post.is_published;
-            });
-            return {filtered}
-        }
+	if (!error) {
+		const {
+			data: { session }
+		} = await supabaseClient.auth.getSession();
 
-        return {data};
-    } else {
-        console.log('error:', error);
-        return {error: error}
-    }
-});
+		// Filter out unpublished posts if not authenticated
+		if (!session?.user?.aud) {
+			const filtered = data?.filter((post) => {
+				return post.is_published;
+			});
+			return { filtered };
+		}
+
+		return { data };
+	} else {
+		console.log('error:', error);
+		return { error: error };
+	}
+};

@@ -1,1 +1,1 @@
-import "$lib/utils/supabaseClient";
+import '#lib/utils/supabaseClient.ts';

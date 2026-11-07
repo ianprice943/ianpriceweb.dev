@@ -10,9 +10,8 @@ export default defineConfig({
 			adapter: adapter({
 				edge: false,
 				split: false
-			}),
-		}),
-
+			})
+		})
 	],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}'],

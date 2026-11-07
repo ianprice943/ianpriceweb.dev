@@ -1,44 +1,47 @@
-import { createSupabaseClient } from '$lib/utils/supabaseClient';
+import { createSupabaseClient } from '#lib/utils/supabaseClient.ts';
 import { error as fourOhFour, fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoadEvent, Actions } from './$types';
-import type { BlogPost } from '$lib/types/blogTypes.types';
+import type { BlogPost } from '#lib/types/blogTypes.types.ts';
 import { marked } from 'marked';
-import { getTodayString, highlightSettings } from '$lib/utils/utils';
+import { getTodayString, highlightSettings } from '#lib/utils/utils.ts';
 
-export const load = ( async (event: PageServerLoadEvent ) => {
-    return loadFromDB(event);
-})
+export const load = async (event: PageServerLoadEvent) => {
+	return loadFromDB(event);
+};
 
 const loadFromDB = async (event: PageServerLoadEvent) => {
-    const supabaseClient = createSupabaseClient(event)
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    // bail out early if user isn't logged in
-    if(!session?.user?.aud) {
-        throw fourOhFour(404, {
-            message: 'Page not found'
-        })
-    }
+	const supabaseClient = createSupabaseClient(event);
+	const {
+		data: { session }
+	} = await supabaseClient.auth.getSession();
+	// bail out early if user isn't logged in
+	if (!session?.user?.aud) {
+		throw fourOhFour(404, {
+			message: 'Page not found'
+		});
+	}
 
-    const slug = event.params.slug;
+	const slug = event.params.slug;
 
-    if(slug === "new") {
-        // new blog post
-        return {
-            is_published: "",
-            title: "",
-            description: "",
-            date: "",
-            urlStub: "",
-            content: "",
-            mdContent: "",
-            thumbnail: "",
-            thumbnail_alt_text: ""
-        }
-    }
+	if (slug === 'new') {
+		// new blog post
+		return {
+			is_published: '',
+			title: '',
+			description: '',
+			date: '',
+			urlStub: '',
+			content: '',
+			mdContent: '',
+			thumbnail: '',
+			thumbnail_alt_text: ''
+		};
+	}
 
-    const { data, error } = await supabaseClient
-    .from('blog_posts')
-    .select(`
+	const { data, error } = await supabaseClient
+		.from('blog_posts')
+		.select(
+			`
         is_published,
         published_at,
         urlStub,
@@ -47,129 +50,129 @@ const loadFromDB = async (event: PageServerLoadEvent) => {
         content,
         thumbnail,
         thumbnail_alt_text
-    `)
-    .eq('urlStub', slug);
+    `
+		)
+		.eq('urlStub', slug);
 
-    if(!error && data !== null && data?.length !== 0) {
+	if (!error && data !== null && data?.length !== 0) {
+		const dbContent = data[0].content;
+		// console.log('content', dbContent);
 
-        const dbContent = data[0].content;
-        // console.log('content', dbContent);
+		const content = compileWithMarked(dbContent);
+		const mdContent = data[0].content;
+		const date = data[0].published_at;
+		const { title, description, urlStub, is_published, thumbnail, thumbnail_alt_text } = data[0];
 
-        const content = compileWithMarked(dbContent);
-        const mdContent = data[0].content;
-        const date = data[0].published_at;
-        const { title, description, urlStub, is_published, thumbnail, thumbnail_alt_text } = data[0];
+		return {
+			is_published,
+			title,
+			description,
+			date,
+			urlStub,
+			content,
+			mdContent,
+			thumbnail,
+			thumbnail_alt_text
+		};
+	} else {
+		throw fourOhFour(404, {
+			message: 'Blog post not found'
+		});
+	}
+};
 
-        return {
-            is_published,
-            title,
-            description,
-            date,
-            urlStub,
-            content,
-            mdContent,
-            thumbnail,
-            thumbnail_alt_text
-        }
-    } else {
-        throw fourOhFour(404, {
-            message: 'Blog post not found'
-        })
-    }
-}
+const compileWithMarked = async (data: string) => {
+	marked.setOptions({
+		highlight: (code, lang) => {
+			return highlightSettings(code, lang);
+		},
+		langPrefix: 'hljs language-'
+	});
 
-const compileWithMarked = async(data: string) => {
-    marked.setOptions({
-        highlight: (code, lang) => {
-            return highlightSettings(code, lang);
-        },
-        langPrefix: 'hljs language-'
-    })
-
-    return marked(data);
-}
+	return marked(data);
+};
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-    updatePost: async ({ request }) => {
-        const supabaseClient = createSupabaseClient(event)
-        const formData = await request.formData();
-        
-        const urlStub = formData.get("urlStub")?.toString();
-        const startingUrlStub = formData.get("startingUrlStub")?.toString();
-        const startingPublished = formData.get("startingPublished") === 'on' ? true : false;
-        
-        const updateObject: BlogPost = {
-            is_published: formData.get("isPublished") === 'on' ? true : false,
-            title: formData.get("postTitle")?.toString(),
-            description: formData.get("postDescription")?.toString(),
-            content: formData.get("markdown")?.toString(),
-            urlStub: urlStub,
-            thumbnail: formData.get("thumbnailUrl")?.toString(),
-            thumbnail_alt_text: formData.get("thumbnailAltText")?.toString()
-        };
-        
-        if(formData.get("isPublished") === 'on' && !startingPublished) {
-            const today = getTodayString();
-            updateObject["published_at"] = today;
-        }
-            
-        const { data, error } = await supabaseClient
-        .from('blog_posts')
-        .update(updateObject)
-        .eq('urlStub', startingUrlStub);
+	updatePost: async ({ request }) => {
+		const supabaseClient = createSupabaseClient(event);
+		const formData = await request.formData();
 
-        if(!error) {
-            if(urlStub) {
-                redirect(303, `/blog/${urlStub}`);
-            } else {
-                redirect(303, '/blog');
-            }
-        } else {
-            console.log("update post error: ", error);
-            throw fail(500, {
-                error: 'Something went wrong while updating your blog post.',
-                values: {
-                    error
-                }
-            });
-        }
-    },
-    createPost: async ({ request }) => {
-        const supabaseClient = createSupabaseClient(event)
-        const formData = await request.formData();
+		const urlStub = formData.get('urlStub')?.toString();
+		const startingUrlStub = formData.get('startingUrlStub')?.toString();
+		const startingPublished = formData.get('startingPublished') === 'on' ? true : false;
 
-        const urlStub = formData.get("urlStub")?.toString();
+		const updateObject: BlogPost = {
+			is_published: formData.get('isPublished') === 'on' ? true : false,
+			title: formData.get('postTitle')?.toString(),
+			description: formData.get('postDescription')?.toString(),
+			content: formData.get('markdown')?.toString(),
+			urlStub: urlStub,
+			thumbnail: formData.get('thumbnailUrl')?.toString(),
+			thumbnail_alt_text: formData.get('thumbnailAltText')?.toString()
+		};
 
-        const createObject: BlogPost = {
-            is_published: formData.get("isPublished") === 'on' ? true : false,
-            title: formData.get("postTitle")?.toString(),
-            description: formData.get("postDescription")?.toString(),
-            content: formData.get("markdown")?.toString(),
-            urlStub: urlStub,
-            thumbnail: formData.get("thumbnailUrl")?.toString(),
-            thumbnail_alt_text: formData.get("thumbnailAltText")?.toString()
-        };
+		if (formData.get('isPublished') === 'on' && !startingPublished) {
+			const today = getTodayString();
+			updateObject['published_at'] = today;
+		}
 
-        const { data, error } = await supabaseClient
-        .from('blog_posts')
-        .insert(createObject)
-        .eq('urlStub', urlStub);
+		const { data, error } = await supabaseClient
+			.from('blog_posts')
+			.update(updateObject)
+			.eq('urlStub', startingUrlStub);
 
-        if(!error) {
-            if(urlStub) {
-                redirect(303, `/blog/${urlStub}`);
-            } else {
-                redirect(303, '/blog');
-            }
-        } else {
-            console.log("update post error: ", error);
-            throw fail(500, {
-                error: 'Something went wrong while updating your blog post.',
-                values: {
-                    error
-                }
-            });
-        }
-    }
+		if (!error) {
+			if (urlStub) {
+				redirect(303, `/blog/${urlStub}`);
+			} else {
+				redirect(303, '/blog');
+			}
+		} else {
+			console.log('update post error: ', error);
+			throw fail(500, {
+				error: 'Something went wrong while updating your blog post.',
+				values: {
+					error
+				}
+			});
+		}
+	},
+	createPost: async ({ request }) => {
+		const supabaseClient = createSupabaseClient(event);
+		const formData = await request.formData();
+
+		const urlStub = formData.get('urlStub')?.toString();
+
+		const createObject: BlogPost = {
+			is_published: formData.get('isPublished') === 'on' ? true : false,
+			title: formData.get('postTitle')?.toString(),
+			description: formData.get('postDescription')?.toString(),
+			content: formData.get('markdown')?.toString(),
+			urlStub: urlStub,
+			thumbnail: formData.get('thumbnailUrl')?.toString(),
+			thumbnail_alt_text: formData.get('thumbnailAltText')?.toString()
+		};
+
+		const { data, error } = await supabaseClient
+			.from('blog_posts')
+			.insert(createObject)
+			.eq('urlStub', urlStub);
+
+		if (!error) {
+			if (urlStub) {
+				redirect(303, `/blog/${urlStub}`);
+			} else {
+				redirect(303, '/blog');
+			}
+		} else {
+			console.log('update post error: ', error);
+			throw fail(500, {
+				error: 'Something went wrong while updating your blog post.',
+				values: {
+					error
+				}
+			});
+		}
+	}
 } satisfies Actions;

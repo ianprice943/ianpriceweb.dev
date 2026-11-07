@@ -1,55 +1,55 @@
-import { createSupabaseClient } from "$lib/utils/supabaseClient";
-import type { SupabaseClient } from "@supabase/supabase-js";
+import { createSupabaseClient } from '#lib/utils/supabaseClient.ts';
+import type { SupabaseClient } from '@supabase/supabase-js';
 
-export const load = ( async (event) => {
-    const supabaseClient = createSupabaseClient(event)
-    const educationData = await getAllEducationData(supabaseClient);
-    const skillsData = await getAllSkillsData(supabaseClient);
-    const jobData = await getAllJobData(supabaseClient);
-    return { jobData, educationData, skillsData }
-});
+export const load = async (event) => {
+	const supabaseClient = createSupabaseClient(event);
+	const educationData = await getAllEducationData(supabaseClient);
+	const skillsData = await getAllSkillsData(supabaseClient);
+	const jobData = await getAllJobData(supabaseClient);
+	return { jobData, educationData, skillsData };
+};
 
 const getAllEducationData = async (supabaseClient: SupabaseClient) => {
-    const { data, error } = await supabaseClient
-        .from('education')
-        .select(`
+	const { data, error } = await supabaseClient.from('education').select(`
             id,
             school_name,
             graduate_level,
             degree_earned,
             education_time
         `);
-    if(!error) {
-        return data;
-    } else {
-        console.log('error:', error);
-        return { error: error };
-    }
-}
+	if (!error) {
+		return data;
+	} else {
+		console.log('error:', error);
+		return { error: error };
+	}
+};
 
 const getAllSkillsData = async (supabaseClient: SupabaseClient) => {
-    const { data, error } = await supabaseClient
-        .from('skills')
-        .select(`
+	const { data, error } = await supabaseClient
+		.from('skills')
+		.select(
+			`
             id,
             skill_name,
             skill_level`
-        )
-        .order('priority', {ascending: true})
-        .order('skill_name', {ascending: true});
+		)
+		.order('priority', { ascending: true })
+		.order('skill_name', { ascending: true });
 
-    if(!error) {
-        return data;
-    } else {
-        console.log('error:', error);
-        return { error: error }
-    }
-}
+	if (!error) {
+		return data;
+	} else {
+		console.log('error:', error);
+		return { error: error };
+	}
+};
 
 const getAllJobData = async (supabaseClient: SupabaseClient) => {
-    const { data, error } = await supabaseClient
-        .from('jobs')
-        .select(`
+	const { data, error } = await supabaseClient
+		.from('jobs')
+		.select(
+			`
             id,
             company_name,
             job_title,
@@ -60,13 +60,14 @@ const getAllJobData = async (supabaseClient: SupabaseClient) => {
             ),
             start_time,
             end_time
-        `)
-        .order('id', {ascending: true});
+        `
+		)
+		.order('id', { ascending: true });
 
-    if(!error) {
-        return data;
-    } else {
-        console.log('error:', error);
-        return {error: error};
-    }
-}
+	if (!error) {
+		return data;
+	} else {
+		console.log('error:', error);
+		return { error: error };
+	}
+};

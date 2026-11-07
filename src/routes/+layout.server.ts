@@ -1,12 +1,14 @@
-import { createSupabaseClient } from '$lib/utils/supabaseClient';
+import { createSupabaseClient } from '#lib/utils/supabaseClient.ts';
 import type { ServerLoadEvent } from '@sveltejs/kit';
 
-export const load = ( async (event: ServerLoadEvent) => {
-    event.depends('supabase:auth')
-    const supabaseClient = createSupabaseClient(event)
-    const { data: { session } } = await supabaseClient.auth.getSession();
+export const load = async (event: ServerLoadEvent) => {
+	event.depends('supabase:auth');
+	const supabaseClient = createSupabaseClient(event);
+	const {
+		data: { session }
+	} = await supabaseClient.auth.getSession();
 
-    return {
-        session: session,
-    }
-});
+	return {
+		session: session
+	};
+};

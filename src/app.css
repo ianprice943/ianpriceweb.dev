@@ -1,80 +1,79 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
 
-
 body {
-    font-family: Arial;
-    font-size: 16px;
+	font-family: Arial;
+	font-size: 16px;
 
-    /* Tailwind Typography Overrides */
-    --tw-prose-code: transparent;
-    --tw-prose-pre-code: transparent;
-    --tw-prose-b-quote: transparent;
-    --tw-prose-b-quote-decor: transparent; 
-    --tw-prose-links: #1d4ed8; /* blue-700 */
-    --tw-prose-links-hover: #1d4ed8; /* blue-700 */
-    --tw-prose-invert-links: #60a5fa; /* blue-300 */
+	/* Tailwind Typography Overrides */
+	--tw-prose-code: transparent;
+	--tw-prose-pre-code: transparent;
+	--tw-prose-b-quote: transparent;
+	--tw-prose-b-quote-decor: transparent;
+	--tw-prose-links: #1d4ed8; /* blue-700 */
+	--tw-prose-links-hover: #1d4ed8; /* blue-700 */
+	--tw-prose-invert-links: #60a5fa; /* blue-300 */
 }
 
 .expand {
-    height: min-content !important;
-    max-height: 2000px !important;
+	height: min-content !important;
+	max-height: 2000px !important;
 }
 
 .prose pre {
-    padding: 0;
-    border-radius: 0;
-    background-color: #E5E7EB;
+	padding: 0;
+	border-radius: 0;
+	background-color: #e5e7eb;
 }
 .prose ul li::marker {
-    color: #374151;
+	color: #374151;
 }
 .dark .prose pre {
-    background-color: #374151;
+	background-color: #374151;
 }
 .dark .prose ul li::marker {
-    color: #d1d5db;
+	color: #d1d5db;
 }
 .prose img {
-    border-radius: .375rem;
+	border-radius: 0.375rem;
 }
 .prose table img {
-    margin-top: .5em;
-    margin-bottom: .5em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 }
 
 pre code.hljs {
-    border-radius: .375rem;
-    border: 4px solid #0d1117;
-    /* max-height: 18rem; */
-    overflow: auto;
+	border-radius: 0.375rem;
+	border: 4px solid #0d1117;
+	/* max-height: 18rem; */
+	overflow: auto;
 }
 pre code.hljs:focus {
-    border: 4px solid #1D4ED8;
-    outline: 0;
+	border: 4px solid #1d4ed8;
+	outline: 0;
 }
 .dark pre code.hljs:focus {
-    border: 4px solid #93c5fd;
+	border: 4px solid #93c5fd;
 }
 
 html *:focus {
-    outline-offset: 0;
-    outline: 2px solid #1D4ED8;
+	outline-offset: 0;
+	outline: 2px solid #1d4ed8;
 }
 html.dark *:focus {
-    outline: 2px solid #93c5fd;
+	outline: 2px solid #93c5fd;
 }
 
 code {
-    background-color: #0d1117;
-    border-radius: .25rem;
-    padding: 0 2px;
-    color: #d1d5db;
+	background-color: #0d1117;
+	border-radius: 0.25rem;
+	padding: 0 2px;
+	color: #d1d5db;
 }
 
 .what-I-offer-list {
-    list-style-type: disc;
-    margin-left: 16px;
-    margin-bottom: 8px;
+	list-style-type: disc;
+	margin-left: 16px;
+	margin-bottom: 8px;
 }

@@ -1,74 +1,77 @@
 {
-  "name": "ianpriceweb.dev",
-  "version": "0.1.0",
-  "private": true,
-  "engines": {
-    "node": ">=26.13.0"
-  },
-  "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test": "playwright test",
-    "test:wsl": "DISPLAY= playwright test",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "test:unit": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "lint": "prettier --plugin-search-dir . --check . && eslint .",
-    "format": "prettier --plugin-search-dir . --write ."
-  },
-  "devDependencies": {
-    "@playwright/test": "^1.61.1",
-    "@supabase/auth-helpers-sveltekit": "^0.15.0",
-    "@supabase/supabase-js": "^2.110.7",
-    "@sveltejs/adapter-auto": "^8.0.0",
-    "@sveltejs/adapter-netlify": "^7.0.1",
-    "@sveltejs/kit": "^2.70.0",
-    "@sveltejs/vite-plugin-svelte": "^7.2.0",
-    "@tailwindcss/postcss": "^4.3.3",
-    "@tailwindcss/typography": "^0.5.20",
-    "@testing-library/svelte": "^5.4.2",
-    "@types/jsdom": "^30.0.0",
-    "@types/marked": "^4.3.2",
-    "@typescript-eslint/eslint-plugin": "^8.64.0",
-    "@typescript-eslint/parser": "^8.64.0",
-    "autoprefixer": "^10.5.4",
-    "eslint": "^10.7.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-svelte": "^3.20.0",
-    "highlight.js": "^11.11.1",
-    "jsdom": "^31.0.0",
-    "marked": "^4.3.0",
-    "postcss": "^8.5.19",
-    "prettier": "^3.9.5",
-    "prettier-plugin-svelte": "^4.1.1",
-    "supabase": "^2.109.1",
-    "svelte": "^5.56.6",
-    "svelte-check": "^4.7.3",
-    "tailwindcss": "^4.3.3",
-    "tslib": "^2.8.1",
-    "vite": "^8.1.5",
-    "vitest": "^5.1.0"
-  },
-  "type": "module",
-  "dependencies": {
-    "@js-bits/dom-parser": "^1.0.3",
-    "@supabase/auth-helpers-sveltekit": "^0.15.0",
-    "@supabase/supabase-js": "^2.110.7",
-    "@tailwindcss/vite": "^4.3.3",
-    "@types/marked": "^6.0.0",
-    "highlight.js": "^11.11.1",
-    "marked": "^18.0.6",
-    "supabase": "^3.0.0",
-    "typescript": "6"
-  },
-  "pnpm": {
-    "overrides": {
-      "cookie@<0.7.0": ">=0.7.0",
-      "@sveltejs/kit@<3.0.0": ">=3.0.0",
-      "postcss-selector-parser@<6.1.5": ">=6.1.5",
-      "minimatch@>=7.0.0 <11.0.1": ">=11.0.1"
-    }
-  }
+	"name": "ianpriceweb.dev",
+	"version": "0.1.0",
+	"private": true,
+	"engines": {
+		"node": ">=26.13.0"
+	},
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"test": "playwright test",
+		"test:wsl": "DISPLAY= playwright test",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"test:unit": "vitest",
+		"test:coverage": "vitest run --coverage",
+		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"format": "prettier --plugin-search-dir . --write ."
+	},
+	"devDependencies": {
+		"@playwright/test": "^1.61.1",
+		"@supabase/supabase-js": "^2.110.7",
+		"@sveltejs/adapter-auto": "^8.0.0",
+		"@sveltejs/adapter-netlify": "^7.0.1",
+		"@sveltejs/kit": "^3.0.0",
+		"@sveltejs/vite-plugin-svelte": "^7.2.0",
+		"@tailwindcss/postcss": "^4.3.3",
+		"@tailwindcss/typography": "^0.5.20",
+		"@testing-library/svelte": "^5.4.2",
+		"@types/jsdom": "^30.0.0",
+		"@types/marked": "^4.3.2",
+		"@typescript-eslint/eslint-plugin": "^8.64.0",
+		"@typescript-eslint/parser": "^8.64.0",
+		"autoprefixer": "^10.5.4",
+		"eslint": "^10.7.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-svelte": "^3.20.0",
+		"highlight.js": "^11.11.1",
+		"jsdom": "^31.0.0",
+		"marked": "^4.3.0",
+		"postcss": "^8.5.19",
+		"prettier": "^3.9.5",
+		"prettier-plugin-svelte": "^4.1.1",
+		"supabase": "^2.109.1",
+		"svelte": "^5.57.2",
+		"svelte-check": "^4.7.5",
+		"tailwindcss": "^4.3.3",
+		"tslib": "^2.8.1",
+		"vite": "^8.1.5",
+		"vitest": "^5.1.0"
+	},
+	"type": "module",
+	"dependencies": {
+		"@js-bits/dom-parser": "^1.0.3",
+		"@supabase/ssr": "^0.12.7",
+		"@supabase/supabase-js": "^2.110.7",
+		"@tailwindcss/vite": "^4.3.3",
+		"@types/marked": "^6.0.0",
+		"highlight.js": "^11.11.1",
+		"marked": "^18.0.6",
+		"supabase": "^3.0.0",
+		"typescript": "6"
+	},
+	"pnpm": {
+		"overrides": {
+			"cookie@<0.7.0": ">=0.7.0",
+			"@sveltejs/kit@<3.0.0": ">=3.0.0",
+			"postcss-selector-parser@<6.1.5": ">=6.1.5",
+			"minimatch@>=7.0.0 <11.0.1": ">=11.0.1"
+		}
+	},
+	"imports": {
+		"#lib": "./src/lib/index.js",
+		"#lib/*": "./src/lib/*"
+	}
 }

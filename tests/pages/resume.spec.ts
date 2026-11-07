@@ -15,10 +15,18 @@ test('resume page has expected h2s', async ({ page }) => {
 test('resume page has at least 6 articles under the experience section', async ({ page }) => {
 	await page.goto('/resume');
 	expect(await page.textContent('section#experience > div > article:first-of-type')).not.toBeNull();
-	expect(await page.textContent('section#experience > div > article:nth-of-type(2)')).not.toBeNull();
-	expect(await page.textContent('section#experience > div > article:nth-of-type(3)')).not.toBeNull();
-	expect(await page.textContent('section#experience > div > article:nth-of-type(4)')).not.toBeNull();
-	expect(await page.textContent('section#experience > div > article:nth-of-type(5)')).not.toBeNull();
+	expect(
+		await page.textContent('section#experience > div > article:nth-of-type(2)')
+	).not.toBeNull();
+	expect(
+		await page.textContent('section#experience > div > article:nth-of-type(3)')
+	).not.toBeNull();
+	expect(
+		await page.textContent('section#experience > div > article:nth-of-type(4)')
+	).not.toBeNull();
+	expect(
+		await page.textContent('section#experience > div > article:nth-of-type(5)')
+	).not.toBeNull();
 	expect(await page.textContent('section#experience > div > article:last-of-type')).not.toBeNull();
 });
 
